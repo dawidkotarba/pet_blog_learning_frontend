@@ -1,0 +1,12 @@
+default:
+   locale: en
+   async:
+      corePoolSize: 4
+      maxPoolSize: 100
+      queueCapacity: 5000
+
+logging:
+   level:
+      org:
+         springframework: DEBUG
+         hibernate: ERROR

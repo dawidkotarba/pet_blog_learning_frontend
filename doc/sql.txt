@@ -1,0 +1,20 @@
+[path]
+http://localhost:8080/db
+
+[h2 config]
+Driver Class	org.h2.Driver
+JDBC URL	jdbc:h2:mem:testdb
+User Name	sa
+Password	 <blank>
+
+[Copy db to file]
+SCRIPT NODATA TO 'h2db' --without data
+SCRIPT TO 'h2db'
+
+[useful queries]
+// unmatched capitals
+select * from capitals left join countries on capitals.id = countries.capital where countries.name is NULL
+
+// neighbours i.e for Poland
+select * from countries ct where ct.id in (select neighbour from neighbours nb where nb.country = (
+select ct.id from countries ct where ct.name = 'Poland'));

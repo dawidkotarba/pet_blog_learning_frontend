@@ -1,0 +1,3 @@
+Go to Preferences -> Build, Execution, Deployment -> Annotation Processors;
+Check Enable annotation processing checkbox;
+In "Store generated sources relative to:" select Module content root.

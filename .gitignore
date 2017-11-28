@@ -1,0 +1,13 @@
+/.idea
+/*.iml
+/.gradle
+/src/main/webapp/.gradle
+/build
+/target
+/dist
+/logs
+/generated
+/generated_tests
+src/main/webapp/.tmp
+src/main/webapp/node_modules
+src/main/webapp/app/libs
