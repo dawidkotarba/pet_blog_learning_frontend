@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.integration.exceptions;
+package com.dawidkotarba.blog.exceptions;
 
 import com.dawidkotarba.blog.enums.ExceptionType;
 import lombok.Data;
