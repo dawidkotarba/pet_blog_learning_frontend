@@ -22,7 +22,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(value = "/users")
-public class UserController {
+class UserController {
 
     private final UserFacade userFacade;
 

@@ -22,6 +22,8 @@ public class PostEntity extends AbstractEntity {
 
     private Date published;
 
+    @OneToOne
+    @JoinColumn(name = "ID")
     private AuthorEntity author;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")

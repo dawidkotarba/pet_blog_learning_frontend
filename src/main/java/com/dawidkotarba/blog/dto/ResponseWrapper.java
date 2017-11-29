@@ -1,13 +1,13 @@
-package com.dawidkotarba.blog.integration;
+package com.dawidkotarba.blog.dto;
 
 /**
  * Created by Dawid Kotarba on 13.11.2015.
  */
 public class ResponseWrapper<T> {
 
-    private T response;
+    private final T response;
 
-    public ResponseWrapper(T response) {
+    public ResponseWrapper(final T response) {
         this.response = response;
     }
 

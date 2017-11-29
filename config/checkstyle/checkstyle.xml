@@ -93,13 +93,10 @@
             <property name="format" value="TODO|FIXME"/>
         </module>
 
-        <!-- Metrics -->
-
         <!-- Misc -->
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
         <module name="OuterTypeFilename"/>
-        <module name="Indentation"/>
 
         <!-- Modifiers -->
         <module name="ModifierOrder"/>

@@ -35,10 +35,10 @@ public class UserFacade {
         final List<UserEntity> all = userRepository.findAll();
         final List<UserDto> result = new ArrayList<>();
         all.forEach(entity -> {
-                final UserDto userDto = new UserDto();
-                BeanUtils.copyProperties(entity, userDto);
-                result.add(userDto);
-            });
+            final UserDto userDto = new UserDto();
+            BeanUtils.copyProperties(entity, userDto);
+            result.add(userDto);
+        });
         return result;
     }
 }

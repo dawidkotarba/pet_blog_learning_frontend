@@ -14,4 +14,12 @@ INSERT INTO public.posts (author, subject, body, published) VALUES
 -- COMMENTS TABLE
 INSERT INTO public.comments (author, subject, body, post) VALUES
   ('Stefan', 'Test comment', 'Test comment body', 1),
-  ('Mietek', 'Test comment 2', 'Test comment body 2', 1);
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1),
+  ('Stefan', 'Test comment', 'Test comment body', 1);
