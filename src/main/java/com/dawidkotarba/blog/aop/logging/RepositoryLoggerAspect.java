@@ -17,21 +17,20 @@ import javax.inject.Named;
 @Slf4j
 public class RepositoryLoggerAspect {
 
-    @Around("execution(* com.dawidkotarba.blog.dao.*.*(..))")
-    public Object log(ProceedingJoinPoint pjp) {
-        long start = System.currentTimeMillis();
-        Object output;
+    @Around("execution(* com.dawidkotarba.blog.repository.*.*(..))")
+    public Object log(final ProceedingJoinPoint pjp) {
+        final long start = System.currentTimeMillis();
+        final Object output;
 
         try {
             output = pjp.proceed();
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             throw new InternalErrorException("Cannot proceed in repository logger aspect", throwable.getCause());
         }
 
-        long elapsedTime = System.currentTimeMillis() - start;
+        final long elapsedTime = System.currentTimeMillis() - start;
         log.info("Execution time of {}: {} ms", pjp.getSignature(), elapsedTime);
 
         return output;
     }
-
 }
