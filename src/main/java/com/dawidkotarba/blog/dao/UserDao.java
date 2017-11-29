@@ -4,7 +4,7 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.integration.assembler.UserAssembler;
 import com.dawidkotarba.blog.integration.dto.UserInDto;
 import com.dawidkotarba.blog.integration.dto.UserOutDto;
-import com.dawidkotarba.blog.model.entities.User;
+import com.dawidkotarba.blog.model.entities.UserEntity;
 import com.dawidkotarba.blog.repository.UserRepository;
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
@@ -49,20 +49,20 @@ public class UserDao {
     public void add(UserInDto userInDto) {
         Preconditions.checkNotNull(userInDto, "userInDto cannot be null");
 
-        User user = new User();
-        BeanUtils.copyProperties(userInDto, user);
-        entityManager.persist(user);
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(userInDto, userEntity);
+        entityManager.persist(userEntity);
     }
 
     public void delete(String name) {
         Preconditions.checkArgument(StringUtils.isNotBlank(name), "Name cannot be blank");
-        List<User> result = userRepository.findByUsername(name);
+        List<UserEntity> result = userRepository.findByUsername(name);
 
         if (result.isEmpty()) {
             throw new NotFoundException("Cannot find a country with name " + name);
         }
 
-        User country = result.get(0);
+        UserEntity country = result.get(0);
         entityManager.remove(country);
     }
 

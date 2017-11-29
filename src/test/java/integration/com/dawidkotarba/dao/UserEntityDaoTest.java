@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.hasSize;
 /**
  * Created by Dawid Kotarba on 18.11.2015.
  */
-public class UserDaoTest extends AbstractTestNgConfiguration {
+public class UserEntityDaoTest extends AbstractTestNgConfiguration {
 
     @Inject
     private UserDao underTest;

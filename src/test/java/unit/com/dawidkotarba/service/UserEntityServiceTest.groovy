@@ -17,7 +17,7 @@ import static org.mockito.Mockito.*;
 /**
  * Created by Dawid Kotarba on 19.11.2015.
  */
-public class UserServiceTest {
+class UserServiceTest {
 
     @InjectMocks
     private UserService underTest;

@@ -9,7 +9,6 @@ import javax.persistence.*;
 public abstract class AbstractEntity implements HasId<Long>, HasVersion<Integer> {
 
     @Id
-    @Column(name = "ID")
     @GeneratedValue(generator = "PK", strategy = GenerationType.SEQUENCE)
     private Long id;
 
