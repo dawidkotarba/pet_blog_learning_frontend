@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/dawidkotarba/blog.svg?branch=master)](https://travis-ci.org/dawidkotarba/blog)
+
 # Blog app
     An attempt to create a blog;).
 
