@@ -1,14 +1,17 @@
 package com.dawidkotarba.blog.controllers;
 
-import com.dawidkotarba.blog.integration.dto.UserInDto;
-import com.dawidkotarba.blog.integration.dto.UserOutDto;
-import com.dawidkotarba.blog.service.UserService;
+import com.dawidkotarba.blog.dto.UserDto;
+import com.dawidkotarba.blog.facade.UserFacade;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -21,34 +24,28 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    private final UserService userService;
+    private final UserFacade userFacade;
 
     @Inject
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(final UserFacade userFacade) {
+        this.userFacade = userFacade;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserOutDto> getAll() {
-        return updateResourceResults(userService.getAll());
+    public List<UserDto> findAll() {
+        return updateResourceResults(userFacade.findAll());
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserOutDto> getByName(@PathVariable String name) {
-        return updateResourceResults(userService.getByName(name));
+    public List<UserDto> getByName(@PathVariable final String name) {
+        final Optional<UserDto> result = userFacade.findByName(name);
+        if (result.isPresent()) {
+            return updateResourceResults(Collections.singletonList(result.get()));
+        }
+        return Collections.emptyList();
     }
 
-    @RequestMapping(method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody @Valid UserInDto userInDto) {
-        userService.add(userInDto);
-    }
-
-    @RequestMapping(value = "/{name}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable String name) {
-        userService.delete(name);
-    }
-
-    private List<UserOutDto> updateResourceResults(List<UserOutDto> dtos) {
+    private List<UserDto> updateResourceResults(final List<UserDto> dtos) {
         dtos.forEach(dto -> dto.add(linkTo(methodOn(UserController.class).getByName(dto.getUsername())).withSelfRel()));
         return dtos;
     }

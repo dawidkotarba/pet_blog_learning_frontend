@@ -2,7 +2,7 @@ package com.dawidkotarba.blog.aop;
 
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
-import com.dawidkotarba.blog.integration.exceptions.ExceptionResponse;
+import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.service.ExceptionConverterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;

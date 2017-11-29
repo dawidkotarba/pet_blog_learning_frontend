@@ -2,8 +2,8 @@ package com.dawidkotarba.blog.service;
 
 import com.dawidkotarba.blog.enums.ExceptionType;
 import com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException;
-import com.dawidkotarba.blog.integration.exceptions.ExceptionResponse;
-import com.dawidkotarba.blog.integration.exceptions.ValidationError;
+import com.dawidkotarba.blog.exceptions.ExceptionResponse;
+import com.dawidkotarba.blog.exceptions.ValidationError;
 import com.dawidkotarba.blog.service.i18n.LocalizationService;
 import org.springframework.validation.BindingResult;
 

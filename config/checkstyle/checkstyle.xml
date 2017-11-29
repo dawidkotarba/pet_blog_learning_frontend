@@ -89,10 +89,6 @@
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
-        <!--<module name="AvoidStarImport">-->
-        <!--<property name="allowStaticMemberImports" value="true"/>-->
-        <!--</module>-->
-
         <module name="TodoComment">
             <property name="format" value="TODO|FIXME"/>
         </module>
