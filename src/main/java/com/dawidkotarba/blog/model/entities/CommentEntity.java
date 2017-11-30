@@ -20,6 +20,6 @@ public class CommentEntity extends AbstractEntity {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "POST")
+    @JoinColumn(name = "POST_ID")
     private PostEntity post;
 }

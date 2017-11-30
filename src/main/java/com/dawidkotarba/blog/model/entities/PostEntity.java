@@ -23,7 +23,7 @@ public class PostEntity extends AbstractEntity {
     private Date published;
 
     @OneToOne
-    @JoinColumn(name = "ID")
+    @JoinColumn(name = "AUTHOR_ID")
     private AuthorEntity author;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
