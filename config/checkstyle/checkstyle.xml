@@ -25,6 +25,26 @@
         <property name="message" value="System.out.println() is not allowed"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="@Autowired"/>
+        <property name="message" value="Use @Inject instead of @Autowired"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Component"/>
+        <property name="message" value="Use @Named instead of @Component"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Repository"/>
+        <property name="message" value="Use @Named instead of @Repository"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="@Service"/>
+        <property name="message" value="Use @Named instead of @Service"/>
+    </module>
+
     <module name="FileLength">
         <property name="max" value="2000"/>
     </module>
