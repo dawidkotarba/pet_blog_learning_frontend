@@ -89,10 +89,6 @@
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
-        <module name="TodoComment">
-            <property name="format" value="TODO|FIXME"/>
-        </module>
-
         <!-- Misc -->
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
