@@ -1,0 +1,52 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="dawid" id="create_schema">
+        <createSequence
+                incrementBy="1"
+                sequenceName="users_seq"
+                startValue="0"/>
+
+        <createSequence
+                incrementBy="1"
+                sequenceName="authors_seq"
+                startValue="0"/>
+
+        <createSequence
+                incrementBy="1"
+                sequenceName="posts_seq"
+                startValue="0"/>
+
+        <createSequence
+                incrementBy="1"
+                sequenceName="comments_seq"
+                startValue="0"/>
+
+        <createTable tableName="users">
+            <column name="id" type="bigint" defaultValueSequenceNext="users_seq">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="bigint" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="firstname" type="varchar(50)"/>
+            <column name="lastname" type="varchar(50)"/>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

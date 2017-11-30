@@ -10,3 +10,6 @@ logging:
       org:
          springframework: DEBUG
          hibernate: ERROR
+
+liquibase:
+    change-log: classpath:liquibase-changeLog.xml
