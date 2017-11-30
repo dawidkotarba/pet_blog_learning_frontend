@@ -31,11 +31,11 @@ CREATE TABLE authors (
 CREATE TABLE posts (
   id INT NOT NULL DEFAULT nextval('posts_seq') PRIMARY KEY,
   version INT NOT NULL DEFAULT 0,
-  author INT,
+  author_id INT,
   subject VARCHAR(256) NOT NULL UNIQUE,
   body CLOB,
   published DATE,
-  FOREIGN KEY (author) REFERENCES authors(id)
+  FOREIGN KEY (author_id) REFERENCES authors(id)
 );
 
 CREATE TABLE comments (
@@ -44,8 +44,8 @@ CREATE TABLE comments (
   author VARCHAR(50),
   subject VARCHAR(256),
   body CLOB,
-  post INT,
-  FOREIGN KEY (post) REFERENCES posts(id)
+  post_id INT,
+  FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
 ---- INDEXES
