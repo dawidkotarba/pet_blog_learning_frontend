@@ -13,10 +13,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import javax.annotation.PostConstruct;
 import java.util.Locale;
 
-/**
- * Created by Dawid Kotarba on 13.11.2015.
- */
-
 @Configuration
 @ConfigurationProperties(prefix = "default")
 public class LocalizationConfig extends WebMvcConfigurerAdapter {
@@ -31,32 +27,32 @@ public class LocalizationConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public LocaleResolver localeResolver() {
-        SessionLocaleResolver slr = new SessionLocaleResolver();
+        final SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(defaultLocale);
         return slr;
     }
 
     @Bean
     public LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
+        final LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;
     }
 
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        String[] resources = {"classpath:i18n/messages", "classpath:exceptions/exceptions"};
+        final ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+        final String[] resources = {"classpath:i18n/messages", "classpath:exceptions/exceptions"};
         messageSource.setBasenames(resources);
         return messageSource;
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(final InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());
     }
 
-    public void setLocale(String locale) {
+    public void setLocale(final String locale) {
         this.locale = locale;
     }
 

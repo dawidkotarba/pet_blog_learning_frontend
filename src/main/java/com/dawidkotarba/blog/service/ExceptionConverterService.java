@@ -23,12 +23,12 @@ public class ExceptionConverterService {
     private final LocalizationService localizationService;
 
     @Inject
-    public ExceptionConverterService(LocalizationService localizationService) {
+    ExceptionConverterService(final LocalizationService localizationService) {
         this.localizationService = localizationService;
     }
 
-    public ExceptionResponse convert(AbstractApplicationRuntimeException e) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse();
+    public ExceptionResponse convert(final AbstractApplicationRuntimeException e) {
+        final ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setUuid(e.getUuid());
         exceptionResponse.setExceptionType(e.getExceptionType());
         exceptionResponse.setUserMessage(getLocalizedUserMessage(e.getExceptionType(), e.getParams()));
@@ -37,8 +37,8 @@ public class ExceptionConverterService {
         return exceptionResponse;
     }
 
-    public ExceptionResponse convert(Exception e) {
-        ExceptionResponse exceptionResponse = new ExceptionResponse();
+    public ExceptionResponse convert(final Exception e) {
+        final ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setUuid(UUID.randomUUID());
         exceptionResponse.setExceptionType(ExceptionType.INTERNAL_ERROR);
         exceptionResponse.setUserMessage(getLocalizedUserMessage(ExceptionType.INTERNAL_ERROR));
@@ -47,22 +47,22 @@ public class ExceptionConverterService {
         return exceptionResponse;
     }
 
-    public ExceptionResponse convert(Exception e, BindingResult bindingResult) {
-        ExceptionResponse exceptionResponse = convert(e);
+    public ExceptionResponse convert(final Exception e, final BindingResult bindingResult) {
+        final ExceptionResponse exceptionResponse = convert(e);
         exceptionResponse.getValidationErrors().addAll(parseBindingResult(bindingResult));
         return exceptionResponse;
     }
 
-    private String getLocalizedUserMessage(ExceptionType exceptionType) {
+    private String getLocalizedUserMessage(final ExceptionType exceptionType) {
         return getLocalizedUserMessage(exceptionType, null);
     }
 
-    private String getLocalizedUserMessage(ExceptionType exceptionType, String[] params) {
+    private String getLocalizedUserMessage(final ExceptionType exceptionType, final String[] params) {
         return (params != null) ? localizationService.getMessage(exceptionType.name(), params) : localizationService.getMessage(exceptionType.name());
     }
 
-    private List<ValidationError> parseBindingResult(BindingResult bindingResult) {
-        List<ValidationError> validationErrors = new ArrayList<>();
+    private List<ValidationError> parseBindingResult(final BindingResult bindingResult) {
+        final List<ValidationError> validationErrors = new ArrayList<>();
 
         bindingResult.getFieldErrors().forEach(fieldError ->
                 validationErrors.add(new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))

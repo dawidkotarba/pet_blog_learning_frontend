@@ -15,10 +15,10 @@ import javax.inject.Named;
 @Aspect
 @Named
 @Slf4j
-public class RepositoryLoggerAspect {
+class RepositoryLoggerAspect {
 
     @Around("execution(* com.dawidkotarba.blog.repository.*.*(..))")
-    public Object log(final ProceedingJoinPoint pjp) {
+    Object log(final ProceedingJoinPoint pjp) {
         final long start = System.currentTimeMillis();
         final Object output;
 

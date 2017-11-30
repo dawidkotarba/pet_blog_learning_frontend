@@ -1,8 +1,8 @@
 package com.dawidkotarba.blog.aop;
 
+import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
-import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.service.ExceptionConverterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -23,47 +23,47 @@ import javax.inject.Inject;
  * @see com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException
  */
 @ControllerAdvice
-public class ExceptionControllerAdvice {
+class ExceptionControllerAdvice {
 
     private final ExceptionConverterService exceptionConverterService;
 
     @Inject
-    public ExceptionControllerAdvice(ExceptionConverterService exceptionConverterService) {
+    ExceptionControllerAdvice(final ExceptionConverterService exceptionConverterService) {
         this.exceptionConverterService = exceptionConverterService;
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ExceptionResponse handleException(Exception e) {
+    ExceptionResponse handleException(final Exception e) {
         return exceptionConverterService.convert(e);
     }
 
     @ExceptionHandler(value = InternalErrorException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
-    public ExceptionResponse handleException(InternalErrorException e) {
+    ExceptionResponse handleException(final InternalErrorException e) {
         return exceptionConverterService.convert(e);
     }
 
     @ExceptionHandler(value = NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ExceptionResponse handleException(NotFoundException e) {
+    ExceptionResponse handleException(final NotFoundException e) {
         return exceptionConverterService.convert(e);
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ExceptionResponse handleException(MethodArgumentNotValidException e) {
+    ExceptionResponse handleException(final MethodArgumentNotValidException e) {
         return exceptionConverterService.convert(e, e.getBindingResult());
     }
 
     @ExceptionHandler(value = BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ExceptionResponse handleException(BindException e) {
+    ExceptionResponse handleException(final BindException e) {
         return exceptionConverterService.convert(e, e.getBindingResult());
     }
 }

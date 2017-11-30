@@ -9,15 +9,11 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.util.concurrent.Executor;
 
-/**
- * Created by Dawid Kotarba on 20.11.2015.
- */
-
 @Configuration
 @EnableAsync
 @EnableScheduling
 @ConfigurationProperties(prefix = "default.async")
-public class AsyncConfig {
+class AsyncConfig {
 
     private int corePoolSize;
     private int maxPoolSize;
@@ -25,7 +21,7 @@ public class AsyncConfig {
 
     @Bean(name = "taskExecutor")
     public Executor getAsyncExecutor() {
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        final ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(corePoolSize);
         executor.setMaxPoolSize(maxPoolSize);
         executor.setQueueCapacity(queueCapacity);
@@ -34,15 +30,15 @@ public class AsyncConfig {
         return executor;
     }
 
-    public void setCorePoolSize(int corePoolSize) {
+    public void setCorePoolSize(final int corePoolSize) {
         this.corePoolSize = corePoolSize;
     }
 
-    public void setMaxPoolSize(int maxPoolSize) {
+    public void setMaxPoolSize(final int maxPoolSize) {
         this.maxPoolSize = maxPoolSize;
     }
 
-    public void setQueueCapacity(int queueCapacity) {
+    public void setQueueCapacity(final int queueCapacity) {
         this.queueCapacity = queueCapacity;
     }
 }

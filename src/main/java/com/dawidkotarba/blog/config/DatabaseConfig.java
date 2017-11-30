@@ -29,7 +29,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-public class DatabaseConfig {
+class DatabaseConfig {
 
     @Value("classpath:db_create.sql")
     private Resource h2DbCreateScript;
@@ -64,7 +64,6 @@ public class DatabaseConfig {
         initializer.setDatabasePopulator(databasePopulator());
         return initializer;
     }
-
 
     private DatabasePopulator databasePopulator() {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();

@@ -14,14 +14,14 @@ import javax.persistence.Query;
 
 @Named
 @Slf4j
-public class HeartBeatService {
+class HeartBeatService {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Scheduled(fixedDelay = 60000)
     public void doHeartBeat() {
-        Query heartBeatQuery = entityManager.createNativeQuery("SELECT 1 FROM DUAL");
+        final Query heartBeatQuery = entityManager.createNativeQuery("SELECT 1 FROM DUAL");
         log.info("Heartbeat result : " + heartBeatQuery.getSingleResult());
     }
 

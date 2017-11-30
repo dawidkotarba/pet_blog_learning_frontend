@@ -15,20 +15,20 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+class SwaggerConfig {
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .select()
-            .apis(RequestHandlerSelectors.any())
-            .paths(PathSelectors.any()).build().pathMapping("/")
-            .apiInfo(apiInfo());
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any()).build().pathMapping("/")
+                .apiInfo(apiInfo());
     }
 
     private ApiInfo apiInfo() {
-        ApiInfo apiInfo = new ApiInfo("Playground", "This is the REST API of the blog app.", "1.0", "", "Dawid Kotarba",
-            "", "");
+        final ApiInfo apiInfo = new ApiInfo("Playground", "This is the REST API of the blog app.", "1.0", "", "Dawid Kotarba",
+                "", "");
         return apiInfo;
     }
 }
