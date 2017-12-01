@@ -8,8 +8,8 @@ default:
 logging:
    level:
       org:
-         springframework: DEBUG
-         hibernate: ERROR
+         springframework: WARN
+         hibernate: WARN
 
 liquibase:
     change-log: classpath:liquibase-changeLog.xml

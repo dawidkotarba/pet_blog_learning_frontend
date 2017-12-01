@@ -1,13 +1,10 @@
 package com.dawidkotarba.blog.config;
 
 import org.h2.server.web.WebServlet;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.Resource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,26 +17,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-/**
- * Created by Dawid Kotarba on 12.11.2015.
- */
 @Configuration
 @EnableTransactionManagement
 class DatabaseConfig {
 
-    @Value("classpath:db_create.sql")
-    private Resource h2DbCreateScript;
-
-    @Value("classpath:db_data_init.sql")
-    private Resource h2DbDataInitScript;
-
     @Bean
     DataSource dataSource() {
         final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        final EmbeddedDatabase db = builder
+        return builder
                 .setType(EmbeddedDatabaseType.H2)
                 .build();
-        return db;
     }
 
     @Bean
@@ -77,7 +64,6 @@ class DatabaseConfig {
         final Properties props = new Properties();
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
-
         return props;
     }
 }
