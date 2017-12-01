@@ -2,10 +2,9 @@ package com.dawidkotarba.blog.config;
 
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.ServletRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -30,7 +29,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-public class DatabaseConfig {
+class DatabaseConfig {
 
     @Value("classpath:db_create.sql")
     private Resource h2DbCreateScript;
@@ -39,20 +38,20 @@ public class DatabaseConfig {
     private Resource h2DbDataInitScript;
 
     @Bean
-    public DataSource dataSource(Environment env) throws Exception {
+    public DataSource dataSource() {
 
-        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        EmbeddedDatabase db = builder
-            .setType(EmbeddedDatabaseType.H2)
-            .addScript("db_create.sql")
-            .addScript("db_data_init.sql")
-            .build();
+        final EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        final EmbeddedDatabase db = builder
+                .setType(EmbeddedDatabaseType.H2)
+                .addScript("db_create.sql")
+                .addScript("db_data_init.sql")
+                .build();
         return db;
     }
 
     @Bean
     ServletRegistrationBean h2servletRegistration() {
-        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
+        final ServletRegistrationBean registrationBean = new ServletRegistrationBean(new WebServlet());
         registrationBean.addUrlMappings("/db/*");
         return registrationBean;
     }
@@ -60,13 +59,11 @@ public class DatabaseConfig {
     @Inject
     @Bean
     public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
-
         final DataSourceInitializer initializer = new DataSourceInitializer();
         initializer.setDataSource(dataSource);
         initializer.setDatabasePopulator(databasePopulator());
         return initializer;
     }
-
 
     private DatabasePopulator databasePopulator() {
         final ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
@@ -76,22 +73,22 @@ public class DatabaseConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
+    public PlatformTransactionManager transactionManager(final EntityManagerFactory entityManagerFactory) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(Environment env) throws Exception {
-        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(Boolean.TRUE);
         vendorAdapter.setShowSql(Boolean.TRUE);
 
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        final LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPackagesToScan("com.dawidkotarba.blog.model.entities");
-        factory.setDataSource(dataSource(env));
+        factory.setDataSource(dataSource());
 
         factory.setJpaProperties(jpaProperties());
         factory.setLoadTimeWeaver(new InstrumentationLoadTimeWeaver());
@@ -100,7 +97,7 @@ public class DatabaseConfig {
     }
 
     Properties jpaProperties() {
-        Properties props = new Properties();
+        final Properties props = new Properties();
         props.put("hibernate.show_sql", "true");
         props.put("hibernate.format_sql", "true");
 

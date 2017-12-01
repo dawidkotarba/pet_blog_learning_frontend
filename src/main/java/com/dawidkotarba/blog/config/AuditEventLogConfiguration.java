@@ -11,10 +11,10 @@ import org.springframework.security.authentication.event.AbstractAuthenticationE
 
 @Configuration
 @Slf4j
-public class AuditEventLogConfiguration implements ApplicationListener<AbstractAuthenticationEvent> {
+class AuditEventLogConfiguration implements ApplicationListener<AbstractAuthenticationEvent> {
 
     @Override
-    public void onApplicationEvent(AbstractAuthenticationEvent event) {
+    public void onApplicationEvent(final AbstractAuthenticationEvent event) {
         log.info("Authentication event: " + event);
     }
 }

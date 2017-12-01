@@ -15,19 +15,19 @@ import javax.inject.Named;
 @Aspect
 @Named
 @Slf4j
-public class ExceptionLoggerAspect {
+class ExceptionLoggerAspect {
 
     @Pointcut("within(com.dawidkotarba.blog.dao..*)"
-        + "|| within(com.dawidkotarba.blog.service..*)"
-        + "|| within(com.dawidkotarba.blog.controllers..*)")
-    public void loggingPointcut() {
+            + "|| within(com.dawidkotarba.blog.service..*)"
+            + "|| within(com.dawidkotarba.blog.controllers..*)")
+    void loggingPointcut() {
         // intentionally left blank
     }
 
     @AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
-    public void logException(JoinPoint joinPoint, Throwable e) {
+    void logException(final JoinPoint joinPoint, final Throwable e) {
         log.error("Exception in {}.{}() with cause = {} and exception {}", joinPoint.getSignature().getDeclaringTypeName(),
-            joinPoint.getSignature().getName(), e.getCause(), e);
+                joinPoint.getSignature().getName(), e.getCause(), e);
     }
 
 }
