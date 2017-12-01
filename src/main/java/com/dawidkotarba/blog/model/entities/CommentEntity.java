@@ -1,7 +1,6 @@
 package com.dawidkotarba.blog.model.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,6 +9,9 @@ import javax.persistence.*;
 @SequenceGenerator(name = "PK", sequenceName = "COMMENTS_SEQ", allocationSize = 1)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CommentEntity extends AbstractEntity {
 
     private String author;
