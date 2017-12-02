@@ -16,10 +16,12 @@ import javax.persistence.Query;
 @Slf4j
 class HeartBeatService {
 
+    private static final int HEARTBEAT_SCHEDULE_SECS = 60 * 1000;
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Scheduled(fixedDelay = 60000)
+    @Scheduled(fixedDelay = HEARTBEAT_SCHEDULE_SECS)
     public void doHeartBeat() {
         final Query heartBeatQuery = entityManager.createNativeQuery("SELECT 1 FROM DUAL");
         log.info("Heartbeat result : " + heartBeatQuery.getSingleResult());

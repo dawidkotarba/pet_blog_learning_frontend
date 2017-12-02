@@ -6,6 +6,7 @@
 /target
 /dist
 /logs
+/out
 /generated
 /generated_tests
 src/main/webapp/.tmp
