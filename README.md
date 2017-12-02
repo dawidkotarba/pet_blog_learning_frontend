@@ -9,7 +9,7 @@
 - db: H2
 - JPA: Hibernate with Querydsl
 - server: embedded Tomcat (Spring Boot app)
-- tests: TestNG, Mockito, Hamcrest, JBehave -> to be replaced by spock
+- tests: Spock
 - doc: SwaggerUI
 
 #### Buld & run:
