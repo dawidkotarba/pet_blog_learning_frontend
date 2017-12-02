@@ -7,15 +7,15 @@ import com.dawidkotarba.blog.enums.ExceptionType;
  */
 public class InternalErrorException extends AbstractApplicationRuntimeException {
 
-    public InternalErrorException(String message) {
+    public InternalErrorException(final String message) {
         super(ExceptionType.INTERNAL_ERROR, message);
     }
 
-    public InternalErrorException(Throwable cause) {
+    public InternalErrorException(final Throwable cause) {
         super(ExceptionType.INTERNAL_ERROR, cause);
     }
 
-    public InternalErrorException(String message, Throwable cause) {
+    public InternalErrorException(final String message, final Throwable cause) {
         super(ExceptionType.INTERNAL_ERROR, message, cause);
     }
 }

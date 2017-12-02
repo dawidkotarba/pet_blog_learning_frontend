@@ -20,7 +20,7 @@ public class PostFacade {
     private final AuthorRepository authorRepository;
 
     @Inject
-    public PostFacade(final PostRepository postRepository, AuthorRepository authorRepository) {
+    public PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository) {
         this.postRepository = postRepository;
         this.authorRepository = authorRepository;
     }
@@ -35,8 +35,8 @@ public class PostFacade {
         }).collect(Collectors.toList());
     }
 
-    public List<PostDto> findBySubject(String subject) {
-        List<PostEntity> bySubject = postRepository.findBySubject(subject);
+    public List<PostDto> findBySubject(final String subject) {
+        final List<PostEntity> bySubject = postRepository.findBySubject(subject);
         return bySubject.stream().map(entity -> {
             PostDto postDto = new PostDto();
             BeanUtils.copyProperties(entity, postDto);
@@ -44,10 +44,10 @@ public class PostFacade {
         }).collect(Collectors.toList());
     }
 
-    public void add(PostDto postDto) {
-        String username = postDto.getAuthor().getUsername();
-        List<AuthorEntity> authors = authorRepository.findByUsername(username);
-        PostEntity entity = new PostEntity();
+    public void add(final PostDto postDto) {
+        final String username = postDto.getAuthor().getUsername();
+        final List<AuthorEntity> authors = authorRepository.findByUsername(username);
+        final PostEntity entity = new PostEntity();
         entity.setAuthor(authors.get(0));
         entity.setBody(postDto.getBody());
         entity.setPublished(postDto.getPublished());

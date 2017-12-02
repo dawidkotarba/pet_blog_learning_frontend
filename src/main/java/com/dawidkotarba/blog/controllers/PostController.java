@@ -25,12 +25,12 @@ class PostController {
     }
 
     @RequestMapping(value = "/{subject}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostDto> findBySubject(@PathVariable String subject) {
+    public List<PostDto> findBySubject(@PathVariable final String subject) {
         return postFacade.findBySubject(subject);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody PostDto postDto) {
+    public void add(@RequestBody final PostDto postDto) {
         postFacade.add(postDto);
     }
 }
