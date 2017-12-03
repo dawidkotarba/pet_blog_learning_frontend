@@ -6,5 +6,5 @@ import spock.lang.Specification
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @Import([IntegrationTestMockingConfig])
-abstract class AbstractIntegrationTest extends Specification {
+abstract class AbstractIntegrationSpec extends Specification {
 }
