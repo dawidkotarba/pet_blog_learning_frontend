@@ -5,12 +5,12 @@ import com.dawidkotarba.blog.repository.UserRepository
 import org.junit.Test
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import spock.lang.Specification
-import com.dawidkotarba.blog.AbstractIntegrationTest
+import com.dawidkotarba.blog.AbstractIntegrationSpec
 
 import javax.inject.Inject
 
 @DataJpaTest
-class UserRepositorySpec extends AbstractIntegrationTest {
+class UserRepositorySpec extends AbstractIntegrationSpec {
 
     @Inject
     UserRepository userRepository

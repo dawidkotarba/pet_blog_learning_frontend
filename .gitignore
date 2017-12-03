@@ -1,5 +1,6 @@
 /.idea
 /*.iml
+.gradletasknamecache
 /.gradle
 /gradle
 /src/main/webapp/.gradle
