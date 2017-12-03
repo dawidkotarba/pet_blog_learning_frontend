@@ -3,7 +3,7 @@
 [![Sputnik](https://sputnik.ci/conf/badge)](https://sputnik.ci/app#/builds/dawidkotarba/blog)
 
 # Blog app
-    An attempt to create a blog;).
+    An attempt to create a blog;)
 
 #### Tech stack:
 - build: Gradle (wrapper available)
