@@ -2,6 +2,7 @@
 /*.iml
 .gradletasknamecache
 /.gradle
+/gradle
 /src/main/webapp/.gradle
 /build
 /target
