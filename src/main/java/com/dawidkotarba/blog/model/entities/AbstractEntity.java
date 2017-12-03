@@ -13,6 +13,7 @@ public abstract class AbstractEntity implements IdentifiableEntity {
     @Version
     private Integer version;
 
+    @Column(nullable = false, unique = true)
     private String uuid;
 
     public AbstractEntity() {
