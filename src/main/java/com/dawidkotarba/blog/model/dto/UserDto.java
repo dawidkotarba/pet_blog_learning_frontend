@@ -1,11 +1,10 @@
-package com.dawidkotarba.blog.dto;
+package com.dawidkotarba.blog.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Data
 @NoArgsConstructor
@@ -13,13 +12,13 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class UserDto extends AbstractDto {
 
-    @NotNull
+    @NotBlank
     private String username;
-    @NotNull
+    @NotBlank
     private String firstname;
-    @NotNull
+    @NotBlank
     private String lastname;
     private boolean enabled;
-    @NotNull
+    @NotBlank
     private String role;
 }

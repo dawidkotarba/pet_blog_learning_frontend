@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.converters;
 
-import com.dawidkotarba.blog.dto.PostDto;
+import com.dawidkotarba.blog.model.dto.PostDto;
 import com.dawidkotarba.blog.model.entities.PostEntity;
 
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ public class PostConverter implements Converter<PostEntity, PostDto> {
                 .body(entity.getBody())
                 .published(entity.getPublished())
                 .author(authorConverter.convertToDto(entity.getAuthor()))
-                .commentDtos(commentsConverter.convertListToDto(entity.getComments()))
+                .commentDtos(commentsConverter.convertToDtos(entity.getComments()))
                 .build();
     }
 
@@ -33,7 +33,7 @@ public class PostConverter implements Converter<PostEntity, PostDto> {
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .author(authorConverter.convertToEntity(dto.getAuthor()))
-                .comments(commentsConverter.convertListToEntity(dto.getCommentDtos()))
+                .comments(commentsConverter.convertToEntities(dto.getCommentDtos()))
                 .build();
     }
 }

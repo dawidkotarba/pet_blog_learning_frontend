@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.converters;
 
-import com.dawidkotarba.blog.dto.UserDto;
+import com.dawidkotarba.blog.model.dto.UserDto;
 import com.dawidkotarba.blog.model.entities.UserEntity;
 
 public class UserConverter implements Converter<UserEntity, UserDto> {

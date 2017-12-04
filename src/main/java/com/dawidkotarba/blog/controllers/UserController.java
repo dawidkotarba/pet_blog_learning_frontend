@@ -1,7 +1,7 @@
 package com.dawidkotarba.blog.controllers;
 
-import com.dawidkotarba.blog.dto.UserDto;
 import com.dawidkotarba.blog.facade.UserFacade;
+import com.dawidkotarba.blog.model.dto.UserDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.dawidkotarba.blog.facade;
 
 import com.dawidkotarba.blog.converters.PostConverter;
-import com.dawidkotarba.blog.dto.PostDto;
+import com.dawidkotarba.blog.model.dto.PostDto;
 import com.dawidkotarba.blog.model.entities.AuthorEntity;
 import com.dawidkotarba.blog.model.entities.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
@@ -30,13 +30,13 @@ public class PostFacade {
     public List<PostDto> findAll() {
         final List<PostEntity> all = postRepository.findAll();
         return all.stream()
-                .map(entity -> postConverter.convertToDto(entity))
+                .map(postConverter::convertToDto)
                 .collect(Collectors.toList());
     }
 
     public List<PostDto> findBySubject(final String subject) {
         final List<PostEntity> bySubject = postRepository.findBySubject(subject);
-        return bySubject.stream().map(entity -> postConverter.convertToDto(entity)).collect(Collectors.toList());
+        return bySubject.stream().map(postConverter::convertToDto).collect(Collectors.toList());
     }
 
     public void add(final PostDto postDto) {

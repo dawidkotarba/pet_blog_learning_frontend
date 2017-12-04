@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.facade;
 
-import com.dawidkotarba.blog.dto.UserDto;
+import com.dawidkotarba.blog.model.dto.UserDto;
 import com.dawidkotarba.blog.model.entities.UserEntity;
 import com.dawidkotarba.blog.repository.UserRepository;
 import org.springframework.beans.BeanUtils;

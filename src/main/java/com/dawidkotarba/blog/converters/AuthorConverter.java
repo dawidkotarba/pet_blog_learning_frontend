@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.converters;
 
-import com.dawidkotarba.blog.dto.AuthorDto;
+import com.dawidkotarba.blog.model.dto.AuthorDto;
 import com.dawidkotarba.blog.model.entities.AuthorEntity;
 
 import javax.inject.Named;

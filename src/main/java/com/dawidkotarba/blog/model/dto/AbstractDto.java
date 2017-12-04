@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.dto;
+package com.dawidkotarba.blog.model.dto;
 
 import java.io.Serializable;
 
