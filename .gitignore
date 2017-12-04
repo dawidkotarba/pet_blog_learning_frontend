@@ -1,3 +1,4 @@
+#### Java ####
 /.idea
 /*.iml
 .gradletasknamecache
@@ -14,3 +15,39 @@
 src/main/webapp/.tmp
 src/main/webapp/node_modules
 src/main/webapp/app/libs
+
+#### Angular ####
+
+# compiled output
+ngblog/dist
+ngblog/tmp
+ngblog/out-tsc
+
+# dependencies
+ngblog/node_modules
+
+# IDEs and editors
+ngblog/.idea
+ngblog/.project
+ngblog/.classpath
+ngblog/.c9/
+*.launch
+ngblog/.settings/
+*.sublime-workspace
+
+# misc
+ngblog/.sass-cache
+ngblog/connect.lock
+ngblog/coverage
+ngblog/libpeerconnection.log
+*npm-debug.log
+*testem.log
+/typings
+
+# e2e
+ngblog/e2e/*.js
+ngblog/e2e/*.map
+
+# System Files
+*/.DS_Store
+*/Thumbs.db
