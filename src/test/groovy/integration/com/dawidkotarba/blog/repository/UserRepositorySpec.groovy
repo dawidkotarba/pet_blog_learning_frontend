@@ -1,7 +1,8 @@
-package com.dawidkotarba.blog.repository
+package integration.com.dawidkotarba.blog.repository
 
-import com.dawidkotarba.blog.AbstractIntegrationSpec
+import integration.com.dawidkotarba.blog.AbstractIntegrationSpec
 import com.dawidkotarba.blog.model.entities.UserEntity
+import com.dawidkotarba.blog.repository.UserRepository
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 import javax.inject.Inject
