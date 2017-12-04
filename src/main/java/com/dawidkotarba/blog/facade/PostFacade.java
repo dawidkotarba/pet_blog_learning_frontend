@@ -6,9 +6,11 @@ import com.dawidkotarba.blog.model.entities.AuthorEntity;
 import com.dawidkotarba.blog.model.entities.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
 import com.dawidkotarba.blog.repository.PostRepository;
+import com.google.common.base.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,17 +31,21 @@ public class PostFacade {
 
     public List<PostDto> findAll() {
         final List<PostEntity> all = postRepository.findAll();
-        return all.stream()
+        final List<PostDto> result = all.stream()
                 .map(postConverter::convertToDto)
                 .collect(Collectors.toList());
+        return Collections.unmodifiableList(result);
     }
 
     public List<PostDto> findBySubject(final String subject) {
+        Preconditions.checkNotNull(subject);
         final List<PostEntity> bySubject = postRepository.findBySubject(subject);
-        return bySubject.stream().map(postConverter::convertToDto).collect(Collectors.toList());
+        final List<PostDto> result = bySubject.stream().map(postConverter::convertToDto).collect(Collectors.toList());
+        return Collections.unmodifiableList(result);
     }
 
     public void add(final PostDto postDto) {
+        Preconditions.checkNotNull(postDto);
         final String username = postDto.getAuthor().getUsername();
         final AuthorEntity authors = authorRepository.findByUsername(username);
         final PostEntity entity = postConverter.convertToEntity(postDto);

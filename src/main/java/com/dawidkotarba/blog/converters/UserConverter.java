@@ -3,6 +3,9 @@ package com.dawidkotarba.blog.converters;
 import com.dawidkotarba.blog.model.dto.UserDto;
 import com.dawidkotarba.blog.model.entities.UserEntity;
 
+import javax.inject.Named;
+
+@Named
 public class UserConverter implements Converter<UserEntity, UserDto> {
 
     @Override

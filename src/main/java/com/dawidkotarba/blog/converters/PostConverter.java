@@ -5,6 +5,7 @@ import com.dawidkotarba.blog.model.entities.PostEntity;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 
 @Named
 public class PostConverter implements Converter<PostEntity, PostDto> {
@@ -28,12 +29,17 @@ public class PostConverter implements Converter<PostEntity, PostDto> {
 
     @Override
     public PostEntity convertToEntity(final PostDto dto) {
-        return PostEntity.builder()
+        final PostEntity entity = PostEntity.builder()
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .author(authorConverter.convertToEntity(dto.getAuthor()))
-                .comments(commentsConverter.convertToEntities(dto.getCommentDtos()))
                 .build();
+
+        if (Objects.nonNull(dto.getCommentDtos())) {
+            entity.setComments(commentsConverter.convertToEntities(dto.getCommentDtos()));
+        }
+
+        return entity;
     }
 }

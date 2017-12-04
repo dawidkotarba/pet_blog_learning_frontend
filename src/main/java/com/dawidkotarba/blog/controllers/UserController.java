@@ -1,5 +1,6 @@
 package com.dawidkotarba.blog.controllers;
 
+import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.UserFacade;
 import com.dawidkotarba.blog.model.dto.UserDto;
 import org.springframework.http.MediaType;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.inject.Inject;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,11 +30,9 @@ class UserController {
     }
 
     @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> getByName(@PathVariable final String name) {
+    public UserDto getByName(@PathVariable final String name) {
         final Optional<UserDto> result = userFacade.findByName(name);
-        if (result.isPresent()) {
-            Collections.singletonList(result.get());
-        }
-        return Collections.emptyList();
+
+        return result.orElseThrow(() -> new NotFoundException(name + " user does not exist."));
     }
 }
