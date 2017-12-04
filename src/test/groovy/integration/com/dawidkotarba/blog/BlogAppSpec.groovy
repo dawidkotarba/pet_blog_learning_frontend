@@ -1,11 +1,14 @@
 package integration.com.dawidkotarba.blog
 
-import integration.com.dawidkotarba.blog.AbstractIntegrationSpec
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 import org.springframework.web.context.WebApplicationContext
+import spock.lang.Specification
 
 import javax.inject.Inject
 
-class BlogAppSpec extends AbstractIntegrationSpec {
+@SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
+class BlogAppSpec extends Specification {
 
     @Inject
     WebApplicationContext applicationContext
