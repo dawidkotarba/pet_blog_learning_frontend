@@ -12,7 +12,7 @@ INSERT INTO public.posts (uuid, author_id, subject, body, published) VALUES
   ('1', 1, 'Test post', 'Test post body', '2017-11-29');
 
 -- COMMENTS TABLE
-INSERT INTO public.comments (uuid, author, subject, body, post_id) VALUES
-  ('1', 'Stefan', 'Test comment', 'Test comment body', 1),
-  ('2', 'Stefan', 'Test comment', 'Test comment body', 1),
-  ('3', 'Stefan', 'Test comment', 'Test comment body', 1);
+INSERT INTO public.comments (uuid, author, subject, body, post_id, published) VALUES
+  ('1', 'Stefan', 'Test comment', 'Test comment body', 1, '2017-12-01'),
+  ('2', 'Stefan', 'Test comment', 'Test comment body', 1, '2017-11-29'),
+  ('3', 'Stefan', 'Test comment', 'Test comment body', 1,'2017-11-30');

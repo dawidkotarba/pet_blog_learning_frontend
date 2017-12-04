@@ -49,6 +49,7 @@ CREATE TABLE comments (
   subject VARCHAR(256),
   body CLOB,
   post_id INT,
+  published DATE,
   FOREIGN KEY (post_id) REFERENCES posts(id)
 );
 
