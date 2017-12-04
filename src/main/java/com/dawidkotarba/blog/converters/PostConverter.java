@@ -10,32 +10,30 @@ import javax.inject.Named;
 public class PostConverter implements Converter<PostEntity, PostDto> {
 
     @Inject
-    AuthorConverter authorConverter;
+    private AuthorConverter authorConverter;
 
     @Inject
-    CommentConverter commentsConverter;
+    private CommentConverter commentsConverter;
 
     @Override
     public PostDto convertToDto(final PostEntity entity) {
-        final PostDto dto = PostDto.builder()
+        return PostDto.builder()
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished())
                 .author(authorConverter.convertToDto(entity.getAuthor()))
                 .commentDtos(commentsConverter.convertListToDto(entity.getComments()))
                 .build();
-        return dto;
     }
 
     @Override
     public PostEntity convertToEntity(final PostDto dto) {
-        final PostEntity entity = PostEntity.builder()
+        return PostEntity.builder()
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .author(authorConverter.convertToEntity(dto.getAuthor()))
                 .comments(commentsConverter.convertListToEntity(dto.getCommentDtos()))
                 .build();
-        return entity;
     }
 }

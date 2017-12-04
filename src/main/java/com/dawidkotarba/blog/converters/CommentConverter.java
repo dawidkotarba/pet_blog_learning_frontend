@@ -11,36 +11,30 @@ import java.util.stream.Collectors;
 public class CommentConverter implements Converter<CommentEntity, CommentDto> {
 
     List<CommentDto> convertListToDto(final List<CommentEntity> source) {
-        final List<CommentDto> dtos;
-        dtos = source.stream().map(comment -> convertToDto(comment)).collect(Collectors.toList());
-        return dtos;
+        return source.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     List<CommentEntity> convertListToEntity(final List<CommentDto> source) {
-        final List<CommentEntity> entities;
-        entities = source.stream().map(comment -> convertToEntity(comment)).collect(Collectors.toList());
-        return entities;
+        return source.stream().map(this::convertToEntity).collect(Collectors.toList());
     }
 
     @Override
     public CommentDto convertToDto(final CommentEntity entity) {
-        final CommentDto dto = CommentDto.builder()
+        return CommentDto.builder()
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished())
                 .build();
-        return dto;
     }
 
     @Override
     public CommentEntity convertToEntity(final CommentDto dto) {
-        final CommentEntity entity = CommentEntity.builder()
+        return CommentEntity.builder()
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .build();
-        return entity;
     }
 }
