@@ -1,44 +1,45 @@
 package com.dawidkotarba.blog.facade;
 
-import com.dawidkotarba.blog.dto.UserDto;
+import com.dawidkotarba.blog.converters.UserConverter;
+import com.dawidkotarba.blog.model.dto.UserDto;
 import com.dawidkotarba.blog.model.entities.UserEntity;
 import com.dawidkotarba.blog.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
+import com.google.common.base.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Named
 public class UserFacade {
 
     private final UserRepository userRepository;
+    private final UserConverter userConverter;
 
     @Inject
-    public UserFacade(final UserRepository userRepository) {
+    public UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
         this.userRepository = userRepository;
+        this.userConverter = userConverter;
     }
 
     public Optional<UserDto> findByName(final String name) {
-        final List<UserEntity> byUsername = userRepository.findByUsername(name);
-        if (byUsername.isEmpty()) {
+        Preconditions.checkNotNull(name);
+        final UserEntity byUsername = userRepository.findByUsername(name);
+
+        if (!Objects.nonNull(byUsername)) {
             return Optional.empty();
         }
-        final UserDto userDto = new UserDto();
-        BeanUtils.copyProperties(byUsername.get(0), userDto);
+
+        final UserDto userDto = userConverter.convertToDto(byUsername);
         return Optional.of(userDto);
     }
 
     public List<UserDto> findAll() {
         final List<UserEntity> all = userRepository.findAll();
-        final List<UserDto> result = new ArrayList<>();
-        all.forEach(entity -> {
-            final UserDto userDto = new UserDto();
-            BeanUtils.copyProperties(entity, userDto);
-            result.add(userDto);
-        });
-        return result;
+
+        return all.stream().map(userConverter::convertToDto).collect(Collectors.toList());
     }
 }

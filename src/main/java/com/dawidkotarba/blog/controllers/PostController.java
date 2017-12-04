@@ -1,11 +1,12 @@
 package com.dawidkotarba.blog.controllers;
 
-import com.dawidkotarba.blog.dto.PostDto;
 import com.dawidkotarba.blog.facade.PostFacade;
+import com.dawidkotarba.blog.model.dto.PostDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ class PostController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody final PostDto postDto) {
+    public void add(@RequestBody @Valid final PostDto postDto) {
         postFacade.add(postDto);
     }
 }

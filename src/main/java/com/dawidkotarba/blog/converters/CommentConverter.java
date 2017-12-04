@@ -1,46 +1,47 @@
 package com.dawidkotarba.blog.converters;
 
-import com.dawidkotarba.blog.dto.CommentDto;
+import com.dawidkotarba.blog.model.dto.CommentDto;
 import com.dawidkotarba.blog.model.entities.CommentEntity;
 
 import javax.inject.Named;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Named
 public class CommentConverter implements Converter<CommentEntity, CommentDto> {
 
-    List<CommentDto> convertListToDto(final List<CommentEntity> source) {
-        final List<CommentDto> dtos;
-        dtos = source.stream().map(comment -> convertToDto(comment)).collect(Collectors.toList());
-        return dtos;
+    List<CommentDto> convertToDtos(final List<CommentEntity> entities) {
+        return entities.stream()
+                .filter(Objects::nonNull)
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
-    List<CommentEntity> convertListToEntity(final List<CommentDto> source) {
-        final List<CommentEntity> entities;
-        entities = source.stream().map(comment -> convertToEntity(comment)).collect(Collectors.toList());
-        return entities;
+    List<CommentEntity> convertToEntities(final List<CommentDto> dtos) {
+        return dtos.stream()
+                .filter(Objects::nonNull)
+                .map(this::convertToEntity)
+                .collect(Collectors.toList());
     }
 
     @Override
     public CommentDto convertToDto(final CommentEntity entity) {
-        final CommentDto dto = CommentDto.builder()
+        return CommentDto.builder()
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished())
                 .build();
-        return dto;
     }
 
     @Override
     public CommentEntity convertToEntity(final CommentDto dto) {
-        final CommentEntity entity = CommentEntity.builder()
+        return CommentEntity.builder()
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .build();
-        return entity;
     }
 }

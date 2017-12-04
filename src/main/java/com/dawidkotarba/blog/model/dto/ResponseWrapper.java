@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.dto;
+package com.dawidkotarba.blog.model.dto;
 
 /**
  * Created by Dawid Kotarba on 13.11.2015.

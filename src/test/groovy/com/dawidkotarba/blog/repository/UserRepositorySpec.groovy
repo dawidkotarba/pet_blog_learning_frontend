@@ -1,11 +1,8 @@
 package com.dawidkotarba.blog.repository
 
-import com.dawidkotarba.blog.model.entities.UserEntity
-import com.dawidkotarba.blog.repository.UserRepository
-import org.junit.Test
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import spock.lang.Specification
 import com.dawidkotarba.blog.AbstractIntegrationSpec
+import com.dawidkotarba.blog.model.entities.UserEntity
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 
 import javax.inject.Inject
 
@@ -31,7 +28,6 @@ class UserRepositorySpec extends AbstractIntegrationSpec {
         def result = userRepository.findByUsername(TEST_VALUE)
 
         then:
-        result.size() == 1
-        result.get(0) == user
+        result == user
     }
 }

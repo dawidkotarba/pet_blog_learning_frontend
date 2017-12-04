@@ -1,30 +1,30 @@
 package com.dawidkotarba.blog.converters;
 
-import com.dawidkotarba.blog.dto.PostDto;
+import com.dawidkotarba.blog.model.dto.PostDto;
 import com.dawidkotarba.blog.model.entities.PostEntity;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 
 @Named
 public class PostConverter implements Converter<PostEntity, PostDto> {
 
     @Inject
-    AuthorConverter authorConverter;
+    private AuthorConverter authorConverter;
 
     @Inject
-    CommentConverter commentsConverter;
+    private CommentConverter commentsConverter;
 
     @Override
     public PostDto convertToDto(final PostEntity entity) {
-        final PostDto dto = PostDto.builder()
+        return PostDto.builder()
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished())
                 .author(authorConverter.convertToDto(entity.getAuthor()))
-                .commentDtos(commentsConverter.convertListToDto(entity.getComments()))
+                .commentDtos(commentsConverter.convertToDtos(entity.getComments()))
                 .build();
-        return dto;
     }
 
     @Override
@@ -34,8 +34,12 @@ public class PostConverter implements Converter<PostEntity, PostDto> {
                 .body(dto.getBody())
                 .published(dto.getPublished())
                 .author(authorConverter.convertToEntity(dto.getAuthor()))
-                .comments(commentsConverter.convertListToEntity(dto.getCommentDtos()))
                 .build();
+
+        if (Objects.nonNull(dto.getCommentDtos())) {
+            entity.setComments(commentsConverter.convertToEntities(dto.getCommentDtos()));
+        }
+
         return entity;
     }
 }
