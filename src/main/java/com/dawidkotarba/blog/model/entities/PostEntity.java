@@ -1,7 +1,6 @@
 package com.dawidkotarba.blog.model.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,6 +11,9 @@ import java.util.List;
 @SequenceGenerator(name = "PK", sequenceName = "POSTS_SEQ", allocationSize = 1)
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class PostEntity extends AbstractEntity {
 
     @Column(nullable = false, unique = true)
