@@ -13,22 +13,22 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
     private String[] params;
     private ExceptionType exceptionType;
 
-    public AbstractApplicationRuntimeException(ExceptionType exceptionType, String message) {
+    public AbstractApplicationRuntimeException(final ExceptionType exceptionType, final String message) {
         super(message);
         init(exceptionType);
     }
 
-    public AbstractApplicationRuntimeException(ExceptionType exceptionType, Throwable cause) {
+    public AbstractApplicationRuntimeException(final ExceptionType exceptionType, final Throwable cause) {
         super(cause);
         init(exceptionType);
     }
 
-    public AbstractApplicationRuntimeException(ExceptionType exceptionType, String message, Throwable cause) {
+    public AbstractApplicationRuntimeException(final ExceptionType exceptionType, final String message, final Throwable cause) {
         super(message, cause);
         init(exceptionType);
     }
 
-    public AbstractApplicationRuntimeException addParams(String... params) {
+    public AbstractApplicationRuntimeException addParams(final String... params) {
         this.params = params;
         return this;
     }
@@ -45,7 +45,7 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
         return exceptionType;
     }
 
-    private void init(ExceptionType exceptionType) {
+    private void init(final ExceptionType exceptionType) {
         uuid = UUID.randomUUID();
         this.exceptionType = exceptionType;
     }

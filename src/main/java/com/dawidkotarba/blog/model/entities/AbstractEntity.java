@@ -1,12 +1,10 @@
 package com.dawidkotarba.blog.model.entities;
 
 import javax.persistence.*;
+import java.util.UUID;
 
-/**
- * Created by Dawid Kotarba on 19.12.2015.
- */
 @MappedSuperclass
-public abstract class AbstractEntity implements HasId<Long>, HasVersion<Integer> {
+public abstract class AbstractEntity implements IdentifiableEntity {
 
     @Id
     @GeneratedValue(generator = "PK", strategy = GenerationType.SEQUENCE)
@@ -14,6 +12,33 @@ public abstract class AbstractEntity implements HasId<Long>, HasVersion<Integer>
 
     @Version
     private Integer version;
+
+    @Column(nullable = false, unique = true)
+    private String uuid;
+
+    public AbstractEntity() {
+        uuid = UUID.randomUUID().toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof AbstractEntity)) {
+            return false;
+        }
+        final AbstractEntity other = (AbstractEntity) obj;
+        return getUuid().equals(other.getUuid());
+    }
 
     @Override
     public Long getId() {
@@ -23,5 +48,10 @@ public abstract class AbstractEntity implements HasId<Long>, HasVersion<Integer>
     @Override
     public Integer getVersion() {
         return version;
+    }
+
+    @Override
+    public UUID getUuid() {
+        return UUID.fromString(uuid);
     }
 }

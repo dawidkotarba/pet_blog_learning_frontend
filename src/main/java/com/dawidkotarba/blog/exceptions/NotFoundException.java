@@ -7,15 +7,15 @@ import com.dawidkotarba.blog.enums.ExceptionType;
  */
 public class NotFoundException extends AbstractApplicationRuntimeException {
 
-    public NotFoundException(String message) {
+    public NotFoundException(final String message) {
         super(ExceptionType.NOT_FOUND, message);
     }
 
-    public NotFoundException(Throwable cause) {
+    public NotFoundException(final Throwable cause) {
         super(ExceptionType.NOT_FOUND, cause);
     }
 
-    public NotFoundException(String message, Throwable cause) {
+    public NotFoundException(final String message, final Throwable cause) {
         super(ExceptionType.NOT_FOUND, message, cause);
     }
 }
