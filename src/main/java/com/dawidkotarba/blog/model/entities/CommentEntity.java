@@ -3,6 +3,7 @@ package com.dawidkotarba.blog.model.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "COMMENTS")
@@ -24,4 +25,6 @@ public class CommentEntity extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "POST_ID")
     private PostEntity post;
+
+    private Date published;
 }

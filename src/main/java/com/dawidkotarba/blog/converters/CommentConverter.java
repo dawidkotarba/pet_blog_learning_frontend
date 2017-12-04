@@ -28,6 +28,7 @@ public class CommentConverter implements Converter<CommentEntity, CommentDto> {
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
+                .published(entity.getPublished())
                 .build();
         return dto;
     }
@@ -38,6 +39,7 @@ public class CommentConverter implements Converter<CommentEntity, CommentDto> {
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())
                 .body(dto.getBody())
+                .published(dto.getPublished())
                 .build();
         return entity;
     }
