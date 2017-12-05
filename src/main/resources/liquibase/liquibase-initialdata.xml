@@ -28,6 +28,24 @@
             <column name="firstname" value="Dawid"/>
             <column name="lastname" value="K."/>
         </insert>
+        <insert dbms="h2" schemaName="public" tableName="authors">
+            <column name="uuid" value="2"/>
+            <column name="username" value="filipd"/>
+            <column name="firstname" value="Filip"/>
+            <column name="lastname" value="D."/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="authors">
+            <column name="uuid" value="3"/>
+            <column name="username" value="bartekk"/>
+            <column name="firstname" value="Bartek"/>
+            <column name="lastname" value="K."/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="authors">
+            <column name="uuid" value="4"/>
+            <column name="username" value="sebas"/>
+            <column name="firstname" value="Seba"/>
+            <column name="lastname" value="S."/>
+        </insert>
     </changeSet>
 
     <changeSet id="create_initialdata_posts" author="Dawid">
