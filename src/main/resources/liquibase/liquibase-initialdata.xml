@@ -1,0 +1,70 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_initialdata_users" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="users">
+            <column name="uuid" value="1"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/>
+            <column name="enabled" value="true"/>
+            <column name="role" value="role_admin"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users">
+            <column name="uuid" value="2"/>
+            <column name="username" value="user"/>
+            <column name="password" value="user"/>
+            <column name="enabled" value="true"/>
+            <column name="role" value="role_user"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_authors" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="authors">
+            <column name="uuid" value="1"/>
+            <column name="username" value="dawidk"/>
+            <column name="firstname" value="Dawid"/>
+            <column name="lastname" value="K."/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_posts" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="posts">
+            <column name="uuid" value="1"/>
+            <column name="author_id" value="1"/>
+            <column name="subject" value="Test post subject"/>
+            <column name="body" value="Test post body"/>
+            <column name="published" value="2017-11-29"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_comments" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="comments">
+            <column name="uuid" value="1"/>
+            <column name="author" value="Stefan"/>
+            <column name="subject" value="Test comment subject"/>
+            <column name="body" value="Test comment body"/>
+            <column name="post_id" value="1"/>
+            <column name="published" value="2017-11-29"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="comments">
+            <column name="uuid" value="2"/>
+            <column name="author" value="Stefan"/>
+            <column name="subject" value="Test comment subject"/>
+            <column name="body" value="Test comment body"/>
+            <column name="post_id" value="1"/>
+            <column name="published" value="2017-11-30"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="comments">
+            <column name="uuid" value="3"/>
+            <column name="author" value="Stefan"/>
+            <column name="subject" value="Test comment subject"/>
+            <column name="body" value="Test comment body"/>
+            <column name="post_id" value="1"/>
+            <column name="published" value="2017-11-30"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

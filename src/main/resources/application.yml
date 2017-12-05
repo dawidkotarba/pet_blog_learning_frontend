@@ -12,4 +12,4 @@ logging:
          hibernate: WARN
 
 liquibase:
-    change-log: classpath:liquibase-changeLog.xml
+    change-log: classpath:liquibase/liquibase-changeLog.xml

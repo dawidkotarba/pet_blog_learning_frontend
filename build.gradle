@@ -8,7 +8,8 @@ buildscript {
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
         classpath "org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0"
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
+        classpath "info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9"
+        classpath "org.liquibase:liquibase-gradle-plugin:1.2.4"
     }
 }
 
@@ -20,6 +21,7 @@ apply plugin: "com.github.kt3k.coveralls"
 apply plugin: "checkstyle"
 apply plugin: "jacoco"
 apply plugin: "info.solidsoft.pitest"
+apply plugin: 'org.liquibase.gradle'
 
 jar {
     baseName = "blog"
@@ -108,7 +110,6 @@ tasks.coveralls {
 
 task stage(dependsOn: ["build", "clean"])
 build.mustRunAfter clean
-check.dependsOn(jacocoTestReport, "pitest")
 task wrapper(type: Wrapper) {
     gradleVersion = "2.3"
 }
