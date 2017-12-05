@@ -4,7 +4,39 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet author="filip" id="create_schema">
+    <changeSet id="create_user_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE users_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_author_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE authors_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_posts_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE posts_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_comments_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE comments_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet author="Filip" id="create_schema">
         <sqlFile dbms="h2"
                  encoding="utf8"
                  endDelimiter="\nGO"
