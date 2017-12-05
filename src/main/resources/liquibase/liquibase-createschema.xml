@@ -1,0 +1,149 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="create_user_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE users_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_author_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE authors_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_posts_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE posts_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_comments_sequence" author="Dawid">
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE comments_seq INCREMENT BY 1;
+        </sql>
+    </changeSet>
+
+    <changeSet id="create_users_table" author="Dawid">
+        <createTable tableName="users" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="users_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="firstname" type="varchar(50)"/>
+            <column name="lastname" type="varchar(50)"/>
+            <column name="password" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="enabled" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="varchar(20)" defaultValue="user">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_authors_table" author="Dawid">
+        <createTable tableName="authors" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="authors_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="username" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="firstname" type="varchar(50)"/>
+            <column name="lastname" type="varchar(50)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_posts_table" author="Dawid">
+        <createTable tableName="posts" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="posts_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="author_id" type="int">
+                <constraints nullable="false" foreignKeyName="author_id" referencedTableName="authors"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="subject" type="varchar(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="body" type="clob">
+                <constraints nullable="false"/>
+            </column>
+            <column name="published" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create_comments_table" author="Dawid">
+        <createTable tableName="comments" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="posts_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="author" type="varchar(50)"/>
+            <column name="subject" type="varchar(200)"/>
+            <column name="body" type="clob">
+                <constraints nullable="false"/>
+            </column>
+            <column name="post_id" type="int">
+                <constraints nullable="false" foreignKeyName="post_id" referencedTableName="posts"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="published" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="filip" id="init_data">
+        <sqlFile dbms="h2"
+                 encoding="utf8"
+                 endDelimiter="\nGO"
+                 path="db_data_init.sql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+</databaseChangeLog>
