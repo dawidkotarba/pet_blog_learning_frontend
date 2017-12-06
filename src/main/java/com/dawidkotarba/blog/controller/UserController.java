@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.controllers;
+package com.dawidkotarba.blog.controller;
 
 import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.UserFacade;
@@ -29,10 +29,9 @@ class UserController {
         return userFacade.findAll();
     }
 
-    @RequestMapping(value = "/{name}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto getByName(@PathVariable final String name) {
-        final Optional<UserDto> result = userFacade.findByName(name);
-
-        return result.orElseThrow(() -> new NotFoundException("User [" + name + "]" + " not found."));
+    @RequestMapping(value = "/{username}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto findByUsername(@PathVariable final String username) {
+        final Optional<UserDto> result = userFacade.findByUsername(username);
+        return result.orElseThrow(() -> new NotFoundException("User [" + username + "]" + " not found."));
     }
 }

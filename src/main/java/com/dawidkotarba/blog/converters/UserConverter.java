@@ -14,6 +14,8 @@ public class UserConverter implements Converter<UserEntity, UserDto> {
                 .username(entity.getUsername())
                 .firstname(entity.getFirstname())
                 .lastname(entity.getLastname())
+                .role(entity.getRole())
+                .enabled(entity.isEnabled())
                 .build();
     }
 
@@ -23,6 +25,8 @@ public class UserConverter implements Converter<UserEntity, UserDto> {
                 .username(dto.getUsername())
                 .firstname(dto.getFirstname())
                 .lastname(dto.getLastname())
+                .role(dto.getRole())
+                .enabled(dto.isEnabled())
                 .build();
     }
 }
