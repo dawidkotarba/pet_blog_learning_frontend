@@ -8,13 +8,12 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PostDto extends AbstractDto {
+public class PostInDto extends AbstractDto {
 
     @NotBlank
     private String subject;
@@ -24,5 +23,4 @@ public class PostDto extends AbstractDto {
     private Date published;
     @NotNull
     private AuthorDto author;
-    private List<CommentDto> commentDtos;
 }
