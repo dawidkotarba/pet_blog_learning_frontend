@@ -1,16 +1,14 @@
 package com.dawidkotarba.blog.model.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
+import java.io.Serializable;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
-public class UserDto extends AbstractDto {
+public class UserDto implements Serializable {
 
     @NotBlank
     private String username;
