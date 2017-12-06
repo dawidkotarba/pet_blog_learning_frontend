@@ -9,11 +9,12 @@ import javax.inject.Named;
 @Named
 public class PostInConverter implements Converter<PostEntity, PostInDto> {
 
-    @Inject
-    private AuthorConverter authorConverter;
+    private final AuthorConverter authorConverter;
 
     @Inject
-    private CommentConverter commentsConverter;
+    public PostInConverter(final AuthorConverter authorConverter) {
+        this.authorConverter = authorConverter;
+    }
 
     @Override
     public PostInDto convertToDto(final PostEntity entity) {

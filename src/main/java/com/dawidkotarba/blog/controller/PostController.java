@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.controllers;
+package com.dawidkotarba.blog.controller;
 
 import com.dawidkotarba.blog.facade.PostFacade;
 import com.dawidkotarba.blog.model.dto.PostInDto;

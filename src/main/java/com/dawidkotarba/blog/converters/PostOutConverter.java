@@ -10,11 +10,14 @@ import java.util.Objects;
 @Named
 public class PostOutConverter implements Converter<PostEntity, PostOutDto> {
 
-    @Inject
-    private AuthorConverter authorConverter;
+    private final AuthorConverter authorConverter;
+    private final CommentConverter commentsConverter;
 
     @Inject
-    private CommentConverter commentsConverter;
+    public PostOutConverter(final AuthorConverter authorConverter, final CommentConverter commentsConverter) {
+        this.authorConverter = authorConverter;
+        this.commentsConverter = commentsConverter;
+    }
 
     @Override
     public PostOutDto convertToDto(final PostEntity entity) {

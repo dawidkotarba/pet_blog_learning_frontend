@@ -25,9 +25,9 @@ public class UserFacade {
         this.userConverter = userConverter;
     }
 
-    public Optional<UserDto> findByName(final String name) {
-        Preconditions.checkNotNull(name);
-        final UserEntity byUsername = userRepository.findByUsername(name);
+    public Optional<UserDto> findByUsername(final String username) {
+        Preconditions.checkNotNull(username);
+        final UserEntity byUsername = userRepository.findByUsername(username);
 
         if (!Objects.nonNull(byUsername)) {
             return Optional.empty();
