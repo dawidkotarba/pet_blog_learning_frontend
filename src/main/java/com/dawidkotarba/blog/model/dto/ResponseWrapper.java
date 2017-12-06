@@ -1,8 +1,5 @@
 package com.dawidkotarba.blog.model.dto;
 
-/**
- * Created by Dawid Kotarba on 13.11.2015.
- */
 public class ResponseWrapper<T> {
 
     private final T response;
