@@ -20,7 +20,7 @@ class UserController {
     private final UserFacade userFacade;
 
     @Inject
-    public UserController(final UserFacade userFacade) {
+    UserController(final UserFacade userFacade) {
         this.userFacade = userFacade;
     }
 
@@ -33,6 +33,6 @@ class UserController {
     public UserDto getByName(@PathVariable final String name) {
         final Optional<UserDto> result = userFacade.findByName(name);
 
-        return result.orElseThrow(() -> new NotFoundException(name + " user does not exist."));
+        return result.orElseThrow(() -> new NotFoundException("User [" + name + "]" + " not found."));
     }
 }

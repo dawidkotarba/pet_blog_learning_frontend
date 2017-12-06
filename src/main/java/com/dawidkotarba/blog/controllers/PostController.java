@@ -1,7 +1,8 @@
 package com.dawidkotarba.blog.controllers;
 
 import com.dawidkotarba.blog.facade.PostFacade;
-import com.dawidkotarba.blog.model.dto.PostDto;
+import com.dawidkotarba.blog.model.dto.PostInDto;
+import com.dawidkotarba.blog.model.dto.PostOutDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,17 +22,17 @@ class PostController {
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostDto> findAll() {
+    public List<PostOutDto> findAll() {
         return postFacade.findAll();
     }
 
     @RequestMapping(value = "/{subject}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostDto> findBySubject(@PathVariable final String subject) {
+    public List<PostOutDto> findBySubject(@PathVariable final String subject) {
         return postFacade.findBySubject(subject);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody @Valid final PostDto postDto) {
+    public void add(@RequestBody @Valid final PostInDto postDto) {
         postFacade.add(postDto);
     }
 }
