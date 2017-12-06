@@ -79,7 +79,7 @@
             <column name="uuid" type="varchar(36)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="author_id" type="int">
+            <column name="author_id" type="long">
                 <constraints nullable="false" foreignKeyName="author_id" referencedTableName="authors"
                              referencedColumnNames="id"/>
             </column>
@@ -108,7 +108,7 @@
             <column name="body" type="clob">
                 <constraints nullable="false"/>
             </column>
-            <column name="post_id" type="int">
+            <column name="post_id" type="long">
                 <constraints nullable="false" foreignKeyName="post_id" referencedTableName="posts"
                              referencedColumnNames="id"/>
             </column>
