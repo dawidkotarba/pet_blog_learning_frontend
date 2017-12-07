@@ -54,7 +54,7 @@
             <column name="author_id" value="1"/>
             <column name="subject" value="Test post subject"/>
             <column name="body" value="Test post body"/>
-            <column name="published" value="2017-11-29"/>
+            <column name="published" value="2017-10-31T01:30:00"/>
         </insert>
     </changeSet>
 

@@ -89,7 +89,7 @@
             <column name="body" type="clob">
                 <constraints nullable="false"/>
             </column>
-            <column name="published" type="date">
+            <column name="published" type="timestamp">
                 <constraints nullable="false"/>
             </column>
         </createTable>
@@ -112,7 +112,7 @@
                 <constraints nullable="false" foreignKeyName="post_id" referencedTableName="posts"
                              referencedColumnNames="id"/>
             </column>
-            <column name="published" type="date">
+            <column name="published" type="timestamp">
                 <constraints nullable="false"/>
             </column>
         </createTable>
