@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -18,7 +18,7 @@ public class PostOutDto implements Serializable {
     @NotBlank
     private String body;
     @NotNull
-    private Date published;
+    private LocalDateTime published;
     @NotNull
     private AuthorDto author;
     private List<CommentDto> commentDtos;
