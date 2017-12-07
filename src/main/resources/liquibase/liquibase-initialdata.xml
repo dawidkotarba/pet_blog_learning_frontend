@@ -56,6 +56,20 @@
             <column name="body" value="Test post body"/>
             <column name="published" value="2017-11-29"/>
         </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts">
+            <column name="uuid" value="2"/>
+            <column name="author_id" value="2"/>
+            <column name="subject" value="Test post subject 2"/>
+            <column name="body" value="Test post body 2"/>
+            <column name="published" value="2017-12-07"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts">
+            <column name="uuid" value="3"/>
+            <column name="author_id" value="3"/>
+            <column name="subject" value="Test post subject 3"/>
+            <column name="body" value="Test post body 3"/>
+            <column name="published" value="2017-12-06"/>
+        </insert>
     </changeSet>
 
     <changeSet id="create_initialdata_comments" author="Dawid">
