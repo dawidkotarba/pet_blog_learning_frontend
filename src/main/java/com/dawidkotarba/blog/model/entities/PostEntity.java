@@ -3,7 +3,7 @@ package com.dawidkotarba.blog.model.entities;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Entity
@@ -22,7 +22,7 @@ public class PostEntity extends AbstractEntity {
     @Lob
     private String body;
 
-    private Date published;
+    private Timestamp published;
 
     @OneToOne
     @JoinColumn(name = "AUTHOR_ID")
