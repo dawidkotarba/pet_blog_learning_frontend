@@ -1,4 +1,4 @@
-package integration.com.dawidkotarba.blog.repository.controller
+package integration.com.dawidkotarba.blog.controller
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -17,9 +17,9 @@ class UserControllerSpec extends Specification {
     @Inject
     MockMvc mockMvc
 
-    def "Should return at least one user"() {
+    def 'Should return at least one user'() {
         when: 'rest users url is hit'
-        def response = mockMvc.perform(get("/users")).andReturn().response
+        def response = mockMvc.perform(get('/users')).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and user returned'
@@ -30,9 +30,9 @@ class UserControllerSpec extends Specification {
         user != null
     }
 
-    def "Should return admin user"() {
+    def 'Should return admin user'() {
         when: 'rest users url is hit'
-        def response = mockMvc.perform(get("/users/admin")).andReturn().response
+        def response = mockMvc.perform(get('/users/admin')).andReturn().response
         def user = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and admin user returned'
