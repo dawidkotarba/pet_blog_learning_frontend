@@ -3,11 +3,12 @@ package com.dawidkotarba.blog.model.dto;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -20,6 +21,7 @@ public class PostOutDto implements Serializable {
     @NotNull
     private Date published;
     @NotNull
-    private AuthorDto author;
-    private List<CommentDto> commentDtos;
+    @NotEmpty
+    private Set<AuthorDto> authors;
+    private Set<CommentDto> commentDtos;
 }

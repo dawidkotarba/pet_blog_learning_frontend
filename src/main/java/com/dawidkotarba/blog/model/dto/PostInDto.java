@@ -3,10 +3,12 @@ package com.dawidkotarba.blog.model.dto;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Builder
@@ -19,5 +21,6 @@ public class PostInDto implements Serializable {
     @NotNull
     private Date published;
     @NotNull
-    private AuthorDto author;
+    @NotEmpty
+    private Set<AuthorDto> authors;
 }

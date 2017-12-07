@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "POSTS")
@@ -24,10 +24,12 @@ public class PostEntity extends AbstractEntity {
 
     private Date published;
 
-    @OneToOne
+    @ManyToMany
+    @JoinTable(name = "POSTS_AUTHORS", joinColumns = @JoinColumn(name = "POST_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID"))
     @JoinColumn(name = "AUTHOR_ID")
-    private AuthorEntity author;
+    private Set<AuthorEntity> authors;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
-    private List<CommentEntity> comments;
+    private Set<CommentEntity> comments;
 }
