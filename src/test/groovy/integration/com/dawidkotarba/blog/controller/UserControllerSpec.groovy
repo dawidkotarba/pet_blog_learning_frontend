@@ -1,5 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
+import com.dawidkotarba.blog.exceptions.NotFoundException
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
@@ -31,7 +32,7 @@ class UserControllerSpec extends Specification {
     }
 
     def 'Should return admin user'() {
-        when: 'rest users url is hit'
+        when: 'rest single user url is hit'
         def response = mockMvc.perform(get('/users/admin')).andReturn().response
         def user = new JsonSlurper().parseText(response.contentAsString)
 
@@ -43,5 +44,18 @@ class UserControllerSpec extends Specification {
         user.username == 'admin'
         user.enabled == true
         user.role == 'role_admin'
+    }
+
+    def "Should show exception information when user is not found"() {
+        when: 'rest is hit with not existing user'
+        def response = mockMvc.perform(get('/users/nosuchuser')).andReturn().response
+        def content = new JsonSlurper().parseText(response.contentAsString)
+
+        then: 'Exception message is shown'
+        response.status == NOT_FOUND.value()
+        response.contentType.contains('application/json')
+
+        content.uuid != null
+        content.exceptionType == 'NOT_FOUND'
     }
 }
