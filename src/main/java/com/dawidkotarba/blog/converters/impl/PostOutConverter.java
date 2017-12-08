@@ -2,7 +2,7 @@ package com.dawidkotarba.blog.converters.impl;
 
 import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
-import com.dawidkotarba.blog.model.entities.PostEntity;
+import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 
 import javax.inject.Inject;
 import javax.inject.Named;

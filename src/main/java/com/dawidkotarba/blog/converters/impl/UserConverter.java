@@ -3,7 +3,7 @@ package com.dawidkotarba.blog.converters.impl;
 import com.dawidkotarba.blog.converters.InConverter;
 import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.model.dto.impl.UserDto;
-import com.dawidkotarba.blog.model.entities.UserEntity;
+import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 
 import javax.inject.Named;
 

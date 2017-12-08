@@ -1,4 +1,6 @@
-package com.dawidkotarba.blog.model.entities;
+package com.dawidkotarba.blog.model.entities.impl;
+
+import com.dawidkotarba.blog.model.entities.IdentifiableEntity;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -14,7 +16,7 @@ public abstract class AbstractEntity implements IdentifiableEntity {
     private Integer version;
 
     @Column(nullable = false, unique = true)
-    private String uuid;
+    private final String uuid;
 
     public AbstractEntity() {
         uuid = UUID.randomUUID().toString();

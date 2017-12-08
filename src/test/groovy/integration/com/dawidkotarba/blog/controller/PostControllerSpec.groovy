@@ -1,7 +1,7 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.model.entities.AuthorEntity
-import com.dawidkotarba.blog.model.entities.PostEntity
+import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
+import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.AuthorRepository
 import com.dawidkotarba.blog.repository.PostRepository
 import groovy.json.JsonSlurper
