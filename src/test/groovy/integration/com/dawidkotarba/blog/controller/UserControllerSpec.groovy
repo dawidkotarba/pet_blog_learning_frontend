@@ -1,15 +1,16 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.exceptions.NotFoundException
+import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
-import groovy.json.JsonSlurper
+
 import javax.inject.Inject
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.http.HttpStatus.*
+
+import static org.springframework.http.HttpStatus.NOT_FOUND
+import static org.springframework.http.HttpStatus.OK
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @AutoConfigureMockMvc

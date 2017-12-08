@@ -29,7 +29,7 @@ public class UserFacade {
         Preconditions.checkNotNull(username);
         final UserEntity byUsername = userRepository.findByUsername(username);
 
-        if (!Objects.nonNull(byUsername)) {
+        if (Objects.isNull(byUsername)) {
             return Optional.empty();
         }
 

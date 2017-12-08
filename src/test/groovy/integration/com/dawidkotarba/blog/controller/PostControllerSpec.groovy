@@ -9,12 +9,12 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.inject.Inject
 import java.sql.Timestamp
 
+import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 
@@ -30,30 +30,6 @@ class PostControllerSpec extends Specification {
     @Inject
     MockMvc mockMvc
 
-    @Shared
-    def authorTest = new AuthorEntity()
-    @Shared
-    def postTest = new PostEntity()
-
-    def setup() {
-        given:
-        def final TEST_VALUE = "test"
-        authorTest.with {
-            username = TEST_VALUE
-            firstname = TEST_VALUE
-            lastname = TEST_VALUE
-        }
-        postTest.with {
-            subject = TEST_VALUE
-            body = TEST_VALUE
-            published = new Timestamp(System.currentTimeMillis())
-            author = authorTest
-            comments = null
-        }
-        authorRepository.save(authorTest)
-        postRepository.save(postTest)
-    }
-
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
         def response = mockMvc.perform(get('/posts')).andReturn().response
@@ -68,6 +44,25 @@ class PostControllerSpec extends Specification {
     }
 
     def 'Should return post with proper subject'() {
+        given:
+        def final TEST_VALUE = "test"
+        def authorTest = new AuthorEntity()
+        def postTest = new PostEntity()
+        authorTest.with {
+            username = TEST_VALUE
+            firstname = TEST_VALUE
+            lastname = TEST_VALUE
+            posts = null
+        }
+        postTest.with {
+            subject = TEST_VALUE
+            body = TEST_VALUE
+            published = new Timestamp(System.currentTimeMillis())
+            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
+            comments = null
+        }
+        authorRepository.save(authorTest)
+        postRepository.save(postTest)
         when: 'rest posts/subject/{subject} url is hit'
         def response = mockMvc.perform(get('/posts/subject/' + postTest.subject)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
@@ -80,5 +75,23 @@ class PostControllerSpec extends Specification {
         post != null
         post.subject == postTest.subject
         post.body == postTest.body
+        post.published.nano == postTest.published.nanos
+        post.authors != null
+        post.authors.username == postTest.authors.username
+        post.authors.firstname == postTest.authors.firstname
+        post.authors.lastname == postTest.authors.lastname
+    }
+
+    def "Should show exception information when post is not found"() {
+        when: 'rest is hit with not existing post'
+        def response = mockMvc.perform(get('/posts/subject/notExistingPost')).andReturn().response
+        def content = new JsonSlurper().parseText(response.contentAsString)
+
+        then: 'Exception message is shown'
+        response.status == NOT_FOUND.value()
+        response.contentType.contains('application/json')
+
+        content.uuid != null
+        content.exceptionType == 'NOT_FOUND'
     }
 }

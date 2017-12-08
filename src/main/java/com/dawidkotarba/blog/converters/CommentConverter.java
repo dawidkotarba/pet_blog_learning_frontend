@@ -4,6 +4,7 @@ import com.dawidkotarba.blog.model.dto.CommentDto;
 import com.dawidkotarba.blog.model.entities.CommentEntity;
 
 import javax.inject.Named;
+import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class CommentConverter implements Converter<CommentEntity, CommentDto> {
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
-                .published(entity.getPublished())
+                .published(entity.getPublished().toLocalDateTime())
                 .build();
     }
 
@@ -41,7 +42,7 @@ public class CommentConverter implements Converter<CommentEntity, CommentDto> {
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())
                 .body(dto.getBody())
-                .published(dto.getPublished())
+                .published(Timestamp.valueOf(dto.getPublished()))
                 .build();
     }
 }
