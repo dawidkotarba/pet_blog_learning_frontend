@@ -6,6 +6,7 @@ import com.dawidkotarba.blog.model.entities.PostEntity;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.sql.Timestamp;
+import java.util.stream.Collectors;
 
 @Named
 public class PostInConverter implements Converter<PostEntity, PostInDto> {
@@ -23,7 +24,7 @@ public class PostInConverter implements Converter<PostEntity, PostInDto> {
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished().toLocalDateTime())
-                .author(authorConverter.convertToDto(entity.getAuthor()))
+                .authors(entity.getAuthors().stream().map(authorConverter::convertToDto).collect(Collectors.toSet()))
                 .build();
     }
 
@@ -33,7 +34,7 @@ public class PostInConverter implements Converter<PostEntity, PostInDto> {
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .published(Timestamp.valueOf(dto.getPublished()))
-                .author(authorConverter.convertToEntity(dto.getAuthor()))
+                .authors(dto.getAuthors().stream().map(authorConverter::convertToEntity).collect(Collectors.toSet()))
                 .build();
     }
 }
