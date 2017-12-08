@@ -1,10 +1,10 @@
 package com.dawidkotarba.blog.facade;
 
-import com.dawidkotarba.blog.converters.PostInConverter;
-import com.dawidkotarba.blog.converters.PostOutConverter;
-import com.dawidkotarba.blog.model.dto.AuthorDto;
-import com.dawidkotarba.blog.model.dto.PostInDto;
-import com.dawidkotarba.blog.model.dto.PostOutDto;
+import com.dawidkotarba.blog.converters.impl.PostInConverter;
+import com.dawidkotarba.blog.converters.impl.PostOutConverter;
+import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
+import com.dawidkotarba.blog.model.dto.impl.PostInDto;
+import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
 import com.dawidkotarba.blog.model.entities.AuthorEntity;
 import com.dawidkotarba.blog.model.entities.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
@@ -40,7 +40,7 @@ public class PostFacade {
     public List<PostOutDto> findAll() {
         final List<PostEntity> all = postRepository.findAll();
         final List<PostOutDto> result = all.stream()
-                .map(postOutConverter::convertToDto)
+                .map(postOutConverter::convert)
                 .collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }
@@ -53,7 +53,7 @@ public class PostFacade {
             return Optional.empty();
         }
 
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
+        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Optional.of(result);
     }
 
@@ -68,7 +68,7 @@ public class PostFacade {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
         final List<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
+        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }
 
@@ -78,7 +78,7 @@ public class PostFacade {
                 .stream()
                 .map(AuthorDto::getUsername)
                 .collect(Collectors.toSet()));
-        final PostEntity entity = postInConverter.convertToEntity(postInDto);
+        final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
         postRepository.save(entity);
     }

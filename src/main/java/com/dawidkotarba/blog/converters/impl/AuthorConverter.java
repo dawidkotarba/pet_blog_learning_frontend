@@ -1,15 +1,17 @@
-package com.dawidkotarba.blog.converters;
+package com.dawidkotarba.blog.converters.impl;
 
-import com.dawidkotarba.blog.model.dto.AuthorDto;
+import com.dawidkotarba.blog.converters.InConverter;
+import com.dawidkotarba.blog.converters.OutConverter;
+import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
 import com.dawidkotarba.blog.model.entities.AuthorEntity;
 
 import javax.inject.Named;
 
 @Named
-public class AuthorConverter implements Converter<AuthorEntity, AuthorDto> {
+public class AuthorConverter implements InConverter<AuthorDto, AuthorEntity>, OutConverter<AuthorEntity, AuthorDto> {
 
     @Override
-    public AuthorDto convertToDto(final AuthorEntity entity) {
+    public AuthorDto convert(final AuthorEntity entity) {
         return AuthorDto.builder()
                 .username(entity.getUsername())
                 .firstname(entity.getFirstname())
@@ -17,7 +19,7 @@ public class AuthorConverter implements Converter<AuthorEntity, AuthorDto> {
     }
 
     @Override
-    public AuthorEntity convertToEntity(final AuthorDto dto) {
+    public AuthorEntity convert(final AuthorDto dto) {
         return AuthorEntity.builder()
                 .username(dto.getUsername())
                 .firstname(dto.getFirstname())

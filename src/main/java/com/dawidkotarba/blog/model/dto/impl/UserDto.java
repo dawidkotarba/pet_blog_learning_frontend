@@ -1,15 +1,19 @@
-package com.dawidkotarba.blog.model.dto;
+package com.dawidkotarba.blog.model.dto.impl;
 
+import com.dawidkotarba.blog.model.dto.InDto;
+import com.dawidkotarba.blog.model.dto.OutDto;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
 
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-public class UserDto implements Serializable {
+public class UserDto implements InDto, OutDto {
 
+    @NotNull
+    private Long id;
     @NotBlank
     private String username;
     @NotBlank

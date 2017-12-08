@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.model.dto;
+package com.dawidkotarba.blog.model.dto.impl;
 
 public class ResponseWrapper<T> {
 

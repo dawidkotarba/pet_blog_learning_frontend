@@ -2,8 +2,8 @@ package com.dawidkotarba.blog.controller;
 
 import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.PostFacade;
-import com.dawidkotarba.blog.model.dto.PostInDto;
-import com.dawidkotarba.blog.model.dto.PostOutDto;
+import com.dawidkotarba.blog.model.dto.impl.PostInDto;
+import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

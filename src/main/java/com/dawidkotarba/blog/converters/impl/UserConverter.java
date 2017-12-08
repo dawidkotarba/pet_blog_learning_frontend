@@ -1,15 +1,17 @@
-package com.dawidkotarba.blog.converters;
+package com.dawidkotarba.blog.converters.impl;
 
-import com.dawidkotarba.blog.model.dto.UserDto;
+import com.dawidkotarba.blog.converters.InConverter;
+import com.dawidkotarba.blog.converters.OutConverter;
+import com.dawidkotarba.blog.model.dto.impl.UserDto;
 import com.dawidkotarba.blog.model.entities.UserEntity;
 
 import javax.inject.Named;
 
 @Named
-public class UserConverter implements Converter<UserEntity, UserDto> {
+public class UserConverter implements InConverter<UserDto, UserEntity>, OutConverter<UserEntity, UserDto> {
 
     @Override
-    public UserDto convertToDto(final UserEntity entity) {
+    public UserDto convert(final UserEntity entity) {
         return UserDto.builder()
                 .username(entity.getUsername())
                 .firstname(entity.getFirstname())
@@ -20,7 +22,7 @@ public class UserConverter implements Converter<UserEntity, UserDto> {
     }
 
     @Override
-    public UserEntity convertToEntity(final UserDto dto) {
+    public UserEntity convert(final UserDto dto) {
         return UserEntity.builder()
                 .username(dto.getUsername())
                 .firstname(dto.getFirstname())
