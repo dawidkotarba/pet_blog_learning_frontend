@@ -63,6 +63,7 @@ class PostControllerSpec extends Specification {
         }
         authorRepository.save(authorTest)
         postRepository.save(postTest)
+
         when: 'rest posts/subject/{subject} url is hit'
         def response = mockMvc.perform(get('/posts/subject/' + postTest.subject)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
