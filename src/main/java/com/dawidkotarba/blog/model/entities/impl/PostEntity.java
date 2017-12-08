@@ -32,4 +32,10 @@ public class PostEntity extends AbstractEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
     private Set<CommentEntity> comments;
+
+    @ManyToMany
+    @JoinTable(name = "POSTS_LABELS", joinColumns = @JoinColumn(name = "POST_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID"))
+    @JoinColumn(name = "LABEL_ID")
+    private Set<LabelEntity> labels;
 }

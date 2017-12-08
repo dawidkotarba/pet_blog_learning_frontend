@@ -90,7 +90,22 @@
         </insert>
     </changeSet>
 
-    <changeSet id="create_initialdata_post_authors" author="Dawid">
+    <changeSet id="create_initialdata_labels" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="labels">
+            <column name="uuid" value="1"/>
+            <column name="name" value="programming"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="labels">
+            <column name="uuid" value="2"/>
+            <column name="name" value="databases"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="labels">
+            <column name="uuid" value="3"/>
+            <column name="name" value="networking"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_posts_authors" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="posts_authors">
             <column name="post_id" value="1"/>
             <column name="author_id" value="1"/>
@@ -106,6 +121,25 @@
         <insert dbms="h2" schemaName="public" tableName="posts_authors">
             <column name="post_id" value="2"/>
             <column name="author_id" value="3"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_posts_labels" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="posts_labels">
+            <column name="post_id" value="1"/>
+            <column name="label_id" value="1"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_labels">
+            <column name="post_id" value="1"/>
+            <column name="label_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_labels">
+            <column name="post_id" value="2"/>
+            <column name="label_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_labels">
+            <column name="post_id" value="2"/>
+            <column name="label_id" value="3"/>
         </insert>
     </changeSet>
 

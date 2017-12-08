@@ -26,29 +26,29 @@ class PostController {
         this.postFacade = postFacade;
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     List<PostOutDto> findAll() {
         return postFacade.findAll();
     }
 
-    @RequestMapping(value = "/subject/{subject}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/subject/{subject}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<PostOutDto> findBySubject(@PathVariable final String subject) {
         final Optional<List<PostOutDto>> result = postFacade.findBySubject(subject);
         return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     void add(@RequestBody @Valid final PostInDto postDto) {
         postFacade.add(postDto);
     }
 
-    @RequestMapping(value = "/search/{dayOfAMonth}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/search/{dayOfAMonth}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<PostOutDto> findMontlyByDayOfAMonth(@RequestParam
                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate dayOfAMonth) {
         return postFacade.findMontlyByDayOfAMonth(dayOfAMonth);
     }
 
-    @RequestMapping(value = "/search/{fromDate}/{toDate}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/search/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<PostOutDto> findFromDayToDay(@RequestParam
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime fromDate,
                                       @RequestParam
