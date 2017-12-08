@@ -6,3 +6,11 @@ jdk:
 after_success:
 - ./gradlew jacocoTestReport coveralls pitest
 - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
+
+deploy:
+  provider: releases
+  api_key: $GITHUB_API_KEY
+  file: "build/libs/blog-0.1.0.jar"
+  skip_cleanup: true
+  on:
+    tags: true
