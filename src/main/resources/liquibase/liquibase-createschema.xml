@@ -25,6 +25,11 @@
              splitStatements="true"
              stripComments="true">CREATE SEQUENCE comments_seq INCREMENT BY 1;
         </sql>
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE labels_seq INCREMENT BY 1;
+        </sql>
     </changeSet>
 
     <changeSet id="create_tables" author="Dawid">
@@ -112,11 +117,33 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <createTable tableName="labels" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="labels_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
         <createTable tableName="posts_authors" schemaName="public">
             <column name="post_id" type="long">
                 <constraints nullable="false"/>
             </column>
             <column name="author_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="posts_labels" schemaName="public">
+            <column name="post_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="label_id" type="long">
                 <constraints nullable="false"/>
             </column>
         </createTable>
