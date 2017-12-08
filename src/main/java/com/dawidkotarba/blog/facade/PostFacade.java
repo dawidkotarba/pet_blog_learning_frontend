@@ -5,8 +5,8 @@ import com.dawidkotarba.blog.converters.impl.PostOutConverter;
 import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
-import com.dawidkotarba.blog.model.entities.AuthorEntity;
-import com.dawidkotarba.blog.model.entities.PostEntity;
+import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
+import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
 import com.dawidkotarba.blog.repository.PostRepository;
 import com.google.common.base.Preconditions;
@@ -29,8 +29,8 @@ public class PostFacade {
     private final PostInConverter postInConverter;
 
     @Inject
-    public PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository,
-                      final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
+    PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository,
+               final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
         this.postRepository = postRepository;
         this.authorRepository = authorRepository;
         this.postOutConverter = postOutConverter;

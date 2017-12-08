@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.model.entities;
+package com.dawidkotarba.blog.model.entities.impl;
 
 import lombok.*;
 

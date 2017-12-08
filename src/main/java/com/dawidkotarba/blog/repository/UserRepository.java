@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.repository;
 
-import com.dawidkotarba.blog.model.entities.UserEntity;
+import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

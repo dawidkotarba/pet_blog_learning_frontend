@@ -25,12 +25,12 @@ class UserController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> findAll() {
+    List<UserDto> findAll() {
         return userFacade.findAll();
     }
 
     @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto findByUsername(@PathVariable final String username) {
+    UserDto findByUsername(@PathVariable final String username) {
         final Optional<UserDto> result = userFacade.findByUsername(username);
         return result.orElseThrow(() -> new NotFoundException("User [" + username + "]" + " not found."));
     }

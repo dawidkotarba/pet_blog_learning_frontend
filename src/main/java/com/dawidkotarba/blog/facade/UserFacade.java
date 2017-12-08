@@ -2,7 +2,7 @@ package com.dawidkotarba.blog.facade;
 
 import com.dawidkotarba.blog.converters.impl.UserConverter;
 import com.dawidkotarba.blog.model.dto.impl.UserDto;
-import com.dawidkotarba.blog.model.entities.UserEntity;
+import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import com.dawidkotarba.blog.repository.UserRepository;
 import com.google.common.base.Preconditions;
 
@@ -20,7 +20,7 @@ public class UserFacade {
     private final UserConverter userConverter;
 
     @Inject
-    public UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
+    UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
         this.userRepository = userRepository;
         this.userConverter = userConverter;
     }
