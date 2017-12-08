@@ -3,7 +3,7 @@ package com.dawidkotarba.blog.converters.impl;
 import com.dawidkotarba.blog.converters.InConverter;
 import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.model.dto.impl.CommentDto;
-import com.dawidkotarba.blog.model.entities.CommentEntity;
+import com.dawidkotarba.blog.model.entities.impl.CommentEntity;
 
 import javax.inject.Named;
 import java.sql.Timestamp;

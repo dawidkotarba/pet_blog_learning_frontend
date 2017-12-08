@@ -41,7 +41,7 @@ class SecurityConfigProd extends WebSecurityConfigurerAdapter {
     }
 
     @Inject
-    public void configureAuthentication(final AuthenticationManagerBuilder auth) throws Exception {
+    void configureAuthentication(final AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource).
                 usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?").authoritiesByUsernameQuery(
                 "SELECT username, role FROM users WHERE username=?");

@@ -21,19 +21,19 @@ public class LocalizationConfig extends WebMvcConfigurerAdapter {
     private Locale defaultLocale;
 
     @PostConstruct
-    public void init() {
+    void init() {
         defaultLocale = new Locale.Builder().setLanguageTag(locale).build();
     }
 
     @Bean
-    public LocaleResolver localeResolver() {
+    LocaleResolver localeResolver() {
         final SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(defaultLocale);
         return slr;
     }
 
     @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
+    LocaleChangeInterceptor localeChangeInterceptor() {
         final LocaleChangeInterceptor lci = new LocaleChangeInterceptor();
         lci.setParamName("lang");
         return lci;

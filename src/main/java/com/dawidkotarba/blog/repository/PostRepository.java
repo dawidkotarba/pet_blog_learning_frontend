@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.repository;
 
-import com.dawidkotarba.blog.model.entities.PostEntity;
+import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.Timestamp;

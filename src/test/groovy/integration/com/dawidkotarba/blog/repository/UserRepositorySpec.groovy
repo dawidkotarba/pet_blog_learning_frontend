@@ -1,6 +1,6 @@
 package integration.com.dawidkotarba.blog.repository
 
-import com.dawidkotarba.blog.model.entities.UserEntity
+import com.dawidkotarba.blog.model.entities.impl.UserEntity
 import com.dawidkotarba.blog.repository.UserRepository
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
