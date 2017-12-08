@@ -51,24 +51,15 @@
     <changeSet id="create_initialdata_posts" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="posts">
             <column name="uuid" value="1"/>
-            <column name="author_id" value="1"/>
             <column name="subject" value="Test post subject"/>
             <column name="body" value="Test post body"/>
             <column name="published" value="2017-10-31T01:30:00"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="posts">
             <column name="uuid" value="2"/>
-            <column name="author_id" value="2"/>
             <column name="subject" value="Test post subject 2"/>
             <column name="body" value="Test post body 2"/>
-            <column name="published" value="2017-12-07"/>
-        </insert>
-        <insert dbms="h2" schemaName="public" tableName="posts">
-            <column name="uuid" value="3"/>
-            <column name="author_id" value="3"/>
-            <column name="subject" value="Test post subject 3"/>
-            <column name="body" value="Test post body 3"/>
-            <column name="published" value="2017-12-06"/>
+            <column name="published" value="2017-11-30"/>
         </insert>
     </changeSet>
 
@@ -86,7 +77,7 @@
             <column name="author" value="Stefan"/>
             <column name="subject" value="Test comment subject"/>
             <column name="body" value="Test comment body"/>
-            <column name="post_id" value="1"/>
+            <column name="post_id" value="2"/>
             <column name="published" value="2017-11-30"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="comments">
@@ -94,8 +85,27 @@
             <column name="author" value="Stefan"/>
             <column name="subject" value="Test comment subject"/>
             <column name="body" value="Test comment body"/>
-            <column name="post_id" value="1"/>
+            <column name="post_id" value="2"/>
             <column name="published" value="2017-11-30"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="create_initialdata_post_authors" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="posts_authors">
+            <column name="post_id" value="1"/>
+            <column name="author_id" value="1"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_authors">
+            <column name="post_id" value="1"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_authors">
+            <column name="post_id" value="2"/>
+            <column name="author_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="posts_authors">
+            <column name="post_id" value="2"/>
+            <column name="author_id" value="3"/>
         </insert>
     </changeSet>
 

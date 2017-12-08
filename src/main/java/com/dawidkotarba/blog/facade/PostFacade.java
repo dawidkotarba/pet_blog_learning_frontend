@@ -2,6 +2,7 @@ package com.dawidkotarba.blog.facade;
 
 import com.dawidkotarba.blog.converters.PostInConverter;
 import com.dawidkotarba.blog.converters.PostOutConverter;
+import com.dawidkotarba.blog.model.dto.AuthorDto;
 import com.dawidkotarba.blog.model.dto.PostInDto;
 import com.dawidkotarba.blog.model.dto.PostOutDto;
 import com.dawidkotarba.blog.model.entities.AuthorEntity;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,11 +72,12 @@ public class PostFacade {
 
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final String username = postInDto.getAuthor().getUsername();
-        final AuthorEntity authors = authorRepository.findByUsername(username);
+        final List<AuthorEntity> authors = authorRepository.findByUsernames(postInDto.getAuthors()
+                .stream()
+                .map(AuthorDto::getUsername)
+                .collect(Collectors.toSet()));
         final PostEntity entity = postInConverter.convertToEntity(postInDto);
-        entity.setAuthor(authors);
-
+        entity.setAuthors(new HashSet<>(authors));
         postRepository.save(entity);
     }
 }
