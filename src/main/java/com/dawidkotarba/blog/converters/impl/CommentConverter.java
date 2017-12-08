@@ -1,6 +1,8 @@
-package com.dawidkotarba.blog.converters;
+package com.dawidkotarba.blog.converters.impl;
 
-import com.dawidkotarba.blog.model.dto.CommentDto;
+import com.dawidkotarba.blog.converters.InConverter;
+import com.dawidkotarba.blog.converters.OutConverter;
+import com.dawidkotarba.blog.model.dto.impl.CommentDto;
 import com.dawidkotarba.blog.model.entities.CommentEntity;
 
 import javax.inject.Named;
@@ -10,24 +12,24 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Named
-public class CommentConverter implements Converter<CommentEntity, CommentDto> {
+public class CommentConverter implements InConverter<CommentDto, CommentEntity>, OutConverter<CommentEntity, CommentDto> {
 
     Set<CommentDto> convertToDtos(final Set<CommentEntity> entities) {
         return entities.stream()
                 .filter(Objects::nonNull)
-                .map(this::convertToDto)
+                .map(this::convert)
                 .collect(Collectors.toSet());
     }
 
     Set<CommentEntity> convertToEntities(final Set<CommentDto> dtos) {
         return dtos.stream()
                 .filter(Objects::nonNull)
-                .map(this::convertToEntity)
+                .map(this::convert)
                 .collect(Collectors.toSet());
     }
 
     @Override
-    public CommentDto convertToDto(final CommentEntity entity) {
+    public CommentDto convert(final CommentEntity entity) {
         return CommentDto.builder()
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
@@ -37,7 +39,7 @@ public class CommentConverter implements Converter<CommentEntity, CommentDto> {
     }
 
     @Override
-    public CommentEntity convertToEntity(final CommentDto dto) {
+    public CommentEntity convert(final CommentDto dto) {
         return CommentEntity.builder()
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())

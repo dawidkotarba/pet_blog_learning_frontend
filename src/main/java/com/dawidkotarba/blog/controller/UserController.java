@@ -2,7 +2,7 @@ package com.dawidkotarba.blog.controller;
 
 import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.UserFacade;
-import com.dawidkotarba.blog.model.dto.UserDto;
+import com.dawidkotarba.blog.model.dto.impl.UserDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
