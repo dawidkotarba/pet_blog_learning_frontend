@@ -4,25 +4,25 @@ import com.dawidkotarba.blog.model.dto.CommentDto;
 import com.dawidkotarba.blog.model.entities.CommentEntity;
 
 import javax.inject.Named;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Named
 public class CommentConverter implements Converter<CommentEntity, CommentDto> {
 
-    List<CommentDto> convertToDtos(final List<CommentEntity> entities) {
+    Set<CommentDto> convertToDtos(final Set<CommentEntity> entities) {
         return entities.stream()
                 .filter(Objects::nonNull)
                 .map(this::convertToDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
-    List<CommentEntity> convertToEntities(final List<CommentDto> dtos) {
+    Set<CommentEntity> convertToEntities(final Set<CommentDto> dtos) {
         return dtos.stream()
                 .filter(Objects::nonNull)
                 .map(this::convertToEntity)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     @Override

@@ -79,10 +79,6 @@
             <column name="uuid" type="varchar(36)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="author_id" type="long">
-                <constraints nullable="false" foreignKeyName="author_id" referencedTableName="authors"
-                             referencedColumnNames="id"/>
-            </column>
             <column name="subject" type="varchar(200)">
                 <constraints nullable="false" unique="true"/>
             </column>
@@ -113,6 +109,14 @@
                              referencedColumnNames="id"/>
             </column>
             <column name="published" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="posts_authors" schemaName="public">
+            <column name="post_id" type="long">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author_id" type="long">
                 <constraints nullable="false"/>
             </column>
         </createTable>
