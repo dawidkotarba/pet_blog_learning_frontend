@@ -13,6 +13,7 @@ import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.inject.Inject
+import java.sql.Timestamp
 
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
@@ -28,7 +29,7 @@ class PostControllerSpec extends Specification {
     PostRepository postRepository
     @Inject
     MockMvc mockMvc
-    def final TEST_VALUE = "test"
+
     @Shared
     def authorTest = new AuthorEntity()
     @Shared
@@ -36,6 +37,7 @@ class PostControllerSpec extends Specification {
 
     def setup() {
         given:
+        def final TEST_VALUE = "test"
         authorTest.with {
             username = TEST_VALUE
             firstname = TEST_VALUE
@@ -44,7 +46,7 @@ class PostControllerSpec extends Specification {
         postTest.with {
             subject = TEST_VALUE
             body = TEST_VALUE
-            published = new Date()
+            published = new Timestamp(System.currentTimeMillis())
             author = authorTest
             comments = null
         }
@@ -66,8 +68,8 @@ class PostControllerSpec extends Specification {
     }
 
     def 'Should return post with proper subject'() {
-        when: 'rest posts/{subject} url is hit'
-        def response = mockMvc.perform(get('/posts/' + TEST_VALUE)).andReturn().response
+        when: 'rest posts/subject/{subject} url is hit'
+        def response = mockMvc.perform(get('/posts/subject/' + postTest.subject)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post with proper subject returned'
