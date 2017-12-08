@@ -17,9 +17,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Named
@@ -47,13 +45,17 @@ public class PostFacade {
         return Collections.unmodifiableList(result);
     }
 
-    public List<PostOutDto> findBySubject(final String subject) {
+    public Optional<List<PostOutDto>> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
         final List<PostEntity> bySubject = postRepository.findBySubject(subject);
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
-        return Collections.unmodifiableList(result);
-    }
 
+        if (Objects.isNull(bySubject) || bySubject.isEmpty()) {
+            return Optional.empty();
+        }
+
+        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
+        return Optional.of(result);
+    }
 
     public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
         Preconditions.checkNotNull(dayOfAMonth);
