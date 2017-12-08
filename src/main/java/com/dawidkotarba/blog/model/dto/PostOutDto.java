@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -19,7 +19,7 @@ public class PostOutDto implements Serializable {
     @NotBlank
     private String body;
     @NotNull
-    private Date published;
+    private LocalDateTime published;
     @NotNull
     @NotEmpty
     private Set<AuthorDto> authors;

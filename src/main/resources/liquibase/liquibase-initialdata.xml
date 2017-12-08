@@ -53,7 +53,7 @@
             <column name="uuid" value="1"/>
             <column name="subject" value="Test post subject"/>
             <column name="body" value="Test post body"/>
-            <column name="published" value="2017-11-29"/>
+            <column name="published" value="2017-10-31T01:30:00"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="posts">
             <column name="uuid" value="2"/>

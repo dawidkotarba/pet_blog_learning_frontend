@@ -13,6 +13,10 @@ import com.google.common.base.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -46,6 +50,22 @@ public class PostFacade {
     public List<PostOutDto> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
         final List<PostEntity> bySubject = postRepository.findBySubject(subject);
+        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
+        return Collections.unmodifiableList(result);
+    }
+
+
+    public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
+        Preconditions.checkNotNull(dayOfAMonth);
+        final LocalDate startDate = dayOfAMonth.withDayOfMonth(1);
+        final LocalDate endDate = dayOfAMonth.withDayOfMonth(dayOfAMonth.lengthOfMonth());
+        return findFromDateToDate(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), LocalDateTime.of(endDate, LocalTime.MAX));
+    }
+
+    public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
+        Preconditions.checkNotNull(fromDate);
+        Preconditions.checkNotNull(toDate);
+        final List<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
         final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convertToDto).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }
