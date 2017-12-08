@@ -21,13 +21,13 @@ class CacheConfig {
     private Resource ehCacheConfiguration;
 
     @Bean
-    public CacheManager getEhCacheManager() {
+    CacheManager getEhCacheManager() {
         return new EhCacheCacheManager(ehCacheFactoryBean().getObject());
 
     }
 
     @Bean
-    public EhCacheManagerFactoryBean ehCacheFactoryBean() {
+    EhCacheManagerFactoryBean ehCacheFactoryBean() {
         final EhCacheManagerFactoryBean factoryBean = new EhCacheManagerFactoryBean();
         factoryBean.setConfigLocation(ehCacheConfiguration);
         factoryBean.setShared(true);

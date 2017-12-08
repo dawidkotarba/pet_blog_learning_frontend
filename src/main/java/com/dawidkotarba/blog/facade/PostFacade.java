@@ -29,8 +29,8 @@ public class PostFacade {
     private final PostInConverter postInConverter;
 
     @Inject
-    public PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository,
-                      final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
+    PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository,
+               final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
         this.postRepository = postRepository;
         this.authorRepository = authorRepository;
         this.postOutConverter = postOutConverter;

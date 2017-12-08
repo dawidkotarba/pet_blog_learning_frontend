@@ -20,7 +20,7 @@ public class UserFacade {
     private final UserConverter userConverter;
 
     @Inject
-    public UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
+    UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
         this.userRepository = userRepository;
         this.userConverter = userConverter;
     }

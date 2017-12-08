@@ -22,37 +22,37 @@ class PostController {
     private final PostFacade postFacade;
 
     @Inject
-    public PostController(final PostFacade postFacade) {
+    PostController(final PostFacade postFacade) {
         this.postFacade = postFacade;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostOutDto> findAll() {
+    List<PostOutDto> findAll() {
         return postFacade.findAll();
     }
 
     @RequestMapping(value = "/subject/{subject}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostOutDto> findBySubject(@PathVariable final String subject) {
+    List<PostOutDto> findBySubject(@PathVariable final String subject) {
         final Optional<List<PostOutDto>> result = postFacade.findBySubject(subject);
         return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void add(@RequestBody @Valid final PostInDto postDto) {
+    void add(@RequestBody @Valid final PostInDto postDto) {
         postFacade.add(postDto);
     }
 
     @RequestMapping(value = "/search/{dayOfAMonth}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostOutDto> findMontlyByDayOfAMonth(@RequestParam("dayOfAMonth")
-                                                    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate dayOfAMonth) {
+    List<PostOutDto> findMontlyByDayOfAMonth(@RequestParam
+                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate dayOfAMonth) {
         return postFacade.findMontlyByDayOfAMonth(dayOfAMonth);
     }
 
     @RequestMapping(value = "/search/{fromDate}/{toDate}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<PostOutDto> findFromDayToDay(@RequestParam("fromDate")
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime fromDate,
-                                             @RequestParam("toDate")
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime toDate) {
+    List<PostOutDto> findFromDayToDay(@RequestParam
+                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime fromDate,
+                                      @RequestParam
+                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime toDate) {
         return postFacade.findFromDateToDate(fromDate, toDate);
     }
 }
