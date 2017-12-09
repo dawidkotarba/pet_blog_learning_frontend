@@ -1,7 +1,9 @@
 package com.dawidkotarba.blog.facade;
 
-import com.dawidkotarba.blog.converters.impl.UserConverter;
-import com.dawidkotarba.blog.model.dto.impl.UserDto;
+import com.dawidkotarba.blog.converters.impl.UserInConverter;
+import com.dawidkotarba.blog.converters.impl.UserOutConverter;
+import com.dawidkotarba.blog.model.dto.impl.UserInDto;
+import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
 import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import com.dawidkotarba.blog.repository.UserRepository;
 import com.google.common.base.Preconditions;
@@ -17,15 +19,17 @@ import java.util.stream.Collectors;
 public class UserFacade {
 
     private final UserRepository userRepository;
-    private final UserConverter userConverter;
+    private final UserInConverter userInConverter;
+    private final UserOutConverter userOutConverter;
 
     @Inject
-    UserFacade(final UserRepository userRepository, final UserConverter userConverter) {
+    UserFacade(final UserRepository userRepository, final UserInConverter userInConverter, final UserOutConverter userOutConverter) {
         this.userRepository = userRepository;
-        this.userConverter = userConverter;
+        this.userInConverter = userInConverter;
+        this.userOutConverter = userOutConverter;
     }
 
-    public Optional<UserDto> findByUsername(final String username) {
+    public Optional<UserOutDto> findByUsername(final String username) {
         Preconditions.checkNotNull(username);
         final UserEntity byUsername = userRepository.findByUsername(username);
 
@@ -33,13 +37,17 @@ public class UserFacade {
             return Optional.empty();
         }
 
-        final UserDto userDto = userConverter.convert(byUsername);
+        final UserOutDto userDto = userOutConverter.convert(byUsername);
         return Optional.of(userDto);
     }
 
-    public List<UserDto> findAll() {
+    public List<UserOutDto> findAll() {
         final List<UserEntity> all = userRepository.findAll();
 
-        return all.stream().map(userConverter::convert).collect(Collectors.toList());
+        return all.stream().map(userOutConverter::convert).collect(Collectors.toList());
+    }
+
+    public void add(final UserInDto userInDto) {
+        userRepository.save(userInConverter.convert(userInDto));
     }
 }
