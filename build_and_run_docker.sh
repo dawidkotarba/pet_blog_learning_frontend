@@ -1,2 +1,2 @@
-docker build -t dawidkotarba/blog .
-docker run -d -P --name blog dawidkotarba/blog
+docker build -t dawidkotarba/blog:latest .
+docker run -d -P --name blog dawidkotarba/blog:latest

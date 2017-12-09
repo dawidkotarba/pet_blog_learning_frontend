@@ -10,9 +10,9 @@ after_success:
   - ./gradlew jacocoTestReport coveralls pitest
   - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
-    docker build -t dawidkotarba/blog .
+    docker build -t dawidkotarba/blog:latest .
     docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD";
-    docker push dawidkotarba/blog;
+    docker push dawidkotarba/blog:latest;
     fi
 
 deploy:
