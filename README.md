@@ -17,6 +17,9 @@
 #### Buld & run:
 - sh build_and_run.sh from main folder
 
+#### Docker build:
+- Pull image from docker hub: docker pull dawidkotarba/blog
+
 #### Pages (provided Tomcat runs on default 8080):
 - localhost:8080/login => default login page
 - localhost:8080/db => H2 console (url: jdbc:h2:mem:testdb, user: sa, pwd: <blank>)
