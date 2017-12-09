@@ -76,7 +76,7 @@ class PostControllerSpec extends Specification {
         post != null
         post.subject == postTest.subject
         post.body == postTest.body
-        post.published.nano == postTest.published.nanos
+        post.published == postTest.published.toLocalDateTime().withNano(0).toString()
         post.authors != null
         post.authors.username == postTest.authors.username
         post.authors.firstname == postTest.authors.firstname

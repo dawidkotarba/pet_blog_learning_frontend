@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
 
     private final AuthorConverter authorConverter;
-    private final CommentConverter commentsConverter;
+    private final CommentOutConverter commentsConverter;
 
     @Inject
-    public PostOutConverter(final AuthorConverter authorConverter, final CommentConverter commentsConverter) {
+    public PostOutConverter(final AuthorConverter authorConverter, final CommentOutConverter commentsConverter) {
         this.authorConverter = authorConverter;
         this.commentsConverter = commentsConverter;
     }
