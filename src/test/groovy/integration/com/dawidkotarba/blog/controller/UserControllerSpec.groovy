@@ -51,7 +51,6 @@ class UserControllerSpec extends Specification {
         user != null
         user.username == 'admin'
         user.enabled == true
-        user.role == 'role_admin'
     }
 
     def "Should show exception information when user is not found"() {
@@ -78,7 +77,6 @@ class UserControllerSpec extends Specification {
             lastname = TEST_VALUE
             password = TEST_VALUE
             enabled = true
-            role = TEST_VALUE
         }
         def requestBody = objectMapper.writeValueAsString(newUser)
 
@@ -95,6 +93,5 @@ class UserControllerSpec extends Specification {
         user.lastname == newUser.lastname
         user.password == newUser.password
         user.enabled == newUser.enabled
-        user.role == newUser.role
     }
 }

@@ -22,6 +22,4 @@ public class UserInDto implements InDto {
     @NotBlank
     private String password;
     private boolean enabled;
-    @NotBlank
-    private String role;
 }

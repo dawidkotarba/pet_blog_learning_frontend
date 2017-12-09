@@ -23,7 +23,6 @@ class UserRepositorySpec extends Specification {
             username = TEST_VALUE
             password = TEST_VALUE
             enabled = true
-            role = TEST_VALUE
         }
         userRepository.save(user)
 

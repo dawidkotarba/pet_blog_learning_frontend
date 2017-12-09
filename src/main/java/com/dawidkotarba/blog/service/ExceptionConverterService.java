@@ -1,5 +1,6 @@
 package com.dawidkotarba.blog.service;
 
+import com.dawidkotarba.blog.enums.CommonExceptionType;
 import com.dawidkotarba.blog.enums.ExceptionType;
 import com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
@@ -40,8 +41,8 @@ public class ExceptionConverterService {
     public ExceptionResponse convert(final Exception e) {
         final ExceptionResponse exceptionResponse = new ExceptionResponse();
         exceptionResponse.setUuid(UUID.randomUUID());
-        exceptionResponse.setExceptionType(ExceptionType.INTERNAL_ERROR);
-        exceptionResponse.setUserMessage(getLocalizedUserMessage(ExceptionType.INTERNAL_ERROR));
+        exceptionResponse.setExceptionType(CommonExceptionType.INTERNAL_ERROR);
+        exceptionResponse.setUserMessage(getLocalizedUserMessage(CommonExceptionType.INTERNAL_ERROR));
         exceptionResponse.setDevMessage(e.getMessage());
 
         return exceptionResponse;

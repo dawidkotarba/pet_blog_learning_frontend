@@ -16,7 +16,6 @@ public class UserInConverter implements InConverter<UserInDto, UserEntity> {
                 .firstname(userInDto.getFirstname())
                 .lastname(userInDto.getLastname())
                 .password(userInDto.getPassword())
-                .role(userInDto.getRole())
                 .enabled(userInDto.isEnabled())
                 .build();
     }
