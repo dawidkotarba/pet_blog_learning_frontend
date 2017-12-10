@@ -17,6 +17,12 @@
             <column name="password" value="admin"/>
             <column name="enabled" value="true"/>
         </insert>
+        <insert dbms="h2" schemaName="public" tableName="users">
+            <column name="uuid" value="3"/>
+            <column name="username" value="testuser"/>
+            <column name="password" value="testuser"/>
+            <column name="enabled" value="true"/>
+        </insert>
     </changeSet>
     <changeSet id="create_initialdata_authorities" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="authorities">
@@ -47,6 +53,18 @@
         </insert>
         <insert dbms="h2" schemaName="public" tableName="users_authorities">
             <column name="user_id" value="2"/>
+            <column name="authority_id" value="3"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
+            <column name="authority_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
             <column name="authority_id" value="3"/>
         </insert>
     </changeSet>
