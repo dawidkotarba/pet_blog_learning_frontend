@@ -51,7 +51,7 @@ class DatabaseConfig {
 
         final LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan("com.dawidkotarba.blog.model.entities");
+        factory.setPackagesToScan("com.dawidkotarba.blog");
         factory.setDataSource(dataSource());
 
         factory.setJpaProperties(jpaProperties());
