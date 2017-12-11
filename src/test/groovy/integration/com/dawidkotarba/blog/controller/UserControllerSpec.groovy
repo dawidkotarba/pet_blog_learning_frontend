@@ -49,7 +49,6 @@ class UserControllerSpec extends Specification {
         user != null
         user.username == 'admin'
         user.enabled == true
-        user.role == 'role_admin'
     }
 
     def "Should show exception information when user is not found"() {
@@ -74,8 +73,7 @@ class UserControllerSpec extends Specification {
                 '  "firstname": "' + TEST_VALUE + '",\n' +
                 '  "lastname": "' + TEST_VALUE + '",\n' +
                 '  "password": "' + TEST_VALUE + '",\n' +
-                '  "enabled": true,\n' +
-                '  "role": "' + TEST_VALUE + '"\n' +
+                '  "enabled": true\n' +
                 '}'
 
         when: 'rest add user url is hit'
@@ -91,6 +89,5 @@ class UserControllerSpec extends Specification {
         user.lastname == TEST_VALUE
         user.password == TEST_VALUE
         user.enabled == true
-        user.role == TEST_VALUE
     }
 }
