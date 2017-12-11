@@ -1,6 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.auth.service.AuthenticationService
+import com.dawidkotarba.blog.auth.service.LoginService
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.AuthorRepository
@@ -9,7 +9,9 @@ import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -18,6 +20,7 @@ import java.sql.Timestamp
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @AutoConfigureMockMvc
@@ -31,7 +34,7 @@ class PostControllerSpec extends Specification {
     @Inject
     MockMvc mockMvc
     @Inject
-    AuthenticationService authenticationService
+    LoginService loginService
 
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
@@ -99,10 +102,11 @@ class PostControllerSpec extends Specification {
         content.exceptionType == 'NOT_FOUND'
     }
 
-    /*
-    AUTHENTICATION DOESNT WORK
+    @Ignore
     def 'Should add new post'() {
         given:
+        loginService.logIn('admin', 'admin')
+
         def TEST_VALUE = 'test'
         def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
         def TEST_AUTHOR_ID = 1
@@ -121,9 +125,6 @@ class PostControllerSpec extends Specification {
                 '}'
 
         when: 'rest add post url is hit'
-        //AUTHENTICATION DOESNT WORK
-        Authentication authentication = authenticationService.authenticate('admin', 'admin')
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         def response = mockMvc.perform(post('/posts')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)).andReturn().response
@@ -136,5 +137,4 @@ class PostControllerSpec extends Specification {
         post.body == TEST_VALUE
         post.published.toLocalDateTime().toString() == TEST_PUBLISHED_VALUE
     }
-    */
 }

@@ -67,13 +67,17 @@ class UserControllerSpec extends Specification {
     def 'Should add new user'() {
         given:
         def TEST_VALUE = 'test'
+        def TEST_AUTHORITY_VALUE = 'administrate'
         def requestBody = '{\n' +
                 '  "id": 0,\n' +
                 '  "username": "' + TEST_VALUE + '",\n' +
                 '  "firstname": "' + TEST_VALUE + '",\n' +
                 '  "lastname": "' + TEST_VALUE + '",\n' +
                 '  "password": "' + TEST_VALUE + '",\n' +
-                '  "enabled": true\n' +
+                '  "enabled": true,\n' +
+                '  "authorities": [\n' +
+                '    "' + TEST_AUTHORITY_VALUE + '"\n' +
+                '  ]' + '\n' +
                 '}'
 
         when: 'rest add user url is hit'
@@ -84,10 +88,11 @@ class UserControllerSpec extends Specification {
         then: 'response is correct and new user is saved in db'
         response.status == OK.value()
         def user = userRepository.findByUsername(TEST_VALUE)
+        user != null
         user.username == TEST_VALUE
         user.firstname == TEST_VALUE
         user.lastname == TEST_VALUE
-        user.password == TEST_VALUE
         user.enabled == true
+        user.authorities[0].authority == TEST_AUTHORITY_VALUE
     }
 }
