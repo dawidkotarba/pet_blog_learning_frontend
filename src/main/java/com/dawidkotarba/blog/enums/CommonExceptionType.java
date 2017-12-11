@@ -1,5 +1,5 @@
 package com.dawidkotarba.blog.enums;
 
 public enum CommonExceptionType implements ExceptionType {
-    NOT_FOUND, INTERNAL_ERROR, NOT_AUTHORIZED
+    NOT_FOUND, INTERNAL_ERROR, UNAUTHORIZED
 }

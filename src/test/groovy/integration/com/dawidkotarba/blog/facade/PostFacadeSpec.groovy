@@ -1,14 +1,13 @@
 package integration.com.dawidkotarba.blog.facade
 
-import com.dawidkotarba.blog.auth.service.AuthenticationService
+import com.dawidkotarba.blog.auth.exceptions.UnauthorizedException
 import com.dawidkotarba.blog.facade.PostFacade
+import com.dawidkotarba.blog.model.dto.impl.PostInDto
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
-import com.dawidkotarba.blog.model.dto.impl.PostInDto
-import com.dawidkotarba.blog.auth.exceptions.NotAuthorizedException
-import java.time.LocalDateTime
 
 import javax.inject.Inject
+import java.time.LocalDateTime
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 class PostFacadeSpec extends Specification {
@@ -21,6 +20,6 @@ class PostFacadeSpec extends Specification {
         postFacade.add(PostInDto.builder().subject('test').body('test').published(LocalDateTime.now()).build())
 
         then:
-        thrown NotAuthorizedException
+        thrown UnauthorizedException
     }
 }

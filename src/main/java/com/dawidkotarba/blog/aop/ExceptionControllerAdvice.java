@@ -1,5 +1,8 @@
 package com.dawidkotarba.blog.aop;
 
+import com.dawidkotarba.blog.auth.exceptions.UnauthorizedException;
+import com.dawidkotarba.blog.auth.exceptions.WrongPasswordException;
+import com.dawidkotarba.blog.auth.exceptions.WrongUsernameException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
@@ -50,6 +53,27 @@ class ExceptionControllerAdvice {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     ExceptionResponse handleException(final NotFoundException e) {
+        return exceptionConverterService.convert(e);
+    }
+
+    @ExceptionHandler(value = UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    ExceptionResponse handleException(final UnauthorizedException e) {
+        return exceptionConverterService.convert(e);
+    }
+
+    @ExceptionHandler(value = WrongPasswordException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    ExceptionResponse handleException(final WrongPasswordException e) {
+        return exceptionConverterService.convert(e);
+    }
+
+    @ExceptionHandler(value = WrongUsernameException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    ExceptionResponse handleException(final WrongUsernameException e) {
         return exceptionConverterService.convert(e);
     }
 

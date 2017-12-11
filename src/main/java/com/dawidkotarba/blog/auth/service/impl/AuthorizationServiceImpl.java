@@ -1,7 +1,7 @@
 package com.dawidkotarba.blog.auth.service.impl;
 
 import com.dawidkotarba.blog.auth.enums.UserAuthority;
-import com.dawidkotarba.blog.auth.exceptions.NotAuthorizedException;
+import com.dawidkotarba.blog.auth.exceptions.UnauthorizedException;
 import com.dawidkotarba.blog.auth.service.AuthorizationService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,7 +29,7 @@ class AuthorizationServiceImpl implements AuthorizationService {
                 return;
             }
         }
-        throw new NotAuthorizedException("Unauthorized");
+        throw new UnauthorizedException("Unauthorized");
     }
 
     @Override

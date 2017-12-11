@@ -4,7 +4,6 @@ import com.dawidkotarba.blog.auth.annotations.AuthorizeAuthorities;
 import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.converters.impl.PostInConverter;
 import com.dawidkotarba.blog.converters.impl.PostOutConverter;
-import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
@@ -77,10 +76,7 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final List<AuthorEntity> authors = authorRepository.findByUsernames(postInDto.getAuthors()
-                .stream()
-                .map(AuthorDto::getUsername)
-                .collect(Collectors.toSet()));
+        final List<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
         final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
         postRepository.save(entity);

@@ -8,15 +8,16 @@ import com.dawidkotarba.blog.repository.PostRepository;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.sql.Timestamp;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Named
 public class CommentInConverter implements InConverter<CommentInDto, CommentEntity> {
 
+    private final PostRepository postRepository;
+
     @Inject
-    private PostRepository postRepository;
+    public CommentInConverter(final PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
 
     @Override
     public CommentEntity convert(final CommentInDto dto) {
@@ -27,12 +28,5 @@ public class CommentInConverter implements InConverter<CommentInDto, CommentEnti
                 .post(postRepository.findOne(dto.getPostId()))
                 .published(Timestamp.valueOf(dto.getPublished()))
                 .build();
-    }
-
-    Set<CommentEntity> convertToEntities(final Set<CommentInDto> dtos) {
-        return dtos.stream()
-                .filter(Objects::nonNull)
-                .map(this::convert)
-                .collect(Collectors.toSet());
     }
 }
