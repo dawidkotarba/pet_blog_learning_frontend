@@ -6,19 +6,16 @@
 
     <changeSet id="create_initialdata_users" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="users">
-            <column name="uuid" value="1"/>
             <column name="username" value="user"/>
             <column name="password" value="$2a$04$F7TmxweMaQWDHG5l1GtkL.LxCCoI5BHQ0FefmzOlec.NLSxDJG9ci"/>
             <column name="enabled" value="true"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="users">
-            <column name="uuid" value="2"/>
             <column name="username" value="admin"/>
             <column name="password" value="$2a$04$./UKrgAdSYL2xThVs3QYI.OxHpl1gdTexj433bNAOV1l3A./5ZAp2"/>
             <column name="enabled" value="true"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="users">
-            <column name="uuid" value="3"/>
             <column name="username" value="testuser"/>
             <column name="password" value="$2a$04$3xmOBgmnGN0OOz5zl9nenORHVTGW8eDkRGQYbQFTSIIUGKshz5TJC"/>
             <column name="enabled" value="true"/>
@@ -26,15 +23,12 @@
     </changeSet>
     <changeSet id="create_initialdata_authorities" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="authorities">
-            <column name="uuid" value="1"/>
             <column name="authority" value="administrate"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authorities">
-            <column name="uuid" value="2"/>
             <column name="authority" value="write"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authorities">
-            <column name="uuid" value="3"/>
             <column name="authority" value="read"/>
         </insert>
     </changeSet>
@@ -70,25 +64,21 @@
     </changeSet>
     <changeSet id="create_initialdata_authors" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="authors">
-            <column name="uuid" value="1"/>
             <column name="username" value="dawidk"/>
             <column name="firstname" value="Dawid"/>
             <column name="lastname" value="K."/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authors">
-            <column name="uuid" value="2"/>
             <column name="username" value="filipd"/>
             <column name="firstname" value="Filip"/>
             <column name="lastname" value="D."/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authors">
-            <column name="uuid" value="3"/>
             <column name="username" value="bartekk"/>
             <column name="firstname" value="Bartek"/>
             <column name="lastname" value="K."/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authors">
-            <column name="uuid" value="4"/>
             <column name="username" value="sebas"/>
             <column name="firstname" value="Seba"/>
             <column name="lastname" value="S."/>
@@ -97,13 +87,11 @@
 
     <changeSet id="create_initialdata_posts" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="posts">
-            <column name="uuid" value="1"/>
             <column name="subject" value="Test post subject"/>
             <column name="body" value="Test post body"/>
             <column name="published" value="2017-10-31T01:30:00"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="posts">
-            <column name="uuid" value="2"/>
             <column name="subject" value="Test post subject 2"/>
             <column name="body" value="Test post body 2"/>
             <column name="published" value="2017-11-30"/>
@@ -112,7 +100,6 @@
 
     <changeSet id="create_initialdata_comments" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="comments">
-            <column name="uuid" value="1"/>
             <column name="author" value="Stefan"/>
             <column name="subject" value="Test comment subject"/>
             <column name="body" value="Test comment body"/>
@@ -120,7 +107,6 @@
             <column name="published" value="2017-11-29"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="comments">
-            <column name="uuid" value="2"/>
             <column name="author" value="Stefan"/>
             <column name="subject" value="Test comment subject"/>
             <column name="body" value="Test comment body"/>
@@ -128,7 +114,6 @@
             <column name="published" value="2017-11-30"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="comments">
-            <column name="uuid" value="3"/>
             <column name="author" value="Stefan"/>
             <column name="subject" value="Test comment subject"/>
             <column name="body" value="Test comment body"/>
@@ -139,15 +124,12 @@
 
     <changeSet id="create_initialdata_labels" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="uuid" value="1"/>
             <column name="name" value="programming"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="uuid" value="2"/>
             <column name="name" value="databases"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="uuid" value="3"/>
             <column name="name" value="networking"/>
         </insert>
     </changeSet>
