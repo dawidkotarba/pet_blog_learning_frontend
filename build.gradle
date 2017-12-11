@@ -71,6 +71,7 @@ dependencies {
 
     // utils
     compile "org.codehaus.jackson:jackson-core-asl:1.9.13"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3"
     compile "org.apache.commons:commons-lang3:3.6"
     compile "org.projectlombok:lombok:1.16.18"
     compile "com.google.guava:guava:23.5-jre"

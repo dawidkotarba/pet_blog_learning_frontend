@@ -1,5 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
+import com.dawidkotarba.blog.auth.service.AuthenticationService
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.AuthorRepository
@@ -29,6 +30,8 @@ class PostControllerSpec extends Specification {
     PostRepository postRepository
     @Inject
     MockMvc mockMvc
+    @Inject
+    AuthenticationService authenticationService
 
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
@@ -76,7 +79,7 @@ class PostControllerSpec extends Specification {
         post != null
         post.subject == postTest.subject
         post.body == postTest.body
-        post.published.nano == postTest.published.nanos
+        post.published == postTest.published.toLocalDateTime().withNano(0).toString()
         post.authors != null
         post.authors.username == postTest.authors.username
         post.authors.firstname == postTest.authors.firstname
@@ -95,4 +98,43 @@ class PostControllerSpec extends Specification {
         content.uuid != null
         content.exceptionType == 'NOT_FOUND'
     }
+
+    /*
+    AUTHENTICATION DOESNT WORK
+    def 'Should add new post'() {
+        given:
+        def TEST_VALUE = 'test'
+        def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
+        def TEST_AUTHOR_ID = 1
+        def requestBody = '{\n' +
+                '  "subject": "' + TEST_VALUE + '",\n' +
+                '  "body": "' + TEST_VALUE + '",\n' +
+                '  "published": "' + TEST_PUBLISHED_VALUE + '",\n' +
+                '  "authors": ' + '[\n' +
+                '    {\n' +
+                '      "id": ' + TEST_AUTHOR_ID + ',\n' +
+                '      "username": "' + TEST_VALUE + '",\n' +
+                '      "firstname": "' + TEST_VALUE + '",\n' +
+                '      "lastname": "' + TEST_VALUE + '"\n' +
+                '    }\n' +
+                '  ]' + '\n' +
+                '}'
+
+        when: 'rest add post url is hit'
+        //AUTHENTICATION DOESNT WORK
+        Authentication authentication = authenticationService.authenticate('admin', 'admin')
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        def response = mockMvc.perform(post('/posts')
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(requestBody)).andReturn().response
+
+        then: 'response is correct and new post is saved in db'
+        response.status == OK.value()
+        def post = postRepository.findBySubject(TEST_VALUE).get(0)
+        post != null
+        post.subject == TEST_VALUE
+        post.body == TEST_VALUE
+        post.published.toLocalDateTime().toString() == TEST_PUBLISHED_VALUE
+    }
+    */
 }
