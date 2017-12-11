@@ -36,12 +36,9 @@ class SecurityConfigDev extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
     }
 
-    @Inject
-    void configureAuthentication(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource).
-                usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username=?").authoritiesByUsernameQuery(
-                "SELECT u.username, auth.authority FROM users AS u JOIN users_authorities AS ua ON u.id = ua.user_id "
-                        + "JOIN authorities AS auth ON ua.authority_id = auth.id WHERE u.username=?");
+    @Override
+    protected void configure(final AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
 
     @Bean

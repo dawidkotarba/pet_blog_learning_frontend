@@ -8,19 +8,19 @@
         <insert dbms="h2" schemaName="public" tableName="users">
             <column name="uuid" value="1"/>
             <column name="username" value="user"/>
-            <column name="password" value="user"/>
+            <column name="password" value="$2a$04$F7TmxweMaQWDHG5l1GtkL.LxCCoI5BHQ0FefmzOlec.NLSxDJG9ci"/>
             <column name="enabled" value="true"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="users">
             <column name="uuid" value="2"/>
             <column name="username" value="admin"/>
-            <column name="password" value="admin"/>
+            <column name="password" value="$2a$04$./UKrgAdSYL2xThVs3QYI.OxHpl1gdTexj433bNAOV1l3A./5ZAp2"/>
             <column name="enabled" value="true"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="users">
             <column name="uuid" value="3"/>
             <column name="username" value="testuser"/>
-            <column name="password" value="testuser"/>
+            <column name="password" value="$2a$04$3xmOBgmnGN0OOz5zl9nenORHVTGW8eDkRGQYbQFTSIIUGKshz5TJC"/>
             <column name="enabled" value="true"/>
         </insert>
     </changeSet>
