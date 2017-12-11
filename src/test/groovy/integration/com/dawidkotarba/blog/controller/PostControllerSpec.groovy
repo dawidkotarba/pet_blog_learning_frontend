@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
+import org.springframework.security.test.context.support.WithMockUser
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.AUTO_CONFIGURED)
+@WithMockUser(authorities = "administrate")
 class PostControllerSpec extends Specification {
 
     @Inject
@@ -102,11 +103,8 @@ class PostControllerSpec extends Specification {
         content.exceptionType == 'NOT_FOUND'
     }
 
-    @Ignore
     def 'Should add new post'() {
         given:
-        loginService.logIn('admin', 'admin')
-
         def TEST_VALUE = 'test'
         def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
         def TEST_AUTHOR_ID = 1
