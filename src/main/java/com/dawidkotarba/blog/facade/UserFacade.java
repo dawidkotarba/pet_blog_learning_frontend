@@ -1,5 +1,6 @@
 package com.dawidkotarba.blog.facade;
 
+import com.dawidkotarba.blog.auth.service.impl.RegistrationServiceImpl;
 import com.dawidkotarba.blog.converters.impl.UserInConverter;
 import com.dawidkotarba.blog.converters.impl.UserOutConverter;
 import com.dawidkotarba.blog.model.dto.impl.UserInDto;
@@ -21,12 +22,15 @@ public class UserFacade {
     private final UserRepository userRepository;
     private final UserInConverter userInConverter;
     private final UserOutConverter userOutConverter;
+    private final RegistrationServiceImpl registrationService;
 
     @Inject
-    UserFacade(final UserRepository userRepository, final UserInConverter userInConverter, final UserOutConverter userOutConverter) {
+    UserFacade(final UserRepository userRepository, final UserInConverter userInConverter, final UserOutConverter
+            userOutConverter, final RegistrationServiceImpl registrationService) {
         this.userRepository = userRepository;
         this.userInConverter = userInConverter;
         this.userOutConverter = userOutConverter;
+        this.registrationService = registrationService;
     }
 
     public Optional<UserOutDto> findByUsername(final String username) {
@@ -48,6 +52,7 @@ public class UserFacade {
     }
 
     public void add(final UserInDto userInDto) {
-        userRepository.save(userInConverter.convert(userInDto));
+        Preconditions.checkNotNull(userInDto);
+        registrationService.registerUser(userInConverter.convert(userInDto));
     }
 }
