@@ -1,6 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.auth.service.LoginService
+import com.dawidkotarba.blog.auth.enums.UserAuthority
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.AuthorRepository
@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -19,6 +18,7 @@ import java.sql.Timestamp
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
@@ -33,8 +33,6 @@ class PostControllerSpec extends Specification {
     PostRepository postRepository
     @Inject
     MockMvc mockMvc
-    @Inject
-    LoginService loginService
 
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
@@ -102,11 +100,8 @@ class PostControllerSpec extends Specification {
         content.exceptionType == 'NOT_FOUND'
     }
 
-    @Ignore
-    def 'Should add new post'() {
+    def 'Should add new post for authenticated user'() {
         given:
-        loginService.logIn('admin', 'admin')
-
         def TEST_VALUE = 'test'
         def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
         def TEST_AUTHOR_ID = 1
@@ -127,7 +122,7 @@ class PostControllerSpec extends Specification {
         when: 'rest add post url is hit'
         def response = mockMvc.perform(post('/posts')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody)).andReturn().response
+                .content(requestBody).with((user("testuser").authorities([UserAuthority.WRITE])))).andReturn().response
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
