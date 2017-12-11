@@ -24,5 +24,5 @@ public class PostInDto implements InDto {
     private LocalDateTime published;
     @NotNull
     @NotEmpty
-    private Set<AuthorDto> authors;
+    private Set<Long> authors;
 }

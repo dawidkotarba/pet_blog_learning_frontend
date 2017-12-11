@@ -1,30 +1,28 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.auth.service.LoginService
+import com.dawidkotarba.blog.auth.enums.UserAuthority
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.AuthorRepository
 import com.dawidkotarba.blog.repository.PostRepository
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
 import java.sql.Timestamp
 
-import static org.springframework.http.HttpStatus.NOT_FOUND
-import static org.springframework.http.HttpStatus.OK
+import static org.springframework.http.HttpStatus.*
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @AutoConfigureMockMvc
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.AUTO_CONFIGURED)
 class PostControllerSpec extends Specification {
 
     @Inject
@@ -33,8 +31,6 @@ class PostControllerSpec extends Specification {
     PostRepository postRepository
     @Inject
     MockMvc mockMvc
-    @Inject
-    LoginService loginService
 
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
@@ -102,32 +98,27 @@ class PostControllerSpec extends Specification {
         content.exceptionType == 'NOT_FOUND'
     }
 
-    @Ignore
-    def 'Should add new post'() {
+    def 'Should add new post for authenticated user'() {
         given:
-        loginService.logIn('admin', 'admin')
+        def author = new AuthorEntity(username: "testAuthor")
+        authorRepository.save(author)
 
-        def TEST_VALUE = 'test'
+        def TEST_VALUE = 'test2'
         def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
-        def TEST_AUTHOR_ID = 1
-        def requestBody = '{\n' +
-                '  "subject": "' + TEST_VALUE + '",\n' +
-                '  "body": "' + TEST_VALUE + '",\n' +
-                '  "published": "' + TEST_PUBLISHED_VALUE + '",\n' +
-                '  "authors": ' + '[\n' +
-                '    {\n' +
-                '      "id": ' + TEST_AUTHOR_ID + ',\n' +
-                '      "username": "' + TEST_VALUE + '",\n' +
-                '      "firstname": "' + TEST_VALUE + '",\n' +
-                '      "lastname": "' + TEST_VALUE + '"\n' +
-                '    }\n' +
-                '  ]' + '\n' +
-                '}'
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    subject TEST_VALUE
+                    body TEST_VALUE
+                    published TEST_PUBLISHED_VALUE
+                    authors([author.getId()])
+                }
+        )
 
         when: 'rest add post url is hit'
         def response = mockMvc.perform(post('/posts')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody)).andReturn().response
+                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.WRITE])))).andReturn().response
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
@@ -136,5 +127,34 @@ class PostControllerSpec extends Specification {
         post.subject == TEST_VALUE
         post.body == TEST_VALUE
         post.published.toLocalDateTime().toString() == TEST_PUBLISHED_VALUE
+    }
+
+    def 'Should not add new post for user without sufficient privileges'() {
+        given:
+        def author = new AuthorEntity(username: "testAuthor2")
+        authorRepository.save(author)
+
+        def TEST_VALUE = 'test3'
+        def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    subject TEST_VALUE
+                    body TEST_VALUE
+                    published TEST_PUBLISHED_VALUE
+                    authors([author.getId()])
+                }
+        )
+
+        when: 'rest add post url is hit'
+        def response = mockMvc.perform(post('/posts')
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.READ])))).andReturn().response
+        def content = new JsonSlurper().parseText(response.contentAsString)
+
+        then: 'there was unauthorized status of the response'
+        response.status == UNAUTHORIZED.value()
+        content.uuid != null
+        content.exceptionType == 'UNAUTHORIZED'
     }
 }
