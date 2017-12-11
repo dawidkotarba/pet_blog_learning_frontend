@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.exceptions;
 
-import com.dawidkotarba.blog.enums.ExceptionType;
+import com.dawidkotarba.blog.enums.CommonExceptionType;
 
 /**
  * Created by Dawid Kotarba on 13.11.2015.
@@ -8,14 +8,14 @@ import com.dawidkotarba.blog.enums.ExceptionType;
 public class NotFoundException extends AbstractApplicationRuntimeException {
 
     public NotFoundException(final String devMessage) {
-        super(ExceptionType.NOT_FOUND, devMessage);
+        super(CommonExceptionType.NOT_FOUND, devMessage);
     }
 
     public NotFoundException(final Throwable cause) {
-        super(ExceptionType.NOT_FOUND, cause);
+        super(CommonExceptionType.NOT_FOUND, cause);
     }
 
     public NotFoundException(final String devMessage, final Throwable cause) {
-        super(ExceptionType.NOT_FOUND, devMessage, cause);
+        super(CommonExceptionType.NOT_FOUND, devMessage, cause);
     }
 }

@@ -20,6 +20,4 @@ public class UserOutDto implements OutDto {
     @NotBlank
     private String lastname;
     private boolean enabled;
-    @NotBlank
-    private String role;
 }

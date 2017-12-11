@@ -15,7 +15,6 @@ public class UserOutConverter implements OutConverter<UserEntity, UserOutDto> {
                 .username(userEntity.getUsername())
                 .firstname(userEntity.getFirstname())
                 .lastname(userEntity.getLastname())
-                .role(userEntity.getRole())
                 .enabled(userEntity.isEnabled())
                 .build();
     }

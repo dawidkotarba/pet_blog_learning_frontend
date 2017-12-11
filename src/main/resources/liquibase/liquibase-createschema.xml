@@ -30,6 +30,11 @@
              splitStatements="true"
              stripComments="true">CREATE SEQUENCE labels_seq INCREMENT BY 1;
         </sql>
+        <sql dbms="h2"
+             endDelimiter="\nGO"
+             splitStatements="true"
+             stripComments="true">CREATE SEQUENCE authorities_seq INCREMENT BY 1;
+        </sql>
     </changeSet>
 
     <changeSet id="create_tables" author="Dawid">
@@ -54,8 +59,38 @@
             <column name="enabled" type="boolean" defaultValue="true">
                 <constraints nullable="false"/>
             </column>
-            <column name="role" type="varchar(20)" defaultValue="role_user">
+            <column name="accountNonExpired" type="boolean" defaultValue="true">
                 <constraints nullable="false"/>
+            </column>
+            <column name="accountNonLocked" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="credentialsNonExpired" type="boolean" defaultValue="true">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createTable tableName="authorities" schemaName="public">
+            <column name="id" type="long" defaultValueSequenceNext="authorities_seq">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="version" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="uuid" type="varchar(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="authority" type="varchar(20)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <createTable tableName="users_authorities" schemaName="public">
+            <column name="user_id" type="long">
+                <constraints nullable="false" foreignKeyName="user_id" referencedTableName="users"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="authority_id" type="long">
+                <constraints nullable="false" foreignKeyName="authority_id" referencedTableName="authorities"
+                             referencedColumnNames="id"/>
             </column>
         </createTable>
         <createTable tableName="authors" schemaName="public">

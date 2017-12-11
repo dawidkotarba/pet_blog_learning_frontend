@@ -1,5 +1,7 @@
 package com.dawidkotarba.blog.facade;
 
+import com.dawidkotarba.blog.auth.annotations.AuthorizeAuthorities;
+import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.converters.impl.PostInConverter;
 import com.dawidkotarba.blog.converters.impl.PostOutConverter;
 import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
@@ -72,6 +74,7 @@ public class PostFacade {
         return Collections.unmodifiableList(result);
     }
 
+    @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
         final List<AuthorEntity> authors = authorRepository.findByUsernames(postInDto.getAuthors()

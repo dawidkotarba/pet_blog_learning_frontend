@@ -7,20 +7,67 @@
     <changeSet id="create_initialdata_users" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="users">
             <column name="uuid" value="1"/>
-            <column name="username" value="admin"/>
-            <column name="password" value="admin"/>
-            <column name="enabled" value="true"/>
-            <column name="role" value="role_admin"/>
-        </insert>
-        <insert dbms="h2" schemaName="public" tableName="users">
-            <column name="uuid" value="2"/>
             <column name="username" value="user"/>
             <column name="password" value="user"/>
             <column name="enabled" value="true"/>
-            <column name="role" value="role_user"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users">
+            <column name="uuid" value="2"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="admin"/>
+            <column name="enabled" value="true"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users">
+            <column name="uuid" value="3"/>
+            <column name="username" value="testuser"/>
+            <column name="password" value="testuser"/>
+            <column name="enabled" value="true"/>
         </insert>
     </changeSet>
-
+    <changeSet id="create_initialdata_authorities" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="authorities">
+            <column name="uuid" value="1"/>
+            <column name="authority" value="administrate"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="authorities">
+            <column name="uuid" value="2"/>
+            <column name="authority" value="write"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="authorities">
+            <column name="uuid" value="3"/>
+            <column name="authority" value="read"/>
+        </insert>
+    </changeSet>
+    <changeSet id="create_initialdata_users_authorities" author="Dawid">
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="1"/>
+            <column name="authority_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="2"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="2"/>
+            <column name="authority_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="2"/>
+            <column name="authority_id" value="3"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
+            <column name="authority_id" value="2"/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="users_authorities">
+            <column name="user_id" value="3"/>
+            <column name="authority_id" value="3"/>
+        </insert>
+    </changeSet>
     <changeSet id="create_initialdata_authors" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="authors">
             <column name="uuid" value="1"/>
