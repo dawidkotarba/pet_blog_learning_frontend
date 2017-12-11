@@ -45,7 +45,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="username" type="varchar(50)">
@@ -76,7 +76,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="authority" type="varchar(20)">
@@ -100,7 +100,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="username" type="varchar(50)">
@@ -116,7 +116,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="subject" type="varchar(200)">
@@ -136,7 +136,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="author" type="varchar(50)"/>
@@ -159,7 +159,7 @@
             <column name="version" type="int" defaultValue="0">
                 <constraints nullable="false"/>
             </column>
-            <column name="uuid" type="varchar(36)">
+            <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="name" type="varchar(50)">
