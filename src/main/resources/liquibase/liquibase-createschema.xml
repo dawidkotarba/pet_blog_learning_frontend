@@ -53,7 +53,7 @@
             </column>
             <column name="firstname" type="varchar(50)"/>
             <column name="lastname" type="varchar(50)"/>
-            <column name="password" type="varchar(50)">
+            <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="enabled" type="boolean" defaultValue="true">

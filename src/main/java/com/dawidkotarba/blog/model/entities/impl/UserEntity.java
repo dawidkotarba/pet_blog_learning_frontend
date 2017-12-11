@@ -39,7 +39,7 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @Column(nullable = false)
     private boolean credentialsNonExpired;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
     private Set<AuthorityEntity> authorities;
