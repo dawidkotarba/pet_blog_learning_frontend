@@ -1,8 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.model.entities.impl.UserEntity
 import com.dawidkotarba.blog.repository.UserRepository
-import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -70,17 +68,15 @@ class UserControllerSpec extends Specification {
     def 'Should add new user'() {
         given:
         def TEST_VALUE = 'test'
-        def objectMapper = new ObjectMapper()
-        def newUser = new UserEntity()
-        newUser.with {
-            username = TEST_VALUE
-            firstname = TEST_VALUE
-            lastname = TEST_VALUE
-            password = TEST_VALUE
-            enabled = true
-            role = TEST_VALUE
-        }
-        def requestBody = objectMapper.writeValueAsString(newUser)
+        def requestBody = '{\n' +
+                '  "id": 0,\n' +
+                '  "username": "' + TEST_VALUE + '",\n' +
+                '  "firstname": "' + TEST_VALUE + '",\n' +
+                '  "lastname": "' + TEST_VALUE + '",\n' +
+                '  "password": "' + TEST_VALUE + '",\n' +
+                '  "enabled": true,\n' +
+                '  "role": "' + TEST_VALUE + '"\n' +
+                '}'
 
         when: 'rest add user url is hit'
         def response = mockMvc.perform(post('/users')
@@ -90,11 +86,11 @@ class UserControllerSpec extends Specification {
         then: 'response is correct and new user is saved in db'
         response.status == OK.value()
         def user = userRepository.findByUsername(TEST_VALUE)
-        user.username == newUser.username
-        user.firstname == newUser.firstname
-        user.lastname == newUser.lastname
-        user.password == newUser.password
-        user.enabled == newUser.enabled
-        user.role == newUser.role
+        user.username == TEST_VALUE
+        user.firstname == TEST_VALUE
+        user.lastname == TEST_VALUE
+        user.password == TEST_VALUE
+        user.enabled == true
+        user.role == TEST_VALUE
     }
 }
