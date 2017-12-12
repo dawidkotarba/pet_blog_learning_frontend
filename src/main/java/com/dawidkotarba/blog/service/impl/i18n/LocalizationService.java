@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.service.i18n;
+package com.dawidkotarba.blog.service.impl.i18n;
 
 import com.dawidkotarba.blog.config.LocalizationConfig;
 import org.springframework.context.MessageSource;
