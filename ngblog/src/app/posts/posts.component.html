@@ -1,0 +1,15 @@
+<h2>Recent posts:</h2>
+<ul class="posts">
+  <li *ngFor="let post of posts"
+      [class.selected]="post === selectedPost"
+      (click)="onSelect(post)">
+    <span class="badge">{{post.id}}:</span> {{post.subject}}
+  </li>
+</ul>
+
+<div *ngIf="selectedPost">
+  <h2>{{ selectedPost.subject | uppercase }}</h2>
+  <div>{{selectedPost.body}}</div>
+  <div>
+  </div>
+</div>
