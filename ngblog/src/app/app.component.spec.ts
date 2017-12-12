@@ -2,6 +2,7 @@ import {TestBed, async} from '@angular/core/testing';
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
+import {PostsService} from './posts.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,6 +12,7 @@ describe('AppComponent', () => {
         PostsComponent,
         PostDetailsComponent
       ],
+      providers: [PostsService]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
