@@ -1,6 +1,6 @@
 package com.dawidkotarba.blog.auth.config;
 
-import com.dawidkotarba.blog.repository.UserRepository;
+import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,15 +11,15 @@ import javax.inject.Named;
 @Named
 class SecurityConfigService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final CacheableUserRepository cacheableUserRepository;
 
     @Inject
-    SecurityConfigService(final UserRepository userRepository) {
-        this.userRepository = userRepository;
+    SecurityConfigService(final CacheableUserRepository cacheableUserRepository) {
+        this.cacheableUserRepository = cacheableUserRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
+        return cacheableUserRepository.findByUsername(username);
     }
 }

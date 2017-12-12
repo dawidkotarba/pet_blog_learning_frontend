@@ -6,7 +6,7 @@ import com.dawidkotarba.blog.converters.impl.UserOutConverter;
 import com.dawidkotarba.blog.model.dto.impl.UserInDto;
 import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
 import com.dawidkotarba.blog.model.entities.impl.UserEntity;
-import com.dawidkotarba.blog.repository.UserRepository;
+import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import com.google.common.base.Preconditions;
 
 import javax.inject.Inject;
@@ -19,15 +19,15 @@ import java.util.stream.Collectors;
 @Named
 public class UserFacade {
 
-    private final UserRepository userRepository;
+    private final CacheableUserRepository cacheableUserRepository;
     private final UserInConverter userInConverter;
     private final UserOutConverter userOutConverter;
     private final RegistrationServiceImpl registrationService;
 
     @Inject
-    UserFacade(final UserRepository userRepository, final UserInConverter userInConverter, final UserOutConverter
+    UserFacade(final CacheableUserRepository cacheableUserRepository, final UserInConverter userInConverter, final UserOutConverter
             userOutConverter, final RegistrationServiceImpl registrationService) {
-        this.userRepository = userRepository;
+        this.cacheableUserRepository = cacheableUserRepository;
         this.userInConverter = userInConverter;
         this.userOutConverter = userOutConverter;
         this.registrationService = registrationService;
@@ -35,7 +35,7 @@ public class UserFacade {
 
     public Optional<UserOutDto> findByUsername(final String username) {
         Preconditions.checkNotNull(username);
-        final UserEntity byUsername = userRepository.findByUsername(username);
+        final UserEntity byUsername = cacheableUserRepository.findByUsername(username);
 
         if (Objects.isNull(byUsername)) {
             return Optional.empty();
@@ -46,7 +46,7 @@ public class UserFacade {
     }
 
     public List<UserOutDto> findAll() {
-        final List<UserEntity> all = userRepository.findAll();
+        final List<UserEntity> all = cacheableUserRepository.findAll();
 
         return all.stream().map(userOutConverter::convert).collect(Collectors.toList());
     }
