@@ -4,6 +4,8 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.PostFacade;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +29,13 @@ class PostController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findAll() {
-        return postFacade.findAll();
+    Page<PostOutDto> findAll(final Pageable pageable) {
+        return postFacade.findAll(pageable);
     }
 
     @GetMapping(value = "/subject/{subject}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findBySubject(@PathVariable final String subject) {
-        final Optional<List<PostOutDto>> result = postFacade.findBySubject(subject);
+    PostOutDto findBySubject(@PathVariable final String subject) {
+        final Optional<PostOutDto> result = postFacade.findBySubject(subject);
         return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 
@@ -44,7 +46,8 @@ class PostController {
 
     @GetMapping(value = "/search/{dayOfAMonth}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<PostOutDto> findMontlyByDayOfAMonth(@RequestParam
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate dayOfAMonth) {
+                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate
+                                                     dayOfAMonth) {
         return postFacade.findMontlyByDayOfAMonth(dayOfAMonth);
     }
 
