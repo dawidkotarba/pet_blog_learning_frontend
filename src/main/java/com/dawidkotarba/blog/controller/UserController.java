@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/users")
+@CrossOrigin(origins = "http://localhost:4200")
 class UserController {
 
     private final UserFacade userFacade;

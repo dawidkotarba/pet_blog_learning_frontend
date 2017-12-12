@@ -19,6 +19,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/posts")
+@CrossOrigin(origins = "http://localhost:4200")
 class PostController {
 
     private final PostFacade postFacade;

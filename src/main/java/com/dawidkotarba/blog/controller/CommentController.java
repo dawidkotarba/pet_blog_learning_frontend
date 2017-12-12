@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 @RestController
 @RequestMapping(value = "/comments")
+@CrossOrigin(origins = "http://localhost:4200")
 class CommentController {
 
     private final CommentFacade commentFacade;
