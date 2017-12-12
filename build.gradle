@@ -57,6 +57,7 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-integration"
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "org.springframework.boot:spring-boot-starter-remote-shell"
+    compile "org.springframework.boot:spring-boot-devtools"
 
     // db
     compile "com.h2database:h2:1.4.196"

@@ -1,6 +1,6 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.repository.UserRepository
+import com.dawidkotarba.blog.repository.CacheableUserRepository
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 class UserControllerSpec extends Specification {
 
     @Inject
-    UserRepository userRepository
+    CacheableUserRepository userRepository
     @Inject
     MockMvc mockMvc
 

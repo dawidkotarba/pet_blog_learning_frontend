@@ -1,7 +1,7 @@
 package integration.com.dawidkotarba.blog.repository
 
 import com.dawidkotarba.blog.model.entities.impl.UserEntity
-import com.dawidkotarba.blog.repository.UserRepository
+import com.dawidkotarba.blog.repository.CacheableUserRepository
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 @DataJpaTest
-class UserRepositorySpec extends Specification {
+class CacheableUserRepositorySpec extends Specification {
 
     @Inject
-    UserRepository userRepository
+    CacheableUserRepository userRepository
 
     def "Should find user by username"() {
         given:

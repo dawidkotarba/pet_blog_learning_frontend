@@ -8,9 +8,8 @@ import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
 import com.dawidkotarba.blog.model.entities.impl.PostEntity;
-import com.dawidkotarba.blog.repository.AuthorRepository;
-import com.dawidkotarba.blog.repository.PostRepository;
-import com.dawidkotarba.blog.repository.cached.CacheablePostRepository;
+import com.dawidkotarba.blog.repository.CacheableAuthorRepository;
+import com.dawidkotarba.blog.repository.CacheablePostRepository;
 import com.google.common.base.Preconditions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,18 +26,16 @@ import java.util.stream.Collectors;
 @Named
 public class PostFacade {
 
-    private final PostRepository postRepository;
     private final CacheablePostRepository cacheablePostRepository;
-    private final AuthorRepository authorRepository;
+    private final CacheableAuthorRepository cacheableAuthorRepository;
     private final PostOutConverter postOutConverter;
     private final PostInConverter postInConverter;
 
     @Inject
-    PostFacade(final PostRepository postRepository, final CacheablePostRepository cacheablePostRepository, final AuthorRepository authorRepository,
+    PostFacade(final CacheablePostRepository cacheablePostRepository, final CacheableAuthorRepository cacheableAuthorRepository,
                final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
-        this.postRepository = postRepository;
         this.cacheablePostRepository = cacheablePostRepository;
-        this.authorRepository = authorRepository;
+        this.cacheableAuthorRepository = cacheableAuthorRepository;
         this.postOutConverter = postOutConverter;
         this.postInConverter = postInConverter;
     }
@@ -51,12 +48,12 @@ public class PostFacade {
     }
 
     public Page<PostOutDto> findAll(final Pageable pageable) {
-        return postRepository.findAll(pageable).map(postOutConverter::convert);
+        return cacheablePostRepository.findAll(pageable).map(postOutConverter::convert);
     }
 
     public Optional<PostOutDto> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
-        final PostEntity bySubject = postRepository.findBySubject(subject);
+        final PostEntity bySubject = cacheablePostRepository.findBySubject(subject);
         if (Objects.isNull(bySubject)) {
             return Optional.empty();
         }
@@ -74,7 +71,7 @@ public class PostFacade {
     public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
-        final Set<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate),
+        final Set<PostEntity> bySubject = cacheablePostRepository.findByPublishedBetween(Timestamp.valueOf(fromDate),
                 Timestamp.valueOf(toDate));
         final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
@@ -83,9 +80,9 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final Set<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
+        final Set<AuthorEntity> authors = cacheableAuthorRepository.findByIds(postInDto.getAuthors());
         final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
-        postRepository.save(entity);
+        cacheablePostRepository.save(entity);
     }
 }

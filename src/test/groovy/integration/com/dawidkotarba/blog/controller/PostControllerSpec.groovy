@@ -3,8 +3,8 @@ package integration.com.dawidkotarba.blog.controller
 import com.dawidkotarba.blog.auth.enums.UserAuthority
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
-import com.dawidkotarba.blog.repository.AuthorRepository
-import com.dawidkotarba.blog.repository.PostRepository
+import com.dawidkotarba.blog.repository.CacheableAuthorRepository
+import com.dawidkotarba.blog.repository.CacheablePostRepository
 import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 class PostControllerSpec extends Specification {
 
     @Inject
-    AuthorRepository authorRepository
+    CacheableAuthorRepository authorRepository
     @Inject
-    PostRepository postRepository
+    CacheablePostRepository cacheablePostRepository
     @Inject
     MockMvc mockMvc
 
@@ -63,7 +63,7 @@ class PostControllerSpec extends Specification {
             comments = null
         }
         authorRepository.save(authorTest)
-        postRepository.save(postTest)
+        cacheablePostRepository.save(postTest)
 
         when: 'rest posts/subject/{subject} url is hit'
         def response = mockMvc.perform(get('/posts/subject/' + postTest.subject)).andReturn().response
@@ -122,7 +122,7 @@ class PostControllerSpec extends Specification {
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
-        def post = postRepository.findBySubject(TEST_VALUE)
+        def post = cacheablePostRepository.findBySubject(TEST_VALUE)
         post != null
         post.subject == TEST_VALUE
         post.body == TEST_VALUE

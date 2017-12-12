@@ -13,4 +13,26 @@
            transactionalMode="off">
         <persistence strategy="localTempSwap"/>
     </cache>
+    <cache name="authorsCache"
+           maxEntriesLocalHeap="20"
+           maxEntriesLocalDisk="50"
+           eternal="false"
+           diskSpoolBufferSizeMB="50"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+    <cache name="usersCache"
+           maxEntriesLocalHeap="20"
+           maxEntriesLocalDisk="50"
+           eternal="false"
+           diskSpoolBufferSizeMB="50"
+           timeToIdleSeconds="1800"
+           timeToLiveSeconds="1800"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap"/>
+    </cache>
 </ehcache>
