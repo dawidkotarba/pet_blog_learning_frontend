@@ -34,8 +34,8 @@ class PostController {
     }
 
     @GetMapping(value = "/subject/{subject}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findBySubject(@PathVariable final String subject) {
-        final Optional<List<PostOutDto>> result = postFacade.findBySubject(subject);
+    PostOutDto findBySubject(@PathVariable final String subject) {
+        final Optional<PostOutDto> result = postFacade.findBySubject(subject);
         return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 

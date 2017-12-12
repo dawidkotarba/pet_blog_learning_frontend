@@ -8,7 +8,7 @@ import java.util.Set;
 
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
-    Set<PostEntity> findBySubject(String subject);
+    PostEntity findBySubject(String subject);
 
     Set<PostEntity> findByPublishedBetween(Timestamp fromDate, Timestamp toDate);
 }

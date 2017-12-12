@@ -35,14 +35,13 @@ class PostControllerSpec extends Specification {
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
         def response = mockMvc.perform(get('/posts')).andReturn().response
-        def content = new JsonSlurper().parseText(response.contentAsString)
+        def page = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post returned'
         response.status == OK.value()
         response.contentType.contains('application/json')
 
-        def post = content[0]
-        post != null
+        page.content.size > 0
     }
 
     def 'Should return post with proper subject'() {
@@ -74,7 +73,7 @@ class PostControllerSpec extends Specification {
         response.status == OK.value()
         response.contentType.contains('application/json')
 
-        def post = content[0]
+        def post = content
         post != null
         post.subject == postTest.subject
         post.body == postTest.body
@@ -123,7 +122,7 @@ class PostControllerSpec extends Specification {
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
-        def post = postRepository.findBySubject(TEST_VALUE)[0]
+        def post = postRepository.findBySubject(TEST_VALUE)
         post != null
         post.subject == TEST_VALUE
         post.body == TEST_VALUE

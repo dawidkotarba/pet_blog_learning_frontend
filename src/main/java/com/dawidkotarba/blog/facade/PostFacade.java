@@ -44,16 +44,13 @@ public class PostFacade {
         return postRepository.findAll(pageable).map(postOutConverter::convert);
     }
 
-    public Optional<List<PostOutDto>> findBySubject(final String subject) {
+    public Optional<PostOutDto> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
-        final Set<PostEntity> bySubject = postRepository.findBySubject(subject);
-
-        if (Objects.isNull(bySubject) || bySubject.isEmpty()) {
+        final PostEntity bySubject = postRepository.findBySubject(subject);
+        if (Objects.isNull(bySubject)) {
             return Optional.empty();
         }
-
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
-        return Optional.of(result);
+        return Optional.of(postOutConverter.convert(bySubject));
     }
 
     public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
