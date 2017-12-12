@@ -3,6 +3,7 @@ import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostsService} from './posts.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -11,6 +12,9 @@ describe('AppComponent', () => {
         AppComponent,
         PostsComponent,
         PostDetailsComponent
+      ],
+      imports: [
+        HttpClientModule
       ],
       providers: [PostsService]
     }).compileComponents();

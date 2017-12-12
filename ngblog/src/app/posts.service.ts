@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import { of } from 'rxjs/observable/of';
+import {catchError, map, tap} from 'rxjs/operators';
 
 import {Post} from './model/post';
 
@@ -14,6 +15,15 @@ export class PostsService {
   }
 
   getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.allPostsUrl);
+    return this.http.get<Post[]>(this.allPostsUrl).pipe(
+      catchError(this.handleError('getPosts', []))
+    );
+  }
+
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      return of(result as T);
+    };
   }
 }
