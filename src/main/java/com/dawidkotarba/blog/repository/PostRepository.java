@@ -4,11 +4,11 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.sql.Timestamp;
-import java.util.List;
+import java.util.Set;
 
 public interface PostRepository extends JpaRepository<PostEntity, Long> {
 
-    List<PostEntity> findBySubject(String subject);
+    Set<PostEntity> findBySubject(String subject);
 
-    List<PostEntity> findByPublishedBetween(Timestamp fromDate, Timestamp toDate);
+    Set<PostEntity> findByPublishedBetween(Timestamp fromDate, Timestamp toDate);
 }

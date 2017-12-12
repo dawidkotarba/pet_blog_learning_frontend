@@ -118,11 +118,12 @@ class PostControllerSpec extends Specification {
         when: 'rest add post url is hit'
         def response = mockMvc.perform(post('/posts')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.WRITE])))).andReturn().response
+                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.WRITE]))))
+                .andReturn().response
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
-        def post = postRepository.findBySubject(TEST_VALUE).get(0)
+        def post = postRepository.findBySubject(TEST_VALUE)[0]
         post != null
         post.subject == TEST_VALUE
         post.body == TEST_VALUE
@@ -149,7 +150,8 @@ class PostControllerSpec extends Specification {
         when: 'rest add post url is hit'
         def response = mockMvc.perform(post('/posts')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.READ])))).andReturn().response
+                .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.READ]))))
+                .andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'there was unauthorized status of the response'

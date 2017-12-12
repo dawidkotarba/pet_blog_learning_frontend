@@ -48,7 +48,7 @@ public class PostFacade {
 
     public Optional<List<PostOutDto>> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
-        final List<PostEntity> bySubject = postRepository.findBySubject(subject);
+        final Set<PostEntity> bySubject = postRepository.findBySubject(subject);
 
         if (Objects.isNull(bySubject) || bySubject.isEmpty()) {
             return Optional.empty();
@@ -62,13 +62,15 @@ public class PostFacade {
         Preconditions.checkNotNull(dayOfAMonth);
         final LocalDate startDate = dayOfAMonth.withDayOfMonth(1);
         final LocalDate endDate = dayOfAMonth.withDayOfMonth(dayOfAMonth.lengthOfMonth());
-        return findFromDateToDate(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), LocalDateTime.of(endDate, LocalTime.MAX));
+        return findFromDateToDate(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), LocalDateTime.of(endDate,
+                LocalTime.MAX));
     }
 
     public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
-        final List<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
+        final Set<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate),
+                Timestamp.valueOf(toDate));
         final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }
@@ -76,7 +78,7 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final List<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
+        final Set<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
         final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
         postRepository.save(entity);
