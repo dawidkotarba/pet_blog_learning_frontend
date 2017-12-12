@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/posts")
@@ -27,6 +28,11 @@ class PostController {
     @Inject
     PostController(final PostFacade postFacade) {
         this.postFacade = postFacade;
+    }
+
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    Set<PostOutDto> findAll() {
+        return postFacade.findAll();
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
