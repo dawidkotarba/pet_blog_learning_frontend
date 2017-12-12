@@ -40,6 +40,13 @@ public class PostFacade {
         this.postInConverter = postInConverter;
     }
 
+    public Set<PostOutDto> findAll() {
+        return postRepository.findAll()
+                .stream()
+                .map(postOutConverter::convert)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
     public Page<PostOutDto> findAll(final Pageable pageable) {
         return postRepository.findAll(pageable).map(postOutConverter::convert);
     }
