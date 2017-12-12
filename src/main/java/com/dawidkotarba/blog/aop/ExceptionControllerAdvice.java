@@ -6,7 +6,7 @@ import com.dawidkotarba.blog.auth.exceptions.WrongUsernameException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
-import com.dawidkotarba.blog.service.ExceptionConverterService;
+import com.dawidkotarba.blog.service.impl.ExceptionConverterService;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -22,7 +22,7 @@ import javax.inject.Inject;
  * and creates a localized user-readable {@link ExceptionResponse}.
  *
  * @author Dawid Kotarba
- * @see com.dawidkotarba.blog.service.i18n.LocalizationService
+ * @see com.dawidkotarba.blog.service.impl.i18n.LocalizationService
  * @see com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException
  */
 @ControllerAdvice

@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.service;
+package com.dawidkotarba.blog.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;

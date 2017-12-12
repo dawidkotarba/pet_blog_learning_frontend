@@ -9,10 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 
-/**
- * Created by Dawid Kotarba on 24.11.2015.
- */
-
 @Configuration
 @EnableCaching
 class CacheConfig {
@@ -21,9 +17,8 @@ class CacheConfig {
     private Resource ehCacheConfiguration;
 
     @Bean
-    CacheManager getEhCacheManager() {
+    CacheManager ehCacheManager() {
         return new EhCacheCacheManager(ehCacheFactoryBean().getObject());
-
     }
 
     @Bean

@@ -10,6 +10,7 @@ import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
 import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
 import com.dawidkotarba.blog.repository.PostRepository;
+import com.dawidkotarba.blog.repository.cached.CacheablePostRepository;
 import com.google.common.base.Preconditions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,21 +28,23 @@ import java.util.stream.Collectors;
 public class PostFacade {
 
     private final PostRepository postRepository;
+    private final CacheablePostRepository cacheablePostRepository;
     private final AuthorRepository authorRepository;
     private final PostOutConverter postOutConverter;
     private final PostInConverter postInConverter;
 
     @Inject
-    PostFacade(final PostRepository postRepository, final AuthorRepository authorRepository,
+    PostFacade(final PostRepository postRepository, final CacheablePostRepository cacheablePostRepository, final AuthorRepository authorRepository,
                final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
         this.postRepository = postRepository;
+        this.cacheablePostRepository = cacheablePostRepository;
         this.authorRepository = authorRepository;
         this.postOutConverter = postOutConverter;
         this.postInConverter = postInConverter;
     }
 
     public Set<PostOutDto> findAll() {
-        return postRepository.findAll()
+        return cacheablePostRepository.findAll()
                 .stream()
                 .map(postOutConverter::convert)
                 .collect(Collectors.toCollection(LinkedHashSet::new));

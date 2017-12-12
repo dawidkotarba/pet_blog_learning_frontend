@@ -2,13 +2,13 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="ehcache.xsd"
          updateCheck="true" monitoring="autodetect" dynamicConfig="true">
-    <cache name="countriesCache"
-           maxEntriesLocalHeap="300"
-           maxEntriesLocalDisk="1000"
+    <cache name="postsCache"
+           maxEntriesLocalHeap="200"
+           maxEntriesLocalDisk="500"
            eternal="false"
            diskSpoolBufferSizeMB="50"
-           timeToIdleSeconds="300"
-           timeToLiveSeconds="500"
+           timeToIdleSeconds="900"
+           timeToLiveSeconds="900"
            memoryStoreEvictionPolicy="LFU"
            transactionalMode="off">
         <persistence strategy="localTempSwap"/>

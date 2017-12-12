@@ -1,11 +1,11 @@
-package com.dawidkotarba.blog.service;
+package com.dawidkotarba.blog.service.impl;
 
 import com.dawidkotarba.blog.enums.CommonExceptionType;
 import com.dawidkotarba.blog.enums.ExceptionType;
 import com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.ValidationError;
-import com.dawidkotarba.blog.service.i18n.LocalizationService;
+import com.dawidkotarba.blog.service.impl.i18n.LocalizationService;
 import org.springframework.validation.BindingResult;
 
 import javax.inject.Inject;
