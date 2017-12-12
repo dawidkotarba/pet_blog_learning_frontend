@@ -11,6 +11,8 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
 import com.dawidkotarba.blog.repository.PostRepository;
 import com.google.common.base.Preconditions;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,12 +40,8 @@ public class PostFacade {
         this.postInConverter = postInConverter;
     }
 
-    public List<PostOutDto> findAll() {
-        final List<PostEntity> all = postRepository.findAll();
-        final List<PostOutDto> result = all.stream()
-                .map(postOutConverter::convert)
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(result);
+    public Page<PostOutDto> findAll(final Pageable pageable) {
+        return postRepository.findAll(pageable).map(postOutConverter::convert);
     }
 
     public Optional<List<PostOutDto>> findBySubject(final String subject) {
