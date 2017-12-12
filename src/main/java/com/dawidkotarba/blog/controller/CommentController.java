@@ -3,15 +3,13 @@ package com.dawidkotarba.blog.controller;
 import com.dawidkotarba.blog.facade.CommentFacade;
 import com.dawidkotarba.blog.model.dto.impl.CommentInDto;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 
 @RestController
 @RequestMapping(value = "/comments")
+@CrossOrigin(origins = "http://localhost:4200")
 class CommentController {
 
     private final CommentFacade commentFacade;
