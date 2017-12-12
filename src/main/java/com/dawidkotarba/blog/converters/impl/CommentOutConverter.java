@@ -15,6 +15,7 @@ public class CommentOutConverter implements OutConverter<CommentEntity, CommentO
     @Override
     public CommentOutDto convert(final CommentEntity entity) {
         return CommentOutDto.builder()
+                .id(entity.getId())
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())

@@ -11,6 +11,8 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.AuthorRepository;
 import com.dawidkotarba.blog.repository.PostRepository;
 import com.google.common.base.Preconditions;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,37 +40,32 @@ public class PostFacade {
         this.postInConverter = postInConverter;
     }
 
-    public List<PostOutDto> findAll() {
-        final List<PostEntity> all = postRepository.findAll();
-        final List<PostOutDto> result = all.stream()
-                .map(postOutConverter::convert)
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(result);
+    public Page<PostOutDto> findAll(final Pageable pageable) {
+        return postRepository.findAll(pageable).map(postOutConverter::convert);
     }
 
-    public Optional<List<PostOutDto>> findBySubject(final String subject) {
+    public Optional<PostOutDto> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
-        final List<PostEntity> bySubject = postRepository.findBySubject(subject);
-
-        if (Objects.isNull(bySubject) || bySubject.isEmpty()) {
+        final PostEntity bySubject = postRepository.findBySubject(subject);
+        if (Objects.isNull(bySubject)) {
             return Optional.empty();
         }
-
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
-        return Optional.of(result);
+        return Optional.of(postOutConverter.convert(bySubject));
     }
 
     public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
         Preconditions.checkNotNull(dayOfAMonth);
         final LocalDate startDate = dayOfAMonth.withDayOfMonth(1);
         final LocalDate endDate = dayOfAMonth.withDayOfMonth(dayOfAMonth.lengthOfMonth());
-        return findFromDateToDate(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), LocalDateTime.of(endDate, LocalTime.MAX));
+        return findFromDateToDate(LocalDateTime.of(startDate, LocalTime.MIDNIGHT), LocalDateTime.of(endDate,
+                LocalTime.MAX));
     }
 
     public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
-        final List<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate), Timestamp.valueOf(toDate));
+        final Set<PostEntity> bySubject = postRepository.findByPublishedBetween(Timestamp.valueOf(fromDate),
+                Timestamp.valueOf(toDate));
         final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }
@@ -76,7 +73,7 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final List<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
+        final Set<AuthorEntity> authors = authorRepository.findByIds(postInDto.getAuthors());
         final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
         postRepository.save(entity);

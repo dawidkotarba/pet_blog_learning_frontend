@@ -23,6 +23,7 @@ public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
     @Override
     public PostOutDto convert(final PostEntity entity) {
         return PostOutDto.builder()
+                .id(entity.getId())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
                 .published(entity.getPublished().toLocalDateTime())
