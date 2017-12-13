@@ -16,6 +16,10 @@ public interface CacheablePostRepository extends JpaRepository<PostEntity, Long>
     <S extends PostEntity> S save(S entity);
 
     @Override
+    @CacheEvict("postsCache")
+    <S extends PostEntity> S saveAndFlush(S entity);
+
+    @Override
     @Cacheable("postsCache")
     List<PostEntity> findAll();
 
