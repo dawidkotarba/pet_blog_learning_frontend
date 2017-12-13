@@ -7,7 +7,6 @@ import com.dawidkotarba.blog.repository.CacheablePostRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.sql.Timestamp;
 
 @Named
 public class CommentInConverter implements InConverter<CommentInDto, CommentEntity> {
@@ -26,7 +25,7 @@ public class CommentInConverter implements InConverter<CommentInDto, CommentEnti
                 .subject(dto.getSubject())
                 .body(dto.getBody())
                 .post(cacheablePostRepository.findOne(dto.getPostId()))
-                .published(Timestamp.valueOf(dto.getPublished()))
+                .published(dto.getPublished())
                 .build();
     }
 }

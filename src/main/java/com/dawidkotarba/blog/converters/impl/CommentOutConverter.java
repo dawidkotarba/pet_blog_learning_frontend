@@ -19,7 +19,7 @@ public class CommentOutConverter implements OutConverter<CommentEntity, CommentO
                 .author(entity.getAuthor())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
-                .published(entity.getPublished().toLocalDateTime())
+                .published(entity.getPublished())
                 .build();
     }
 

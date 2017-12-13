@@ -26,7 +26,7 @@ public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
                 .id(entity.getId())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
-                .published(entity.getPublished().toLocalDateTime())
+                .published(entity.getPublished())
                 .authors(entity.getAuthors().stream().map(authorConverter::convert).collect(Collectors.toSet()))
                 .commentDtos(commentsConverter.convertToDtos(entity.getComments()))
                 .build();
