@@ -52,6 +52,6 @@ class CommentControllerSpec extends Specification {
         comment.subject == TEST_VALUE
         comment.body == TEST_VALUE
         comment.post.id == TEST_POST_ID
-        comment.published.toLocalDateTime().toString() == TEST_PUBLISHED_VALUE
+        comment.published.toString() == TEST_PUBLISHED_VALUE
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc
 import spock.lang.Specification
 
 import javax.inject.Inject
-import java.sql.Timestamp
+import java.time.LocalDateTime
 
 import static org.springframework.http.HttpStatus.*
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
@@ -58,7 +58,7 @@ class PostControllerSpec extends Specification {
         postTest.with {
             subject = TEST_VALUE
             body = TEST_VALUE
-            published = new Timestamp(System.currentTimeMillis())
+            published = LocalDateTime.now()
             authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
             comments = null
         }
@@ -77,7 +77,7 @@ class PostControllerSpec extends Specification {
         post != null
         post.subject == postTest.subject
         post.body == postTest.body
-        post.published == postTest.published.toLocalDateTime().withNano(0).toString()
+        post.published == postTest.published.withNano(0).toString()
         post.authors != null
         post.authors.username == postTest.authors.username
         post.authors.firstname == postTest.authors.firstname
@@ -126,7 +126,7 @@ class PostControllerSpec extends Specification {
         post != null
         post.subject == TEST_VALUE
         post.body == TEST_VALUE
-        post.published.toLocalDateTime().toString() == TEST_PUBLISHED_VALUE
+        post.published.toString() == TEST_PUBLISHED_VALUE
     }
 
     def 'Should not add new post for user without sufficient privileges'() {
