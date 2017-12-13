@@ -43,3 +43,9 @@ matrix:
       npm install;
       ng build;
     script: karma start karma.conf.js --single-run
+
+notifications:
+  email:
+    recipients: dawidkotarba@users.noreply.github.com
+    on_success: always
+    on_failure: always
