@@ -32,7 +32,8 @@ public class PostFacade {
     private final PostInConverter postInConverter;
 
     @Inject
-    PostFacade(final CacheablePostRepository cacheablePostRepository, final CacheableAuthorRepository cacheableAuthorRepository,
+    PostFacade(final CacheablePostRepository cacheablePostRepository, final CacheableAuthorRepository
+            cacheableAuthorRepository,
                final PostOutConverter postOutConverter, final PostInConverter postInConverter) {
         this.cacheablePostRepository = cacheablePostRepository;
         this.cacheableAuthorRepository = cacheableAuthorRepository;
