@@ -1,5 +1,4 @@
 <div *ngIf="post">
-  <h2>{{ post.subject | uppercase }}</h2>
   <div>{{post.body}}</div>
   <div><span>Authors:</span>
     <div *ngFor="let author of post.authors">

@@ -1,10 +1,10 @@
 import {async, TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// primefaces
-import {ButtonModule, FieldsetModule} from 'primeng/primeng';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+// primeng
+import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 // app
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
@@ -29,6 +29,7 @@ describe('AppComponent', () => {
         HttpClientModule,
         ButtonModule,
         FieldsetModule,
+        PanelModule
       ],
       providers: [PostsService]
     }).compileComponents();

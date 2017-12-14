@@ -4,8 +4,8 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// primefaces
-import {ButtonModule, FieldsetModule} from 'primeng/primeng';
+// primeng
+import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 // declarations
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
@@ -27,7 +27,8 @@ import {TopbarComponent} from './topbar/topbar.component';
     FormsModule,
     HttpClientModule,
     ButtonModule,
-    FieldsetModule
+    FieldsetModule,
+    PanelModule
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]

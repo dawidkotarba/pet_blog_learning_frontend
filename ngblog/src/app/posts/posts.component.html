@@ -1,6 +1,19 @@
-<h2>Recent posts:</h2>
-<ul class="posts">
-    <p-fieldset *ngFor="let post of posts" legend="{{post.id}}: {{post.subject}}" [toggleable]="true">
-      <app-post-details [post]="post"></app-post-details>
-    </p-fieldset>
-</ul>
+<div *ngIf="arePostsAvailable()">
+  <h2>Recent posts:</h2>
+  <p-panel *ngFor="let post of posts">
+    <p-header>
+      <div class="ui-helper-clearfix">
+        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{post.id}}: {{post.subject}}</span>
+      </div>
+    </p-header>
+    <app-post-details [post]="post"></app-post-details>
+    <p-footer>
+      <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
+    </p-footer>
+  </p-panel>
+</div>
+<div *ngIf="!arePostsAvailable()">
+  <h3>There are no recent posts... (psss, turn on java server ;))</h3>
+</div>
+
+

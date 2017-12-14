@@ -8,8 +8,7 @@ import {PostsService} from '../posts.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts: Post[];
-  selectedPost: Post;
+  posts: Post[] = [];
 
   constructor(private postService: PostsService) {
   }
@@ -18,11 +17,11 @@ export class PostsComponent implements OnInit {
     this.getPosts();
   }
 
-  onSelect(post) {
-    this.selectedPost = post;
-  }
-
   getPosts(): void {
     this.postService.getPosts().subscribe(posts => this.posts = posts);
+  }
+
+  arePostsAvailable(): boolean {
+    return this.posts && this.posts.length > 0;
   }
 }
