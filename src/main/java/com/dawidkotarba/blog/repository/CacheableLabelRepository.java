@@ -9,6 +9,6 @@ import java.util.List;
 public interface CacheableLabelRepository extends JpaRepository<LabelEntity, Long> {
 
     @Override
-    @Query("SELECT l from LabelEntity l JOIN FETCH l.posts")
+    @Query("SELECT l from LabelEntity l LEFT JOIN FETCH l.posts")
     List<LabelEntity> findAll();
 }

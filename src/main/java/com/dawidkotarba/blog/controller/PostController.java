@@ -52,7 +52,7 @@ class PostController {
     }
 
     @GetMapping(value = "/search/{dayOfAMonth}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findMontlyByDayOfAMonth(@RequestParam
+    List<PostOutDto> findMontlyByDayOfAMonth(@PathVariable
                                              @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate
                                                      dayOfAMonth) {
         return postFacade.findMontlyByDayOfAMonth(dayOfAMonth);
