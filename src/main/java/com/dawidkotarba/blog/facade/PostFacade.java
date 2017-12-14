@@ -82,13 +82,18 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
+        final List<AuthorEntity> authors = getAuthors(postInDto);
+        final PostEntity entity = postInConverter.convert(postInDto);
+        entity.setAuthors(new HashSet<>(authors));
+        cacheablePostRepository.save(entity);
+    }
+
+    private List<AuthorEntity> getAuthors(final PostInDto postInDto) {
         final List<AuthorEntity> authors = cacheableAuthorRepository.findAll(postInDto.getAuthors());
         if (authors.isEmpty()) {
             throw new NotFoundException(
                     "Author(s) " + postInDto.getAuthors() + " not found. Please add valid author(s).");
         }
-        final PostEntity entity = postInConverter.convert(postInDto);
-        entity.setAuthors(new HashSet<>(authors));
-        cacheablePostRepository.save(entity);
+        return authors;
     }
 }

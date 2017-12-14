@@ -28,12 +28,7 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
                 .name(dto.getName())
                 .build();
 
-        if (dto.getPosts() != null) {
-            entity.setPosts(dto.getPosts().stream()
-                    .filter(Objects::nonNull)
-                    .map(cacheablePostRepository::findOne)
-                    .collect(Collectors.toSet()));
-        }
+        findAndPopulatePosts(dto, entity);
 
         return entity;
     }
@@ -45,13 +40,26 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
                 .name(entity.getName())
                 .build();
 
+        populatePostsIfExist(entity, dto);
+
+        return dto;
+    }
+
+    private void findAndPopulatePosts(final LabelDto dto, final LabelEntity entity) {
+        if (dto.getPosts() != null) {
+            entity.setPosts(dto.getPosts().stream()
+                    .filter(Objects::nonNull)
+                    .map(cacheablePostRepository::findOne)
+                    .collect(Collectors.toSet()));
+        }
+    }
+
+    private void populatePostsIfExist(final LabelEntity entity, final LabelDto dto) {
         if (entity.getPosts() != null) {
             dto.setPosts(entity.getPosts().stream()
                     .filter(Objects::nonNull)
                     .map(AbstractEntity::getId)
                     .collect(Collectors.toSet()));
         }
-
-        return dto;
     }
 }

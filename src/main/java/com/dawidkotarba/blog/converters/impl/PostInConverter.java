@@ -28,13 +28,17 @@ public class PostInConverter implements InConverter<PostInDto, PostEntity> {
                 .published(dto.getPublished())
                 .build();
 
+        populateLabelsIfExist(dto, entity);
+
+        return entity;
+    }
+
+    private void populateLabelsIfExist(final PostInDto dto, final PostEntity entity) {
         if (dto.getLabels() != null) {
             entity.setLabels(dto.getLabels().stream()
                     .filter(Objects::nonNull)
                     .map(cacheableLabelRepository::findOne)
                     .collect(Collectors.toSet()));
         }
-
-        return entity;
     }
 }

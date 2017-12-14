@@ -35,13 +35,17 @@ public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
                 .commentDtos(commentsConverter.convertToDtos(entity.getComments()))
                 .build();
 
+        populateLabelsIfExist(entity, dto);
+
+        return dto;
+    }
+
+    private void populateLabelsIfExist(final PostEntity entity, final PostOutDto dto) {
         if (entity.getLabels() != null) {
             dto.setLabels(entity.getLabels().stream()
                     .filter(Objects::nonNull)
                     .map(labelConverter::convert)
                     .collect(Collectors.toSet()));
         }
-
-        return dto;
     }
 }
