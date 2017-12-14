@@ -14,6 +14,10 @@ public interface CacheableUserRepository extends JpaRepository<UserEntity, Long>
     <S extends UserEntity> S save(S entity);
 
     @Override
+    @CacheEvict("usersCache")
+    <S extends UserEntity> S saveAndFlush(S entity);
+
+    @Override
     @Cacheable("usersCache")
     @Query("SELECT u from UserEntity u JOIN FETCH u.authorities")
     List<UserEntity> findAll();

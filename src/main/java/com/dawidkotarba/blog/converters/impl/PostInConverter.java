@@ -7,7 +7,6 @@ import com.dawidkotarba.blog.repository.CacheableLabelRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class PostInConverter implements InConverter<PostInDto, PostEntity> {
         final PostEntity entity = PostEntity.builder()
                 .subject(dto.getSubject())
                 .body(dto.getBody())
-                .published(Timestamp.valueOf(dto.getPublished()))
+                .published(dto.getPublished())
                 .build();
 
         if (dto.getLabels() != null) {

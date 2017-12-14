@@ -82,7 +82,7 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final Set<AuthorEntity> authors = cacheableAuthorRepository.findByIds(postInDto.getAuthors());
+        final List<AuthorEntity> authors = cacheableAuthorRepository.findAll(postInDto.getAuthors());
         if (authors.isEmpty()) {
             throw new NotFoundException(
                     "Author(s) " + postInDto.getAuthors() + " not found. Please add valid author(s).");

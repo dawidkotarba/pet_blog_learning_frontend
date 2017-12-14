@@ -3,7 +3,7 @@ package com.dawidkotarba.blog.model.entities.impl;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "COMMENTS")
@@ -26,5 +26,5 @@ public class CommentEntity extends AbstractEntity {
     @JoinColumn(name = "POST_ID")
     private PostEntity post;
 
-    private Timestamp published;
+    private LocalDateTime published;
 }
