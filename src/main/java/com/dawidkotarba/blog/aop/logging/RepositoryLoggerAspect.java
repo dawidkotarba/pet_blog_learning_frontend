@@ -25,7 +25,8 @@ class RepositoryLoggerAspect {
         try {
             output = pjp.proceed();
         } catch (final Throwable throwable) {
-            throw new InternalErrorException("Cannot proceed in repository logger aspect", throwable.getCause());
+            log.error(throwable.getCause().getMessage());
+            throw new InternalErrorException(throwable.getCause());
         }
 
         final long elapsedTime = System.currentTimeMillis() - start;
