@@ -1,10 +1,6 @@
 <h2>Recent posts:</h2>
 <ul class="posts">
-  <li *ngFor="let post of posts"
-      [class.selected]="post === selectedPost"
-      (click)="onSelect(post)">
-    <span class="badge">{{post.id}}:</span> {{post.subject}}
-  </li>
-
-  <app-post-details [post]="selectedPost"></app-post-details>
+    <p-fieldset *ngFor="let post of posts" legend="{{post.id}}: {{post.subject}}" [toggleable]="true">
+      <app-post-details [post]="post"></app-post-details>
+    </p-fieldset>
 </ul>

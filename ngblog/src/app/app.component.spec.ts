@@ -1,9 +1,18 @@
 import {TestBed, async} from '@angular/core/testing';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+// primefaces
+import {ButtonModule} from 'primeng/primeng';
+import {FieldsetModule} from 'primeng/primeng';
+import {BrowserModule} from '@angular/platform-browser';
+import {FormsModule} from '@angular/forms';
+
+// app
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostsService} from './posts.service';
-import {HttpClientModule} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,7 +23,12 @@ describe('AppComponent', () => {
         PostDetailsComponent
       ],
       imports: [
-        HttpClientModule
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        ButtonModule,
+        FieldsetModule
       ],
       providers: [PostsService]
     }).compileComponents();
