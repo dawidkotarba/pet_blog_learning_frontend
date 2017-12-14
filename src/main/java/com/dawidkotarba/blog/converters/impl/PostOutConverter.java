@@ -6,6 +6,7 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Named
@@ -13,16 +14,19 @@ public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
 
     private final AuthorConverter authorConverter;
     private final CommentOutConverter commentsConverter;
+    private final LabelConverter labelConverter;
 
     @Inject
-    public PostOutConverter(final AuthorConverter authorConverter, final CommentOutConverter commentsConverter) {
+    public PostOutConverter(final AuthorConverter authorConverter, final CommentOutConverter commentsConverter,
+                            final LabelConverter labelConverter) {
         this.authorConverter = authorConverter;
         this.commentsConverter = commentsConverter;
+        this.labelConverter = labelConverter;
     }
 
     @Override
     public PostOutDto convert(final PostEntity entity) {
-        return PostOutDto.builder()
+        final PostOutDto dto = PostOutDto.builder()
                 .id(entity.getId())
                 .subject(entity.getSubject())
                 .body(entity.getBody())
@@ -30,5 +34,14 @@ public class PostOutConverter implements OutConverter<PostEntity, PostOutDto> {
                 .authors(entity.getAuthors().stream().map(authorConverter::convert).collect(Collectors.toSet()))
                 .commentDtos(commentsConverter.convertToDtos(entity.getComments()))
                 .build();
+
+        if (entity.getLabels() != null) {
+            dto.setLabels(entity.getLabels().stream()
+                    .filter(Objects::nonNull)
+                    .map(labelConverter::convert)
+                    .collect(Collectors.toSet()));
+        }
+
+        return dto;
     }
 }
