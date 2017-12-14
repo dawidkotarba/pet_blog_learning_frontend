@@ -27,5 +27,6 @@ public class PostOutDto implements OutDto {
     @NotNull
     @NotEmpty
     private Set<AuthorDto> authors;
+    private Set<LabelDto> labels;
     private Set<CommentOutDto> commentDtos;
 }

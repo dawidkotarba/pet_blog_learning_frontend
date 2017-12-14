@@ -25,4 +25,5 @@ public class PostInDto implements InDto {
     @NotNull
     @NotEmpty
     private Set<Long> authors;
+    private Set<Long> labels;
 }

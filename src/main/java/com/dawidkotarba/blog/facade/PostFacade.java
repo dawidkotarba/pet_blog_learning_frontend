@@ -4,6 +4,7 @@ import com.dawidkotarba.blog.auth.annotations.AuthorizeAuthorities;
 import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.converters.impl.PostInConverter;
 import com.dawidkotarba.blog.converters.impl.PostOutConverter;
+import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
@@ -81,9 +82,18 @@ public class PostFacade {
     @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final List<AuthorEntity> authors = cacheableAuthorRepository.findAll(postInDto.getAuthors());
+        final List<AuthorEntity> authors = getAuthors(postInDto);
         final PostEntity entity = postInConverter.convert(postInDto);
         entity.setAuthors(new HashSet<>(authors));
         cacheablePostRepository.save(entity);
+    }
+
+    private List<AuthorEntity> getAuthors(final PostInDto postInDto) {
+        final List<AuthorEntity> authors = cacheableAuthorRepository.findAll(postInDto.getAuthors());
+        if (authors.isEmpty()) {
+            throw new NotFoundException(
+                    "Author(s) " + postInDto.getAuthors() + " not found. Please add valid author(s).");
+        }
+        return authors;
     }
 }
