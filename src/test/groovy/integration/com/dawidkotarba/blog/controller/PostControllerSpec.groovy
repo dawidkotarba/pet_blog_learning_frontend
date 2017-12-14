@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -32,7 +33,44 @@ class PostControllerSpec extends Specification {
     @Inject
     MockMvc mockMvc
 
-    def 'Should return at least one post'() {
+    AuthorEntity authorTest
+
+    @Shared
+    PostEntity postTest
+    def TEST_VALUE = 'dummy_integration_value'
+    def TEST_VALUE_ADD = 'dummy_integration_value xxx'
+    def NON_EXISTING_VALUE = 'dummy_non_existing_value'
+    def TEST_PUBLISHED_VALUE = '3017-12-11T08:06:56'
+
+    def setup() {
+        println('Setting up test data')
+
+        authorTest = new AuthorEntity()
+        authorTest.with {
+            username = TEST_VALUE
+            firstname = TEST_VALUE
+            lastname = TEST_VALUE
+            posts = null
+        }
+        postTest = new PostEntity()
+        postTest.with {
+            subject = TEST_VALUE
+            body = TEST_VALUE
+            published = LocalDateTime.now()
+            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
+            comments = null
+        }
+        authorRepository.saveAndFlush(authorTest)
+        cacheablePostRepository.saveAndFlush(postTest)
+    }
+
+    def cleanup() {
+        println('Cleaning up after a test!')
+        authorRepository.delete(authorTest.getId())
+        cacheablePostRepository.delete(postTest.getId())
+    }
+
+    def 'Should return at least one post in pageable format'() {
         when: 'rest posts url is hit'
         def response = mockMvc.perform(get('/posts')).andReturn().response
         def page = new JsonSlurper().parseText(response.contentAsString)
@@ -44,27 +82,19 @@ class PostControllerSpec extends Specification {
         page.content.size > 0
     }
 
-    def 'Should return post with proper subject'() {
-        given:
-        def final TEST_VALUE = "test"
-        def authorTest = new AuthorEntity()
-        def postTest = new PostEntity()
-        authorTest.with {
-            username = TEST_VALUE
-            firstname = TEST_VALUE
-            lastname = TEST_VALUE
-            posts = null
-        }
-        postTest.with {
-            subject = TEST_VALUE
-            body = TEST_VALUE
-            published = LocalDateTime.now()
-            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
-            comments = null
-        }
-        authorRepository.save(authorTest)
-        cacheablePostRepository.save(postTest)
+    def 'Should return at least one post'() {
+        when: 'rest posts url is hit'
+        def response = mockMvc.perform(get('/posts/all')).andReturn().response
+        def page = new JsonSlurper().parseText(response.contentAsString)
 
+        then: 'response is correct and post returned'
+        response.status == OK.value()
+        response.contentType.contains('application/json')
+
+        page.size > 0
+    }
+
+    def 'Should return post with proper subject'() {
         when: 'rest posts/subject/{subject} url is hit'
         def response = mockMvc.perform(get('/posts/subject/' + postTest.subject)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
@@ -86,7 +116,7 @@ class PostControllerSpec extends Specification {
 
     def "Should show exception information when post is not found"() {
         when: 'rest is hit with not existing post'
-        def response = mockMvc.perform(get('/posts/subject/notExistingPost')).andReturn().response
+        def response = mockMvc.perform(get('/posts/subject/' + NON_EXISTING_VALUE)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'Exception message is shown'
@@ -99,18 +129,13 @@ class PostControllerSpec extends Specification {
 
     def 'Should add new post for authenticated user'() {
         given:
-        def author = new AuthorEntity(username: "testAuthor")
-        authorRepository.save(author)
-
-        def TEST_VALUE = 'test2'
-        def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
         def jsonBuilder = new JsonBuilder()
         jsonBuilder.call(
                 {
-                    subject TEST_VALUE
-                    body TEST_VALUE
+                    subject TEST_VALUE_ADD
+                    body TEST_VALUE_ADD
                     published TEST_PUBLISHED_VALUE
-                    authors([author.getId()])
+                    authors([authorTest.getId()])
                 }
         )
 
@@ -122,27 +147,25 @@ class PostControllerSpec extends Specification {
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
-        def post = cacheablePostRepository.findBySubject(TEST_VALUE)
+        def post = cacheablePostRepository.findBySubject(TEST_VALUE_ADD)
         post != null
-        post.subject == TEST_VALUE
-        post.body == TEST_VALUE
+        post.subject == TEST_VALUE_ADD
+        post.body == TEST_VALUE_ADD
         post.published.toString() == TEST_PUBLISHED_VALUE
+
+        cleanup:
+        cacheablePostRepository.delete(post.getId())
     }
 
     def 'Should not add new post for user without sufficient privileges'() {
         given:
-        def author = new AuthorEntity(username: "testAuthor2")
-        authorRepository.save(author)
-
-        def TEST_VALUE = 'test3'
-        def TEST_PUBLISHED_VALUE = '2017-12-11T08:06:56'
         def jsonBuilder = new JsonBuilder()
         jsonBuilder.call(
                 {
-                    subject TEST_VALUE
-                    body TEST_VALUE
+                    subject TEST_VALUE_ADD
+                    body TEST_VALUE_ADD
                     published TEST_PUBLISHED_VALUE
-                    authors([author.getId()])
+                    authors([authorTest.getId()])
                 }
         )
 
@@ -157,5 +180,54 @@ class PostControllerSpec extends Specification {
         response.status == UNAUTHORIZED.value()
         content.uuid != null
         content.exceptionType == 'UNAUTHORIZED'
+    }
+
+    def 'Should find two posts within a specified month/year'() {
+        given:
+        def postTest1 = new PostEntity()
+        postTest1.with {
+            subject = 'startingPost'
+            body = TEST_VALUE
+            published = LocalDateTime.parse('3017-12-01T00:00:01')
+            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
+            comments = null
+        }
+
+        def postTest2 = new PostEntity()
+        postTest2.with {
+            subject = 'endingPost'
+            body = TEST_VALUE
+            published = LocalDateTime.parse('3017-12-31T23:59:59')
+            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
+            comments = null
+        }
+
+        def postTest3 = new PostEntity()
+        postTest3.with {
+            subject = 'previousMonthPost'
+            body = TEST_VALUE
+            published = LocalDateTime.parse('3017-11-30T23:59:59')
+            authors = new HashSet<AuthorEntity>(Arrays.asList(authorTest))
+            comments = null
+        }
+
+        cacheablePostRepository.saveAndFlush(postTest1)
+        cacheablePostRepository.saveAndFlush(postTest2)
+        cacheablePostRepository.saveAndFlush(postTest3)
+
+        when: 'rest posts/search/ url is hit'
+        def response = mockMvc.perform(get('/posts/search/3017-12-15')).andReturn().response
+        def page = new JsonSlurper().parseText(response.contentAsString)
+
+        then: 'response is correct and contains two posts'
+        response.status == OK.value()
+        response.contentType.contains('application/json')
+
+        page.size == 2
+
+        cleanup:
+        cacheablePostRepository.delete(postTest1.getId())
+        cacheablePostRepository.delete(postTest2.getId())
+        cacheablePostRepository.delete(postTest3.getId())
     }
 }

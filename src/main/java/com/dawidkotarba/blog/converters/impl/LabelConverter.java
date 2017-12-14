@@ -3,7 +3,6 @@ package com.dawidkotarba.blog.converters.impl;
 import com.dawidkotarba.blog.converters.InConverter;
 import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.model.dto.impl.LabelDto;
-import com.dawidkotarba.blog.model.entities.impl.AbstractEntity;
 import com.dawidkotarba.blog.model.entities.impl.LabelEntity;
 import com.dawidkotarba.blog.repository.CacheablePostRepository;
 
@@ -40,8 +39,6 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
                 .name(entity.getName())
                 .build();
 
-        populatePostsIfExist(entity, dto);
-
         return dto;
     }
 
@@ -50,15 +47,6 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
             entity.setPosts(dto.getPosts().stream()
                     .filter(Objects::nonNull)
                     .map(cacheablePostRepository::findOne)
-                    .collect(Collectors.toSet()));
-        }
-    }
-
-    private void populatePostsIfExist(final LabelEntity entity, final LabelDto dto) {
-        if (entity.getPosts() != null) {
-            dto.setPosts(entity.getPosts().stream()
-                    .filter(Objects::nonNull)
-                    .map(AbstractEntity::getId)
                     .collect(Collectors.toSet()));
         }
     }

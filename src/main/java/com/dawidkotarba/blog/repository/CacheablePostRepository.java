@@ -22,7 +22,7 @@ public interface CacheablePostRepository extends JpaRepository<PostEntity, Long>
 
     @Override
     @Cacheable("postsCache")
-    @Query("SELECT p from PostEntity p JOIN FETCH p.authors JOIN FETCH p.comments")
+    @Query("SELECT p from PostEntity p LEFT JOIN FETCH p.authors LEFT JOIN FETCH p.comments LEFT JOIN FETCH p.labels")
     List<PostEntity> findAll();
 
     PostEntity findBySubject(String subject);
