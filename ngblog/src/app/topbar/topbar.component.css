@@ -1,0 +1,16 @@
+.topbar {
+  background-color: #41519c;
+  display: block;
+  height: 60px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, .3);
+}
+
+.topbar-textlogo {
+  color: whitesmoke;
+  text-align: center;
+}
