@@ -17,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -73,8 +72,7 @@ public class PostFacade {
     public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
-        final Set<PostEntity> bySubject = cacheablePostRepository.findByPublishedBetween(Timestamp.valueOf(fromDate),
-                Timestamp.valueOf(toDate));
+        final Set<PostEntity> bySubject = cacheablePostRepository.findByPublishedBetween(fromDate, toDate);
         final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
         return Collections.unmodifiableList(result);
     }

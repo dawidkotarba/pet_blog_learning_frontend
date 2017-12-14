@@ -6,7 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -27,5 +27,5 @@ public interface CacheablePostRepository extends JpaRepository<PostEntity, Long>
 
     PostEntity findBySubject(String subject);
 
-    Set<PostEntity> findByPublishedBetween(Timestamp fromDate, Timestamp toDate);
+    Set<PostEntity> findByPublishedBetween(LocalDateTime fromDate, LocalDateTime toDate);
 }
