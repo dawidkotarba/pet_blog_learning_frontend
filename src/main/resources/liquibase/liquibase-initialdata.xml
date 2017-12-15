@@ -219,13 +219,13 @@
 
     <changeSet id="create_initialdata_labels" author="Dawid">
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="name" value="programming"/>
+            <column name="label" value="PROGRAMMING"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="name" value="databases"/>
+            <column name="label" value="DB"/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="labels">
-            <column name="name" value="networking"/>
+            <column name="label" value="NETWORK"/>
         </insert>
     </changeSet>
 

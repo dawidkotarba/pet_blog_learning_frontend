@@ -162,7 +162,7 @@
             <column name="uuid" type="varchar(36)" defaultValueComputed="random_uuid()">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="name" type="varchar(50)">
+            <column name="label" type="varchar(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
         </createTable>

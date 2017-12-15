@@ -2,12 +2,14 @@ package com.dawidkotarba.blog.converters.impl;
 
 import com.dawidkotarba.blog.converters.InConverter;
 import com.dawidkotarba.blog.converters.OutConverter;
+import com.dawidkotarba.blog.enums.Label;
 import com.dawidkotarba.blog.model.dto.impl.LabelDto;
 import com.dawidkotarba.blog.model.entities.impl.LabelEntity;
 import com.dawidkotarba.blog.repository.CacheablePostRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -24,7 +26,7 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
     @Override
     public LabelEntity convert(final LabelDto dto) {
         final LabelEntity entity = LabelEntity.builder()
-                .name(dto.getName())
+                .label(Arrays.asList(Label.values()).stream().filter(label -> label.getName().equals(dto.getLabel())).findFirst().get())
                 .build();
 
         findAndPopulatePosts(dto, entity);
@@ -34,12 +36,10 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
 
     @Override
     public LabelDto convert(final LabelEntity entity) {
-        final LabelDto dto = LabelDto.builder()
+        return LabelDto.builder()
                 .id(entity.getId())
-                .name(entity.getName())
+                .label(entity.getLabel().getName())
                 .build();
-
-        return dto;
     }
 
     private void findAndPopulatePosts(final LabelDto dto, final LabelEntity entity) {
