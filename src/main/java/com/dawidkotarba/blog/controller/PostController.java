@@ -46,6 +46,11 @@ class PostController {
         return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    PostOutDto getOne(@PathVariable final Long id) {
+        return postFacade.getOne(id);
+    }
+
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     void add(@RequestBody @Valid final PostInDto postDto) {
         postFacade.add(postDto);
