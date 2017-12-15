@@ -19,7 +19,7 @@ class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public void authorize(final UserAuthority... authorities) {
-        final Set<String> allowedAuthorities = Arrays.asList(authorities).stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+        final Set<String> allowedAuthorities = Arrays.stream(authorities).map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             final Set<String> userAuthorities =
