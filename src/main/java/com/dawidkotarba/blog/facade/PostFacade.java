@@ -61,6 +61,12 @@ public class PostFacade {
         return Optional.of(postOutConverter.convert(bySubject));
     }
 
+    public PostOutDto getOne(final Long id) {
+        Preconditions.checkNotNull(id);
+        final PostEntity post = cacheablePostRepository.getOne(id);
+        return postOutConverter.convert(post);
+    }
+
     public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
         Preconditions.checkNotNull(dayOfAMonth);
         final LocalDate startDate = dayOfAMonth.withDayOfMonth(1);
