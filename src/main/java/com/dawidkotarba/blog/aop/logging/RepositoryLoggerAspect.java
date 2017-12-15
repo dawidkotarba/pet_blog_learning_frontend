@@ -1,6 +1,7 @@
 package com.dawidkotarba.blog.aop.logging;
 
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
+import com.google.common.base.Throwables;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -25,8 +26,8 @@ class RepositoryLoggerAspect {
         try {
             output = pjp.proceed();
         } catch (final Throwable throwable) {
-            log.error(throwable.getCause().getMessage());
-            throw new InternalErrorException(throwable.getCause());
+            log.error(Throwables.getStackTraceAsString(throwable));
+            throw new InternalErrorException(Throwables.getRootCause(throwable));
         }
 
         final long elapsedTime = System.currentTimeMillis() - start;

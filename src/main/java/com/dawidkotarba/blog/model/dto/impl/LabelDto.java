@@ -16,7 +16,7 @@ public class LabelDto implements InDto, OutDto {
     @NotNull
     private Long id;
     @NotBlank
-    private String name;
+    private String label;
     @NotNull
     private Set<Long> posts;
 }
