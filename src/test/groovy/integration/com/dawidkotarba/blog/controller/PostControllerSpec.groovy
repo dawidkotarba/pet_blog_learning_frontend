@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Shared
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -34,10 +33,9 @@ class PostControllerSpec extends Specification {
     @Inject
     CacheableAuthorRepository authorRepository
     @Inject
-    CacheablePostRepository cacheablePostRepository
+    CacheablePostRepository postRepository
     @Inject
     MockMvc mockMvc
-    @Shared
     PostEntity testPost
     AuthorEntity testAuthor
 
@@ -58,12 +56,12 @@ class PostControllerSpec extends Specification {
             comments = null
         }
         authorRepository.saveAndFlush(testAuthor)
-        cacheablePostRepository.saveAndFlush(testPost)
+        postRepository.saveAndFlush(testPost)
     }
 
     def cleanup() {
         authorRepository.delete(testAuthor.getId())
-        cacheablePostRepository.delete(testPost.getId())
+        postRepository.delete(testPost.getId())
     }
 
     def 'Should return at least one post in pageable format'() {
@@ -134,14 +132,14 @@ class PostControllerSpec extends Specification {
 
         then: 'response is correct and new post is saved in db'
         response.status == OK.value()
-        def post = cacheablePostRepository.findBySubject(TEST_VALUE_ADD)
+        def post = postRepository.findBySubject(TEST_VALUE_ADD)
         post != null
         post.subject == TEST_VALUE_ADD
         post.body == TEST_VALUE_ADD
         post.published.toString() == TEST_PUBLISHED_VALUE
 
         cleanup:
-        cacheablePostRepository.delete(post.getId())
+        postRepository.delete(post.getId())
     }
 
     def 'Should not add new post for user without sufficient privileges'() {
@@ -198,9 +196,9 @@ class PostControllerSpec extends Specification {
             comments = null
         }
 
-        cacheablePostRepository.saveAndFlush(postTest1)
-        cacheablePostRepository.saveAndFlush(postTest2)
-        cacheablePostRepository.saveAndFlush(postTest3)
+        postRepository.saveAndFlush(postTest1)
+        postRepository.saveAndFlush(postTest2)
+        postRepository.saveAndFlush(postTest3)
 
         when: 'rest posts/search/ url is hit'
         def response = mockMvc.perform(get('/posts/search/3017-12-15')).andReturn().response
@@ -213,9 +211,9 @@ class PostControllerSpec extends Specification {
         page.size == 2
 
         cleanup:
-        cacheablePostRepository.delete(postTest1.getId())
-        cacheablePostRepository.delete(postTest2.getId())
-        cacheablePostRepository.delete(postTest3.getId())
+        postRepository.delete(postTest1.getId())
+        postRepository.delete(postTest2.getId())
+        postRepository.delete(postTest3.getId())
     }
 
     def 'Should return a post by given id'() {

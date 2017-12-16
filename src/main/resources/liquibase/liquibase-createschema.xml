@@ -85,11 +85,12 @@
         </createTable>
         <createTable tableName="users_authorities" schemaName="public">
             <column name="user_id" type="long">
-                <constraints nullable="false" foreignKeyName="user_id" referencedTableName="users"
+                <constraints nullable="false" foreignKeyName="users_authorities-user_id" referencedTableName="users"
                              referencedColumnNames="id"/>
             </column>
             <column name="authority_id" type="long">
-                <constraints nullable="false" foreignKeyName="authority_id" referencedTableName="authorities"
+                <constraints nullable="false" foreignKeyName="users_authorities-authority_id"
+                             referencedTableName="authorities"
                              referencedColumnNames="id"/>
             </column>
         </createTable>
@@ -145,7 +146,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="post_id" type="long">
-                <constraints nullable="false" foreignKeyName="post_id" referencedTableName="posts"
+                <constraints nullable="false" foreignKeyName="comments-post_id" referencedTableName="posts"
                              referencedColumnNames="id"/>
             </column>
             <column name="published" type="timestamp">
@@ -168,18 +169,22 @@
         </createTable>
         <createTable tableName="posts_authors" schemaName="public">
             <column name="post_id" type="long">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="posts_authors-post_id"
+                             referencedTableName="posts" referencedColumnNames="id"/>
             </column>
             <column name="author_id" type="long">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="posts_authors-author_id"
+                             referencedTableName="authors" referencedColumnNames="id"/>
             </column>
         </createTable>
         <createTable tableName="posts_labels" schemaName="public">
             <column name="post_id" type="long">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="posts_labels-post_id"
+                             referencedTableName="posts" referencedColumnNames="id"/>
             </column>
             <column name="label_id" type="long">
-                <constraints nullable="false"/>
+                <constraints nullable="false" foreignKeyName="posts_labels-label_id"
+                             referencedTableName="labels" referencedColumnNames="id"/>
             </column>
         </createTable>
     </changeSet>
