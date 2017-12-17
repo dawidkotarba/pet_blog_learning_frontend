@@ -8,7 +8,7 @@ import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 // app
 import {PostsComponent} from '../posts/posts.component';
 import {PostDetailsComponent} from '../post-details/post-details.component';
-import {PostsService} from '../posts.service';
+import {PostsService} from './posts.service';
 
 
 describe('PostsComponent', () => {

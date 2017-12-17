@@ -9,7 +9,7 @@ import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
-import {PostsService} from './posts.service';
+import {PostsService} from './posts/posts.service';
 import {TopbarComponent} from './topbar/topbar.component';
 
 
