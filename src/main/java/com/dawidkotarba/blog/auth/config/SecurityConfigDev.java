@@ -26,9 +26,12 @@ class SecurityConfigDev extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/db").hasAuthority(UserAuthority.ADMINISTRATE.getAuthority())
+                .antMatchers("/db/**").hasAuthority(UserAuthority.ADMINISTRATE.getAuthority())
                 .antMatchers("/swagger-ui.html").hasAnyAuthority(UserAuthority.ADMINISTRATE.getAuthority(), UserAuthority.WRITE.getAuthority())
-                .anyRequest().permitAll()
+                .antMatchers("/posts/**").permitAll()
+                .antMatchers("/users/**").permitAll()
+                .antMatchers("/comments/**").permitAll()
+                .anyRequest().authenticated()
                 .and().formLogin();
 
         // h2 console csrf disable
