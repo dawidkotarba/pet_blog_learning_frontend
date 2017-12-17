@@ -1,13 +1,13 @@
 package com.dawidkotarba.blog.auth.service;
 
-import com.dawidkotarba.blog.auth.enums.UserAuthority;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 
 public interface AuthorizationService {
-    void authorize(UserAuthority... authorizedRoles);
+    void authorize(GrantedAuthority... authorizedRoles);
 
-    Set<UserAuthority> getCurrentUserAuthorities();
+    Set<GrantedAuthority> getCurrentUserAuthorities();
 
-    boolean hasCurrentUserAuthority(UserAuthority userAuthority);
+    boolean hasCurrentUserAuthority(GrantedAuthority userAuthority);
 }

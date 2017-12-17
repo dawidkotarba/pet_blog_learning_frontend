@@ -1,7 +1,5 @@
 package com.dawidkotarba.blog.facade;
 
-import com.dawidkotarba.blog.auth.annotations.AuthorizeAuthorities;
-import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.converters.impl.PostInConverter;
 import com.dawidkotarba.blog.converters.impl.PostOutConverter;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
@@ -14,6 +12,7 @@ import com.dawidkotarba.blog.repository.CacheablePostRepository;
 import com.google.common.base.Preconditions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -83,7 +82,7 @@ public class PostFacade {
         return Collections.unmodifiableList(result);
     }
 
-    @AuthorizeAuthorities(authorities = {UserAuthority.ADMINISTRATE, UserAuthority.WRITE})
+    @PreAuthorize("hasAuthority('administrate') or hasAuthority('write')")
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
         final List<AuthorEntity> authors = getAuthors(postInDto);

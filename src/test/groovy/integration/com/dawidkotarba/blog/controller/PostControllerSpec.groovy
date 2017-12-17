@@ -1,6 +1,7 @@
 package integration.com.dawidkotarba.blog.controller
 
 import com.dawidkotarba.blog.auth.enums.UserAuthority
+import com.dawidkotarba.blog.enums.CommonExceptionType
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity
 import com.dawidkotarba.blog.model.entities.impl.PostEntity
 import com.dawidkotarba.blog.repository.CacheableAuthorRepository
@@ -109,7 +110,7 @@ class PostControllerSpec extends Specification {
         response.contentType.contains('application/json')
 
         content.uuid != null
-        content.exceptionType == 'NOT_FOUND'
+        content.exceptionType == CommonExceptionType.NOT_FOUND.toString()
     }
 
     def 'Should add new post for authenticated user'() {
@@ -164,7 +165,7 @@ class PostControllerSpec extends Specification {
         then: 'there was unauthorized status of the response'
         response.status == UNAUTHORIZED.value()
         content.uuid != null
-        content.exceptionType == 'UNAUTHORIZED'
+        content.exceptionType == CommonExceptionType.INTERNAL_ERROR.toString()
     }
 
     def 'Should find two posts within a specified month/year'() {

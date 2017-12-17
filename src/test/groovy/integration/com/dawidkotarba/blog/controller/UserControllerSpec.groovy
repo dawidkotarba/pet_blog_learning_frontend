@@ -1,5 +1,7 @@
 package integration.com.dawidkotarba.blog.controller
 
+import com.dawidkotarba.blog.auth.enums.UserAuthority
+import com.dawidkotarba.blog.enums.CommonExceptionType
 import com.dawidkotarba.blog.repository.CacheableUserRepository
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -12,6 +14,7 @@ import javax.inject.Inject
 
 import static org.springframework.http.HttpStatus.NOT_FOUND
 import static org.springframework.http.HttpStatus.OK
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 
@@ -61,7 +64,7 @@ class UserControllerSpec extends Specification {
         response.contentType.contains('application/json')
 
         content.uuid != null
-        content.exceptionType == 'NOT_FOUND'
+        content.exceptionType == CommonExceptionType.NOT_FOUND.toString()
     }
 
     def 'Should add new user'() {
@@ -82,6 +85,7 @@ class UserControllerSpec extends Specification {
 
         when: 'rest add user url is hit'
         def response = mockMvc.perform(post('/users')
+                .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)).andReturn().response
 

@@ -1,13 +1,14 @@
 package com.dawidkotarba.blog.aop;
 
 import com.dawidkotarba.blog.auth.exceptions.UnauthorizedException;
-import com.dawidkotarba.blog.auth.exceptions.WrongPasswordException;
-import com.dawidkotarba.blog.auth.exceptions.WrongUsernameException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.InternalErrorException;
 import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.service.impl.ExceptionConverterService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -63,17 +64,24 @@ class ExceptionControllerAdvice {
         return exceptionConverterService.convert(e);
     }
 
-    @ExceptionHandler(value = WrongPasswordException.class)
+    @ExceptionHandler(value = AccessDeniedException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    ExceptionResponse handleException(final WrongPasswordException e) {
+    ExceptionResponse handleException(final AccessDeniedException e) {
         return exceptionConverterService.convert(e);
     }
 
-    @ExceptionHandler(value = WrongUsernameException.class)
+    @ExceptionHandler(value = AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ResponseBody
-    ExceptionResponse handleException(final WrongUsernameException e) {
+    ExceptionResponse handleException(final AuthenticationException e) {
+        return exceptionConverterService.convert(e);
+    }
+
+    @ExceptionHandler(value = AuthenticationCredentialsNotFoundException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseBody
+    ExceptionResponse handleException(final AuthenticationCredentialsNotFoundException e) {
         return exceptionConverterService.convert(e);
     }
 
