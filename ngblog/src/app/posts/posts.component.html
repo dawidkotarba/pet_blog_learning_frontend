@@ -6,9 +6,16 @@
         <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{post.id}}: {{post.subject}}</span>
       </div>
     </p-header>
-    <app-post-details [post]="post"></app-post-details>
+    <div *ngIf="post">
+      <div>{{post.body}}</div>
+      <div><span>Authors:</span>
+        <div *ngFor="let author of post.authors">
+          {{author.username}} ({{author.firstname}} {{author.lastname}})
+        </div>
+      </div>
+    </div>
     <p-footer>
-      <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
+      <a href="/{{post.id}}" pButton type="button" icon="fa-list" label="View" class="ui-button-success" ></a>
     </p-footer>
   </p-panel>
 </div>
