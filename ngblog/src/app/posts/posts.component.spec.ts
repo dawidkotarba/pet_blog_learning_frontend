@@ -8,7 +8,9 @@ import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 // app
 import {PostsComponent} from '../posts/posts.component';
 import {PostDetailsComponent} from '../post-details/post-details.component';
-import {PostsService} from '../posts.service';
+import {PostsService} from './posts.service';
+import {AppRoutingModule} from '../app-routing.module';
+import {APP_BASE_HREF} from '@angular/common';
 
 
 describe('PostsComponent', () => {
@@ -18,7 +20,7 @@ describe('PostsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PostsComponent, PostDetailsComponent],
-      providers: [PostsService],
+      providers: [PostsService, {provide: APP_BASE_HREF, useValue: '/'}],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
@@ -26,7 +28,8 @@ describe('PostsComponent', () => {
         HttpClientModule,
         ButtonModule,
         FieldsetModule,
-        PanelModule
+        PanelModule,
+        AppRoutingModule
       ]
     })
       .compileComponents();

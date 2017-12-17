@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { of } from 'rxjs/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 
-import {Post} from './model/post';
+import {Post} from '../model/post';
 
 @Injectable()
 export class PostsService {

@@ -6,14 +6,19 @@
         <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{post.id}}: {{post.subject}}</span>
       </div>
     </p-header>
-    <app-post-details [post]="post"></app-post-details>
+    <div *ngIf="post">
+      Post quick summary to be implemented...
+    </div>
     <p-footer>
-      <button pButton type="button" icon="fa-list" label="View" class="ui-button-success"></button>
+      <nav>
+        <a routerLink="/post/{{post.id}}" pButton type="button" icon="fa-list" label="Read more"
+           class="ui-button-success"></a>
+      </nav>
     </p-footer>
   </p-panel>
 </div>
 <div *ngIf="!arePostsAvailable()">
-  <h3>There are no recent posts... (psss, turn on java server ;))</h3>
+  <h3>Fetching posts...</h3>
 </div>
 
 
