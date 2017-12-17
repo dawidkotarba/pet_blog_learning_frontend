@@ -4,6 +4,7 @@ import {PostDetailsComponent} from './post-details.component';
 import {PostDetailsService} from './post-details.service';
 import {HttpClientModule} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
 describe('PostDetailsComponent', () => {
   let component: PostDetailsComponent;
@@ -12,7 +13,7 @@ describe('PostDetailsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PostDetailsComponent],
-      imports: [HttpClientModule],
+      imports: [HttpClientModule, Ng4LoadingSpinnerModule.forRoot()],
       providers: [PostDetailsService, ActivatedRoute]
     })
       .compileComponents();

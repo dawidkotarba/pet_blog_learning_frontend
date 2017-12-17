@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 // declarations
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
@@ -32,7 +33,8 @@ import {AppRoutingModule} from './/app-routing.module';
     ButtonModule,
     FieldsetModule,
     PanelModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng4LoadingSpinnerModule.forRoot()
   ],
   providers: [{provide: APP_BASE_HREF, useValue: '/'},
     PostsService,

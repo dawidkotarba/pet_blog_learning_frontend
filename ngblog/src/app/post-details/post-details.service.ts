@@ -14,7 +14,7 @@ export class PostDetailsService {
 
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>('http://localhost:8080/posts/' + id).pipe(
-      catchError(this.handleError('getPosts', new Post()))
+      catchError(this.handleError('getPosts', null))
     );
   }
 
