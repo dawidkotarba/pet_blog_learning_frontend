@@ -8,6 +8,7 @@ import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
 import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import com.google.common.base.Preconditions;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -51,6 +52,7 @@ public class UserFacade {
         return all.stream().map(userOutConverter::convert).collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('administrate')")
     public void add(final UserInDto userInDto) {
         Preconditions.checkNotNull(userInDto);
         registrationService.registerUser(userInConverter.convert(userInDto));

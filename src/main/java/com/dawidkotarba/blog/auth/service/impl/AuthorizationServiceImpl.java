@@ -1,6 +1,5 @@
 package com.dawidkotarba.blog.auth.service.impl;
 
-import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.auth.exceptions.UnauthorizedException;
 import com.dawidkotarba.blog.auth.service.AuthorizationService;
 import org.springframework.security.core.Authentication;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
-    public void authorize(final UserAuthority... authorities) {
+    public void authorize(final GrantedAuthority... authorities) {
         final Set<String> allowedAuthorities = Arrays.stream(authorities).map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -33,14 +32,14 @@ class AuthorizationServiceImpl implements AuthorizationService {
     }
 
     @Override
-    public Set<UserAuthority> getCurrentUserAuthorities() {
-        final Collection<UserAuthority> authorities = (Collection<UserAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+    public Set<GrantedAuthority> getCurrentUserAuthorities() {
+        final Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
         return new HashSet<>(authorities);
     }
 
     @Override
-    public boolean hasCurrentUserAuthority(final UserAuthority userAuthority) {
-        final Set<UserAuthority> usersAuthorities = getCurrentUserAuthorities();
+    public boolean hasCurrentUserAuthority(final GrantedAuthority userAuthority) {
+        final Set<GrantedAuthority> usersAuthorities = getCurrentUserAuthorities();
         return usersAuthorities.stream().anyMatch(role -> role.equals(userAuthority));
     }
 
