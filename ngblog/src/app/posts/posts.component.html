@@ -1,19 +1,22 @@
-<ng4-loading-spinner></ng4-loading-spinner>
-<div *ngIf="arePostsAvailable()">
-  <h2>Recent posts:</h2>
-  <p-panel *ngFor="let post of posts">
-    <p-header>
-      <div class="ui-helper-clearfix">
-        <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{post.id}}: {{post.subject}}</span>
-      </div>
-    </p-header>
-    <div *ngIf="post">
-      Post quick summary to be implemented...
+<div class="ui-g-8 ui-md-8 ui-lg-8">
+  <ng4-loading-spinner></ng4-loading-spinner>
+  <div *ngIf="arePostsAvailable()">
+    <h2>Recent posts:</h2>
+    <div *ngFor="let post of posts" class="post-div">
+      <p-panel>
+        <p-header>
+          <div class="ui-helper-clearfix">
+            <span class="ui-panel-title">{{post.id}}: {{post.subject}}</span>
+          </div>
+        </p-header>
+        <div *ngIf="post">
+          Post quick summary to be implemented...
+        </div>
+        <p-footer>
+          <a routerLink="/post/{{post.id}}" pButton type="button" icon="fa-list" label="Read more"
+             class="ui-button-success"></a>
+        </p-footer>
+      </p-panel>
     </div>
-    <p-footer>
-      <a routerLink="/post/{{post.id}}" pButton type="button" icon="fa-list" label="Read more"
-         class="ui-button-success"></a>
-    </p-footer>
-  </p-panel>
+  </div>
 </div>
-

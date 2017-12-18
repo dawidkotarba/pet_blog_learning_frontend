@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
+import {MessageService} from 'primeng/components/common/messageservice';
 
 import {Post} from '../model/post';
 import {PostsService} from './posts.service';
@@ -13,7 +14,8 @@ export class PostsComponent implements OnInit {
   posts: Post[] = [];
 
   constructor(private postService: PostsService,
-              private spinnerService: Ng4LoadingSpinnerService) {
+              private spinnerService: Ng4LoadingSpinnerService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
@@ -25,6 +27,9 @@ export class PostsComponent implements OnInit {
     this.postService.getPosts().subscribe(posts => {
       this.posts = posts;
       this.spinnerService.hide();
+      if (posts.length === 0) {
+        this.messageService.add({severity: 'error', summary: 'Cannot load any posts...'});
+      }
     });
   }
 

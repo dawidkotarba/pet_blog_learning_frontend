@@ -5,9 +5,12 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
+
 // primeng
-import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {ButtonModule, FieldsetModule, PanelModule, GrowlModule} from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {MessageService} from 'primeng/components/common/messageservice';
+
 // declarations
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
@@ -33,11 +36,14 @@ import {AppRoutingModule} from './/app-routing.module';
     FieldsetModule,
     PanelModule,
     AppRoutingModule,
-    Ng4LoadingSpinnerModule.forRoot()
+    Ng4LoadingSpinnerModule.forRoot(),
+    GrowlModule
   ],
-  providers: [{provide: APP_BASE_HREF, useValue: '/'},
+  providers: [
+    {provide: APP_BASE_HREF, useValue: '/'},
     PostsService,
-    PostDetailsService],
+    PostDetailsService,
+    MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
