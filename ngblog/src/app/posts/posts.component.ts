@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 import {Post} from '../model/post';
 import {PostsService} from './posts.service';
@@ -11,7 +12,8 @@ import {PostsService} from './posts.service';
 export class PostsComponent implements OnInit {
   posts: Post[] = [];
 
-  constructor(private postService: PostsService) {
+  constructor(private postService: PostsService,
+              private spinnerService: Ng4LoadingSpinnerService) {
   }
 
   ngOnInit() {
@@ -19,7 +21,11 @@ export class PostsComponent implements OnInit {
   }
 
   getPosts(): void {
-    this.postService.getPosts().subscribe(posts => this.posts = posts);
+    this.spinnerService.show();
+    this.postService.getPosts().subscribe(posts => {
+      this.posts = posts;
+      this.spinnerService.hide();
+    });
   }
 
   arePostsAvailable(): boolean {

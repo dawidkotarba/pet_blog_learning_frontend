@@ -11,6 +11,7 @@ import {PostDetailsComponent} from '../post-details/post-details.component';
 import {PostsService} from './posts.service';
 import {AppRoutingModule} from '../app-routing.module';
 import {APP_BASE_HREF} from '@angular/common';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
 
 describe('PostsComponent', () => {
@@ -29,7 +30,8 @@ describe('PostsComponent', () => {
         ButtonModule,
         FieldsetModule,
         PanelModule,
-        AppRoutingModule
+        AppRoutingModule,
+        Ng4LoadingSpinnerModule.forRoot()
       ]
     })
       .compileComponents();

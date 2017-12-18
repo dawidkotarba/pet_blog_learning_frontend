@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 
 import {PostDetailsService} from './post-details.service';
 import {Post} from '../model/post';
+import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-post-details',
@@ -10,9 +11,11 @@ import {Post} from '../model/post';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
-  post: Post;
+  post: Post = null;
 
-  constructor(private  postDetailsService: PostDetailsService, private route: ActivatedRoute) {
+  constructor(private  postDetailsService: PostDetailsService,
+              private route: ActivatedRoute,
+              private spinnerService: Ng4LoadingSpinnerService) {
     this.getPost();
   }
 
@@ -21,6 +24,14 @@ export class PostDetailsComponent implements OnInit {
 
   getPost(): void {
     const id = +this.route.snapshot.paramMap.get('postId');
-    this.postDetailsService.getPost(id).subscribe(post => this.post = post);
+    this.spinnerService.show();
+    this.postDetailsService.getPost(id).subscribe(post => {
+      this.post = post;
+      this.spinnerService.hide();
+    });
+  }
+
+  isPostAvailable(): boolean {
+    return this.post !== null;
   }
 }

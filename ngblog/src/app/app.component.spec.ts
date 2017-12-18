@@ -14,6 +14,7 @@ import {PostsService} from './posts/posts.service';
 import {AppRoutingModule} from './/app-routing.module';
 import {AppComponent} from './app.component';
 import {PostDetailsService} from './post-details/post-details.service';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 
 
 describe('AppComponent', () => {
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
         ButtonModule,
         FieldsetModule,
         PanelModule,
-        AppRoutingModule
+        AppRoutingModule,
+        Ng4LoadingSpinnerModule.forRoot()
       ],
       providers: [{provide: APP_BASE_HREF, useValue: '/'},
         PostsService,
