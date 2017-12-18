@@ -17,7 +17,6 @@ import {PostDetailsService} from './post-details/post-details.service';
 import {TopbarComponent} from './topbar/topbar.component';
 import {AppRoutingModule} from './/app-routing.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
