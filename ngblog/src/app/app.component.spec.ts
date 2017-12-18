@@ -6,7 +6,8 @@ import {TopbarComponent} from './topbar/topbar.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {ButtonModule, FieldsetModule, GrowlModule, PanelModule} from 'primeng/primeng';
+import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from './posts/posts.component';
 import {PostDetailsComponent} from './post-details/post-details.component';
@@ -35,11 +36,14 @@ describe('AppComponent', () => {
         FieldsetModule,
         PanelModule,
         AppRoutingModule,
-        Ng4LoadingSpinnerModule.forRoot()
+        Ng4LoadingSpinnerModule.forRoot(),
+        GrowlModule
       ],
-      providers: [{provide: APP_BASE_HREF, useValue: '/'},
+      providers: [
+        {provide: APP_BASE_HREF, useValue: '/'},
         PostsService,
-        PostDetailsService]
+        PostDetailsService,
+        MessageService]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

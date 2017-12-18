@@ -5,6 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
 import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {MessageService} from 'primeng/components/common/messageservice';
+
 // app
 import {PostsComponent} from '../posts/posts.component';
 import {PostDetailsComponent} from '../post-details/post-details.component';
@@ -21,7 +23,11 @@ describe('PostsComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PostsComponent, PostDetailsComponent],
-      providers: [PostsService, {provide: APP_BASE_HREF, useValue: '/'}],
+      providers: [
+        PostsService,
+        MessageService,
+        {provide: APP_BASE_HREF, useValue: '/'}
+      ],
       imports: [
         BrowserModule,
         BrowserAnimationsModule,
