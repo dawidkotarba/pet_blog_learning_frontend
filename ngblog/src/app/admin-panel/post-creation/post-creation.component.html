@@ -1,0 +1,25 @@
+<ng4-loading-spinner></ng4-loading-spinner>
+<div class="container">
+
+  <h2>Add new post:</h2>
+
+  <br/>
+
+  <div class="ui-inputgroup container">
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" class="form-input" pInputText placeholder="Subject" [(ngModel)]="post.subject">
+    <label for="body">Body</label>
+    <textarea class="form-input-area" id="body" pInputTextarea placeholder="Body" [(ngModel)]="post.body"></textarea>
+    <label for="published">Published</label>
+    <input type="text" id="published" class="form-input" pInputText placeholder="2012-12-12T12:12:12"
+           [(ngModel)]="post.published">
+    <label for="authors">Authors</label>
+    <input type="text" id="authors" class="form-input" pInputText placeholder="Authors" [(ngModel)]="authors">
+    <label for="labels">Labels</label>
+    <input type="text" id="labels" class="form-input" pInputText placeholder="Labels - not implemented">
+  </div>
+
+  <br/>
+
+  <button type="button" class="btn" pButton (click)="save()">Save post</button>
+</div>
