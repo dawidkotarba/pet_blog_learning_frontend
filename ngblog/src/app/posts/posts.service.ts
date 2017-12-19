@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
-import { of } from 'rxjs/observable/of';
-import {catchError, map, tap} from 'rxjs/operators';
+import {of} from 'rxjs/observable/of';
+import {catchError} from 'rxjs/operators';
 
 import {Post} from '../model/post';
 
@@ -20,7 +20,7 @@ export class PostsService {
     );
   }
 
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);

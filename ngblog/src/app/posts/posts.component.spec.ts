@@ -6,7 +6,6 @@ import {FormsModule} from '@angular/forms';
 // primeng
 import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
-
 // app
 import {PostsComponent} from '../posts/posts.component';
 import {PostDetailsComponent} from '../post-details/post-details.component';

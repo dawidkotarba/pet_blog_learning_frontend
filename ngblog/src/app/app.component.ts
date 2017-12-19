@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {fadeInAnimation} from './animations/fadeinanimation';
 
 @Component({
@@ -6,7 +6,7 @@ import {fadeInAnimation} from './animations/fadeinanimation';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   animations: [fadeInAnimation],
-  host: { '[@fadeInAnimation]': '' }
+  host: {'[@fadeInAnimation]': ''}
 })
 export class AppComponent {
 }
