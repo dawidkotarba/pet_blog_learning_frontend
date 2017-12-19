@@ -1,13 +1,16 @@
 package com.dawidkotarba.blog.auth.config;
 
 import com.dawidkotarba.blog.auth.enums.UserAuthority;
+import com.dawidkotarba.blog.constants.BlogConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -34,12 +37,18 @@ class SecurityConfigProd extends WebSecurityConfigurerAdapter {
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/comments/**").permitAll()
                 .anyRequest().authenticated()
+                .and().httpBasic().realmName(BlogConstants.BASIC_AUTH_REALM)
                 .and().formLogin();
     }
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Override
+    public void configure(final WebSecurity web) {
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
     @Bean
