@@ -7,13 +7,31 @@
     An attempt to create a blog;)
 
 #### Tech stack:
-- build: Gradle (wrapper available)
-- container: Spring MVC (web, data, aop, security, test)
-- db: H2
-- JPA: Hibernate with Querydsl
-- server: embedded Tomcat (Spring Boot app)
-- tests: Spock
-- doc: SwaggerUI
+##### General:
+- gradle
+- H2 DB
+- Liquibase
+- JPA + Hibernate + Querydsl
+- Ehcache
+- Spring Boot (with Spring AOP, security, MVC for REST, HATEOAS, test)
+- Spock
+- Angular 4 with PrimeNG
+
+##### Tools:
+- Docker
+- Lombok
+- Checkstyle
+- Vavr (todo)
+- Swagger
+
+##### CI pipeline:
+- Travis
+- Sputnik
+- Snyk
+- Codebeat
+- Coveralls
+- Versioneye
+- Docker Hub
 
 #### Buld & run:
 - sh build_and_run.sh from main folder
