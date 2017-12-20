@@ -1,11 +1,13 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {PostCreationService} from './post-creation.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('PostCreationService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostCreationService]
+      providers: [PostCreationService],
+      imports: [HttpClientModule]
     });
   });
 

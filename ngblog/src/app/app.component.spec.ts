@@ -16,6 +16,7 @@ import {AppRoutingModule} from './/app-routing.module';
 import {AppComponent} from './app.component';
 import {PostDetailsService} from './post-details/post-details.service';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
 
 
 describe('AppComponent', () => {
@@ -25,7 +26,8 @@ describe('AppComponent', () => {
         AppComponent,
         PostsComponent,
         PostDetailsComponent,
-        TopbarComponent
+        TopbarComponent,
+        PostCreationComponent
       ],
       imports: [
         BrowserModule,

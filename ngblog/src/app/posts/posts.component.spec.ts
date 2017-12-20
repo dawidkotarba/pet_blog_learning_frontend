@@ -13,6 +13,7 @@ import {PostsService} from './posts.service';
 import {AppRoutingModule} from '../app-routing.module';
 import {APP_BASE_HREF} from '@angular/common';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {PostCreationComponent} from '../admin-panel/post-creation/post-creation.component';
 
 
 describe('PostsComponent', () => {
@@ -21,7 +22,7 @@ describe('PostsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PostsComponent, PostDetailsComponent],
+      declarations: [PostsComponent, PostDetailsComponent, PostCreationComponent],
       providers: [
         PostsService,
         MessageService,
