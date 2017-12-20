@@ -1,18 +1,18 @@
 import {inject, TestBed} from '@angular/core/testing';
 
-import {PostCreationService} from './post-creation.service';
+import {LoginService} from './login.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
 
-describe('PostCreationService', () => {
+describe('LoginService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostCreationService, MessageService],
+      providers: [LoginService, MessageService],
       imports: [HttpClientModule]
     });
   });
 
-  it('should be created', inject([PostCreationService], (service: PostCreationService) => {
+  it('should be created', inject([LoginService], (service: LoginService) => {
     expect(service).toBeTruthy();
   }));
 });

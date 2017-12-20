@@ -1,27 +1,27 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {PostCreationComponent} from './post-creation.component';
+import {LoginPageComponent} from './login-page.component';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
-import {PostCreationService} from './post-creation.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {LoginService} from './login.service';
 import {MessageService} from 'primeng/components/common/messageservice';
 
-describe('PostCreationComponent', () => {
-  let component: PostCreationComponent;
-  let fixture: ComponentFixture<PostCreationComponent>;
+describe('LoginPageComponent', () => {
+  let component: LoginPageComponent;
+  let fixture: ComponentFixture<LoginPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PostCreationComponent],
+      declarations: [LoginPageComponent],
       imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot()],
-      providers: [PostCreationService, MessageService]
+      providers: [LoginService, MessageService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostCreationComponent);
+    fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
