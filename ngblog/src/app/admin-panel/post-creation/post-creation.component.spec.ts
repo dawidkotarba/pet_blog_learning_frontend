@@ -6,6 +6,7 @@ import {PostCreationService} from './post-creation.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
+import {Router} from '@angular/router';
 
 describe('PostCreationComponent', () => {
   let component: PostCreationComponent;
@@ -15,7 +16,13 @@ describe('PostCreationComponent', () => {
     TestBed.configureTestingModule({
       declarations: [PostCreationComponent],
       imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot()],
-      providers: [PostCreationService, MessageService]
+      providers: [PostCreationService,
+        MessageService,
+        {
+          provide: Router, useClass: class {
+            navigate = jasmine.createSpy('navigate');
+          }
+        }]
     })
       .compileComponents();
   }));

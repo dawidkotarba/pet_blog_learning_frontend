@@ -12,7 +12,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -144,7 +143,6 @@ class PostControllerSpec extends Specification {
         postRepository.delete(post.getId())
     }
 
-    @Ignore
     def 'Should not add new post for user without sufficient privileges'() {
         given:
         def jsonBuilder = new JsonBuilder()
