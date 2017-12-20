@@ -5,12 +5,10 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
-
 // primeng
-import {ButtonModule, FieldsetModule, PanelModule, GrowlModule} from 'primeng/primeng';
+import {ButtonModule, FieldsetModule, GrowlModule, InputTextareaModule, PanelModule} from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
-
 // declarations
 import {AppComponent} from './app.component';
 import {PostsComponent} from './posts/posts.component';
@@ -18,14 +16,17 @@ import {PostDetailsComponent} from './post-details/post-details.component';
 import {PostsService} from './posts/posts.service';
 import {PostDetailsService} from './post-details/post-details.service';
 import {TopbarComponent} from './topbar/topbar.component';
-import {AppRoutingModule} from './/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
+import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
+import {PostCreationService} from './admin-panel/post-creation/post-creation.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
     PostDetailsComponent,
-    TopbarComponent
+    TopbarComponent,
+    PostCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -37,13 +38,15 @@ import {AppRoutingModule} from './/app-routing.module';
     PanelModule,
     AppRoutingModule,
     Ng4LoadingSpinnerModule.forRoot(),
-    GrowlModule
+    GrowlModule,
+    InputTextareaModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
     PostsService,
     PostDetailsService,
-    MessageService],
+    MessageService,
+    PostCreationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

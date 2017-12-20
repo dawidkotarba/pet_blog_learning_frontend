@@ -1,0 +1,18 @@
+.container {
+  display: block;
+  justify-content: space-around;
+  width: 500px;
+  margin: auto;
+}
+
+.form-input {
+  width: 500px;
+}
+
+.form-input-area {
+  width: 514px;
+}
+
+.btn {
+  height: 25px;
+}

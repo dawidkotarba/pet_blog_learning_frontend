@@ -12,7 +12,6 @@ import com.dawidkotarba.blog.repository.CacheablePostRepository;
 import com.google.common.base.Preconditions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -82,7 +81,7 @@ public class PostFacade {
         return Collections.unmodifiableList(result);
     }
 
-    @PreAuthorize("hasAuthority('administrate') or hasAuthority('write')")
+    //    @PreAuthorize("hasAuthority('administrate') or hasAuthority('write')")
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
         final List<AuthorEntity> authors = getAuthors(postInDto);
