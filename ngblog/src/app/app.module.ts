@@ -19,6 +19,8 @@ import {TopbarComponent} from './topbar/topbar.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
 import {PostCreationService} from './admin-panel/post-creation/post-creation.service';
+import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
+import {LoginService} from './admin-panel/login-page/login.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {PostCreationService} from './admin-panel/post-creation/post-creation.ser
     PostsComponent,
     PostDetailsComponent,
     TopbarComponent,
-    PostCreationComponent
+    PostCreationComponent,
+    LoginPageComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,8 @@ import {PostCreationService} from './admin-panel/post-creation/post-creation.ser
     PostsService,
     PostDetailsService,
     MessageService,
-    PostCreationService],
+    PostCreationService,
+    LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

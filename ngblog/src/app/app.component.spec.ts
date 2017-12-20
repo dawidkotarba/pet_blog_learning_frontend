@@ -17,6 +17,8 @@ import {AppComponent} from './app.component';
 import {PostDetailsService} from './post-details/post-details.service';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
+import {LoginService} from './admin-panel/login-page/login.service';
+import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 
 
 describe('AppComponent', () => {
@@ -27,7 +29,8 @@ describe('AppComponent', () => {
         PostsComponent,
         PostDetailsComponent,
         TopbarComponent,
-        PostCreationComponent
+        PostCreationComponent,
+        LoginPageComponent
       ],
       imports: [
         BrowserModule,
@@ -45,7 +48,8 @@ describe('AppComponent', () => {
         {provide: APP_BASE_HREF, useValue: '/'},
         PostsService,
         PostDetailsService,
-        MessageService]
+        MessageService,
+        LoginService]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
