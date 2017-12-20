@@ -36,9 +36,9 @@ class SecurityConfigDev extends WebSecurityConfigurerAdapter {
                 .antMatchers("/posts/**").permitAll()
                 .antMatchers("/users/**").permitAll()
                 .antMatchers("/comments/**").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
-                .and().httpBasic().realmName(BlogConstants.BASIC_AUTH_REALM)
-                .and().formLogin();
+                .and().httpBasic().realmName(BlogConstants.BASIC_AUTH_REALM);
 
         // h2 console csrf disable
         http.csrf().disable();

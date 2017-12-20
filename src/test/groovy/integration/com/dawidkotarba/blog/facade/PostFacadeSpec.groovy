@@ -4,7 +4,6 @@ import com.dawidkotarba.blog.facade.PostFacade
 import com.dawidkotarba.blog.model.dto.impl.PostInDto
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException
-import spock.lang.Ignore
 import spock.lang.Specification
 
 import javax.inject.Inject
@@ -16,7 +15,6 @@ class PostFacadeSpec extends Specification {
     @Inject
     PostFacade postFacade
 
-    @Ignore
     def 'Should not adding post without authentication'() {
         when:
         postFacade.add(PostInDto.builder().subject('test').body('test').published(LocalDateTime.now()).build())
