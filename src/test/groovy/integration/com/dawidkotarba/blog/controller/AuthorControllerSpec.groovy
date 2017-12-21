@@ -63,6 +63,10 @@ class AuthorControllerSpec extends Specification {
         content[1].username == testAuthor2.username
         content[1].firstname == testAuthor2.firstname
         content[1].lastname == testAuthor2.lastname
+
+        cleanup:
+        authorRepository.delete(testAuthor.getId())
+        authorRepository.delete(testAuthor2.getId())
     }
 }
 
