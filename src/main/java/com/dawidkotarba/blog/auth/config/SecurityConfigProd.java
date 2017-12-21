@@ -32,9 +32,11 @@ class SecurityConfigProd extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/db/**").hasAuthority(UserAuthority.ADMINISTRATE.getAuthority())
-                .antMatchers("/swagger-ui.html").hasAnyAuthority(UserAuthority.ADMINISTRATE.getAuthority(), UserAuthority.WRITE.getAuthority())
+                .antMatchers("/swagger-ui.html").hasAnyAuthority(UserAuthority.ADMINISTRATE.getAuthority(),
+                UserAuthority.WRITE.getAuthority())
                 .antMatchers("/posts/**").permitAll()
                 .antMatchers("/users/**").permitAll()
+                .antMatchers("/authors/**").permitAll()
                 .antMatchers("/comments/**").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .anyRequest().authenticated()
