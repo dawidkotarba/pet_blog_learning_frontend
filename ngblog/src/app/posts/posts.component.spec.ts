@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {AutoCompleteModule, ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from '../posts/posts.component';
@@ -42,7 +42,8 @@ describe('PostsComponent', () => {
         FieldsetModule,
         PanelModule,
         AppRoutingModule,
-        Ng4LoadingSpinnerModule.forRoot()
+        Ng4LoadingSpinnerModule.forRoot(),
+        AutoCompleteModule
       ]
     })
       .compileComponents();

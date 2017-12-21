@@ -74,6 +74,11 @@
             <column name="lastname" value="D."/>
         </insert>
         <insert dbms="h2" schemaName="public" tableName="authors">
+            <column name="username" value="filipxx"/>
+            <column name="firstname" value="Filip"/>
+            <column name="lastname" value="XX."/>
+        </insert>
+        <insert dbms="h2" schemaName="public" tableName="authors">
             <column name="username" value="bartekk"/>
             <column name="firstname" value="Bartek"/>
             <column name="lastname" value="K."/>

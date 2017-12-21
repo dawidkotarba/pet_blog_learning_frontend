@@ -20,7 +20,6 @@ export class PostCreationService {
       this.router.navigate(['/login']);
       this.messageService.add({severity: 'warn', summary: 'Please login first...'});
     } else {
-
       const httpOptions = {
         headers: new HttpHeaders({'Authorization': currentUser})
       };

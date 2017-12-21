@@ -7,6 +7,8 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {Router} from '@angular/router';
+import {AutoCompleteModule} from 'primeng/primeng';
+import {AutocompleteService} from './autocomplete.service';
 
 describe('PostCreationComponent', () => {
   let component: PostCreationComponent;
@@ -15,14 +17,15 @@ describe('PostCreationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PostCreationComponent],
-      imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot()],
+      imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot(), AutoCompleteModule],
       providers: [PostCreationService,
         MessageService,
         {
           provide: Router, useClass: class {
             navigate = jasmine.createSpy('navigate');
           }
-        }]
+        },
+        AutocompleteService]
     })
       .compileComponents();
   }));

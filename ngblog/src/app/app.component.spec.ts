@@ -6,7 +6,7 @@ import {TopbarComponent} from './topbar/topbar.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {ButtonModule, FieldsetModule, GrowlModule, PanelModule} from 'primeng/primeng';
+import {AutoCompleteModule, ButtonModule, FieldsetModule, GrowlModule, PanelModule} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from './posts/posts.component';
@@ -42,7 +42,8 @@ describe('AppComponent', () => {
         PanelModule,
         AppRoutingModule,
         Ng4LoadingSpinnerModule.forRoot(),
-        GrowlModule
+        GrowlModule,
+        AutoCompleteModule
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},

@@ -1,18 +1,17 @@
-.container {
-  display: block;
-  justify-content: space-around;
-  width: 500px;
+.post-creation-container {
+  width: 800px;
   margin: auto;
 }
 
-.form-input {
-  width: 500px;
+.divider {
+  height: 20px;
 }
 
-.form-input-area {
-  width: 514px;
+.input-width {
+  width: 100%;
 }
 
-.btn {
-  height: 25px;
+.text-area-size {
+  width: 100%;
+  line-height: 5;
 }

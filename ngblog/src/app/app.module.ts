@@ -6,7 +6,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
 // primeng
-import {ButtonModule, FieldsetModule, GrowlModule, InputTextareaModule, PanelModule} from 'primeng/primeng';
+import {
+  AutoCompleteModule, ButtonModule, FieldsetModule, GrowlModule, InputTextareaModule,
+  PanelModule
+} from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
 // declarations
@@ -21,6 +24,7 @@ import {PostCreationComponent} from './admin-panel/post-creation/post-creation.c
 import {PostCreationService} from './admin-panel/post-creation/post-creation.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {LoginService} from './admin-panel/login-page/login.service';
+import {AutocompleteService} from './admin-panel/post-creation/autocomplete.service';
 
 @NgModule({
   declarations: [
@@ -42,7 +46,8 @@ import {LoginService} from './admin-panel/login-page/login.service';
     AppRoutingModule,
     Ng4LoadingSpinnerModule.forRoot(),
     GrowlModule,
-    InputTextareaModule
+    InputTextareaModule,
+    AutoCompleteModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
@@ -50,7 +55,8 @@ import {LoginService} from './admin-panel/login-page/login.service';
     PostDetailsService,
     MessageService,
     PostCreationService,
-    LoginService],
+    LoginService,
+    AutocompleteService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
