@@ -1,20 +1,43 @@
 <ng4-loading-spinner></ng4-loading-spinner>
-<div class="container">
+<div class="post-creation-container">
 
   <h2>Add new post:</h2>
 
-  <br/>
 
-  <div class="ui-inputgroup container">
+  <div class="ui-g ui-fluid">
     <label for="subject">Subject</label>
-    <input type="text" id="subject" class="form-input" pInputText placeholder="Subject" [(ngModel)]="post.subject">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input class="input-width" type="text"
+               id="subject"
+               pInputText
+               [(ngModel)]="post.subject">
+      </div>
+    </div>
 
     <label for="body">Body</label>
-    <textarea class="form-input-area" id="body" pInputTextarea placeholder="Body" [(ngModel)]="post.body"></textarea>
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+      <textarea id="body"
+                class="text-area-size"
+                pInputTextarea
+                [(ngModel)]="post.body">
+      </textarea>
+      </div>
+    </div>
 
     <label for="published">Published</label>
-    <input type="text" id="published" class="form-input" pInputText placeholder="2012-12-12T12:12:12"
-           [(ngModel)]="post.published">
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input type="text"
+               id="published"
+               class="input-width"
+               pInputText
+               placeholder="2012-12-12T12:12:12"
+               [(ngModel)]="post.published">
+      </div>
+    </div>
+
 
     <label>Authors</label>
     <p-autoComplete [(ngModel)]="selectedAuthors"
@@ -25,16 +48,23 @@
                     [dropdown]="true"
                     [forceSelection]="true"
                     field="username"
-                    placeholder="Add author(s)">
+                    [style]="{'width':'98%'}">
     </p-autoComplete>
 
-    <br/>
-
-    <label for="labels">Labels</label>
-    <input type="text" id="labels" class="form-input" pInputText placeholder="Labels - not implemented">
+    <label>Labels</label>
+    <p-autoComplete [(ngModel)]="selectedLabels"
+                    [suggestions]="labels"
+                    (completeMethod)="searchLabels($event)"
+                    [delay]="500"
+                    [multiple]="true"
+                    [dropdown]="true"
+                    [forceSelection]="true"
+                    field="name"
+                    [style]="{'width':'98%'}"
+                    placeholder="not working">
+    </p-autoComplete>
   </div>
 
-  <br/>
-
+  <div class="divider"></div>
   <button type="button" pButton (click)="save()" label="Save post"></button>
 </div>
