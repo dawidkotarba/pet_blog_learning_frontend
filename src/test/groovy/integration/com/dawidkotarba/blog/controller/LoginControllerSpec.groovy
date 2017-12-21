@@ -54,7 +54,7 @@ class LoginControllerSpec extends Specification {
                 .content(new JsonBuilder(credentials).toString()))
                 .andReturn().response
 
-        then: 'response is correct and user logged in'
+        then: 'User is not logged in and status unauthorized'
         response.status == UNAUTHORIZED.value()
     }
 
@@ -72,7 +72,7 @@ class LoginControllerSpec extends Specification {
                 .content(new JsonBuilder(credentials).toString()))
                 .andReturn().response
 
-        then: 'response is correct and user logged in'
+        then: 'User is not logged in and status unauthorized'
         response.status == UNAUTHORIZED.value()
     }
 }
