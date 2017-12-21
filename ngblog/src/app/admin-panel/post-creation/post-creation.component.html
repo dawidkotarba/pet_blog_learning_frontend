@@ -8,18 +8,33 @@
   <div class="ui-inputgroup container">
     <label for="subject">Subject</label>
     <input type="text" id="subject" class="form-input" pInputText placeholder="Subject" [(ngModel)]="post.subject">
+
     <label for="body">Body</label>
     <textarea class="form-input-area" id="body" pInputTextarea placeholder="Body" [(ngModel)]="post.body"></textarea>
+
     <label for="published">Published</label>
     <input type="text" id="published" class="form-input" pInputText placeholder="2012-12-12T12:12:12"
            [(ngModel)]="post.published">
-    <label for="authors">Authors</label>
-    <input type="text" id="authors" class="form-input" pInputText placeholder="Authors" [(ngModel)]="authors">
+
+    <label>Authors</label>
+    <p-autoComplete [(ngModel)]="selectedAuthors"
+                    [suggestions]="authors"
+                    (completeMethod)="searchAuthors($event)"
+                    [delay]="500"
+                    [multiple]="true"
+                    [dropdown]="true"
+                    [forceSelection]="true"
+                    field="username"
+                    placeholder="Add author(s)">
+    </p-autoComplete>
+
+    <br/>
+
     <label for="labels">Labels</label>
     <input type="text" id="labels" class="form-input" pInputText placeholder="Labels - not implemented">
   </div>
 
   <br/>
 
-  <button type="button" class="btn" pButton (click)="save()">Save post</button>
+  <button type="button" pButton (click)="save()" label="Save post"></button>
 </div>

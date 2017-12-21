@@ -18,7 +18,7 @@ export class LoginService {
         () => localStorage.setItem('currentUser', 'Basic ' + btoa(username + ':' + password)),
         () => this.messageService.add({severity: 'error', summary: 'Login failure...'}),
         () => {
-          this.messageService.add({severity: 'success', summary: 'Login successfull.'});
+          this.messageService.add({severity: 'success', summary: 'Login successful.'});
           this.router.navigate(['/adminPanel']);
         }
       );

@@ -13,6 +13,7 @@ public class AuthorConverter implements InConverter<AuthorDto, AuthorEntity>, Ou
     @Override
     public AuthorDto convert(final AuthorEntity entity) {
         return AuthorDto.builder()
+                .id(entity.getId())
                 .username(entity.getUsername())
                 .firstname(entity.getFirstname())
                 .lastname(entity.getLastname()).build();

@@ -20,5 +20,9 @@ public interface CacheableAuthorRepository extends JpaRepository<AuthorEntity, L
     @Cacheable("authorsCache")
     List<AuthorEntity> findAll();
 
+    List<AuthorEntity> findAllByUsernameIn(Iterable<String> usernames);
+
     AuthorEntity findByUsername(String username);
+
+    List<AuthorEntity> findAllByUsernameStartingWithIgnoreCase(String username);
 }
