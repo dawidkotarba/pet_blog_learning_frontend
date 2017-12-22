@@ -1,6 +1,5 @@
 package integration.com.dawidkotarba.blog.controller
 
-import com.dawidkotarba.blog.model.Credentials
 import groovy.json.JsonBuilder
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -20,20 +19,21 @@ class LoginControllerSpec extends Specification {
 
     @Inject
     MockMvc mockMvc
-    Credentials credentials
 
     def 'User should log in with correct credentials'() {
         given:
-        credentials = new Credentials()
-        credentials.with {
-            username = 'testuser'
-            password = 'testuser'
-        }
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    username 'testuser'
+                    password 'testuser'
+                }
+        )
 
         when: 'rest login url is hit'
         def response = mockMvc.perform(post('/login')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new JsonBuilder(credentials).toString()))
+                .content(jsonBuilder.toString()))
                 .andReturn().response
 
         then: 'response is correct and user logged in'
@@ -42,16 +42,18 @@ class LoginControllerSpec extends Specification {
 
     def 'User should not log in with bad password'() {
         given:
-        credentials = new Credentials()
-        credentials.with {
-            username = 'testuser'
-            password = 'pppp'
-        }
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    username 'testuser'
+                    password 'pppp'
+                }
+        )
 
         when: 'rest login url is hit'
         def response = mockMvc.perform(post('/login')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new JsonBuilder(credentials).toString()))
+                .content(jsonBuilder.toString()))
                 .andReturn().response
 
         then: 'User is not logged in and status unauthorized'
@@ -60,16 +62,18 @@ class LoginControllerSpec extends Specification {
 
     def 'Not existing user should not log in'() {
         given:
-        credentials = new Credentials()
-        credentials.with {
-            username = 'notExistingUser'
-            password = 'admin'
-        }
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    username 'notExistingUser'
+                    password 'admin'
+                }
+        )
 
         when: 'rest login url is hit'
         def response = mockMvc.perform(post('/login')
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(new JsonBuilder(credentials).toString()))
+                .content(jsonBuilder.toString()))
                 .andReturn().response
 
         then: 'User is not logged in and status unauthorized'

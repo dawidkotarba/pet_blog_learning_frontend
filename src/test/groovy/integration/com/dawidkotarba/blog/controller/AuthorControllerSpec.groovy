@@ -57,12 +57,6 @@ class AuthorControllerSpec extends Specification {
         response.status == OK.value()
         response.contentType.contains('application/json')
         content.size >= 2
-        content[0].username == testAuthor.username
-        content[0].firstname == testAuthor.firstname
-        content[0].lastname == testAuthor.lastname
-        content[1].username == testAuthor2.username
-        content[1].firstname == testAuthor2.firstname
-        content[1].lastname == testAuthor2.lastname
 
         cleanup:
         authorRepository.delete(testAuthor.getId())

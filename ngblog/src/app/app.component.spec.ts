@@ -6,7 +6,10 @@ import {TopbarComponent} from './topbar/topbar.component';
 import {APP_BASE_HREF} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {AutoCompleteModule, ButtonModule, FieldsetModule, GrowlModule, PanelModule} from 'primeng/primeng';
+import {
+  AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule,
+  PanelModule
+} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from './posts/posts.component';
@@ -19,6 +22,7 @@ import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
 import {LoginService} from './admin-panel/login-page/login.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
+import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
 
 
 describe('AppComponent', () => {
@@ -30,7 +34,8 @@ describe('AppComponent', () => {
         PostDetailsComponent,
         TopbarComponent,
         PostCreationComponent,
-        LoginPageComponent
+        LoginPageComponent,
+        UserCreationComponent
       ],
       imports: [
         BrowserModule,
@@ -43,7 +48,8 @@ describe('AppComponent', () => {
         AppRoutingModule,
         Ng4LoadingSpinnerModule.forRoot(),
         GrowlModule,
-        AutoCompleteModule
+        AutoCompleteModule,
+        CheckboxModule
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},

@@ -26,5 +26,5 @@ public class UserInDto implements InDto {
     private boolean enabled;
     @NotNull
     @NotEmpty
-    private Set<String> authorities;
+    private Set<Long> authorities;
 }

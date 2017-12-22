@@ -8,7 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.stream.Collectors;
+import java.util.HashSet;
 
 @Named
 public class UserInConverter implements InConverter<UserInDto, UserEntity> {
@@ -30,9 +30,7 @@ public class UserInConverter implements InConverter<UserInDto, UserEntity> {
                 .lastname(userInDto.getLastname())
                 .password(passwordEncoder.encode(userInDto.getPassword()))
                 .enabled(userInDto.isEnabled())
-                .authorities(userInDto.getAuthorities().stream()
-                        .map(authority -> authorityRepository.findByAuthority(authority))
-                        .collect(Collectors.toSet()))
+                .authorities(new HashSet<>(authorityRepository.findAll(userInDto.getAuthorities())))
                 .build();
     }
 }

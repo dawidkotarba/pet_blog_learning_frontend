@@ -7,7 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
-  AutoCompleteModule, ButtonModule, FieldsetModule, GrowlModule, InputTextareaModule,
+  AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule, InputTextareaModule,
   PanelModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
@@ -24,7 +24,9 @@ import {PostCreationComponent} from './admin-panel/post-creation/post-creation.c
 import {PostCreationService} from './admin-panel/post-creation/post-creation.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {LoginService} from './admin-panel/login-page/login.service';
-import {AutocompleteService} from './admin-panel/post-creation/autocomplete.service';
+import {AutocompleteService} from './admin-panel/service/autocomplete.service';
+import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
+import {UserCreationService} from './admin-panel/user-creation/user-creation.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import {AutocompleteService} from './admin-panel/post-creation/autocomplete.serv
     PostDetailsComponent,
     TopbarComponent,
     PostCreationComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    UserCreationComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import {AutocompleteService} from './admin-panel/post-creation/autocomplete.serv
     Ng4LoadingSpinnerModule.forRoot(),
     GrowlModule,
     InputTextareaModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    CheckboxModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},
@@ -56,7 +60,8 @@ import {AutocompleteService} from './admin-panel/post-creation/autocomplete.serv
     MessageService,
     PostCreationService,
     LoginService,
-    AutocompleteService],
+    AutocompleteService,
+    UserCreationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
