@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {AutoCompleteModule, ButtonModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, PanelModule} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from '../posts/posts.component';
@@ -15,6 +15,7 @@ import {APP_BASE_HREF} from '@angular/common';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {PostCreationComponent} from '../admin-panel/post-creation/post-creation.component';
 import {LoginPageComponent} from '../admin-panel/login-page/login-page.component';
+import {UserCreationComponent} from '../admin-panel/user-creation/user-creation.component';
 
 
 describe('PostsComponent', () => {
@@ -27,7 +28,8 @@ describe('PostsComponent', () => {
         PostsComponent,
         PostDetailsComponent,
         PostCreationComponent,
-        LoginPageComponent],
+        LoginPageComponent,
+        UserCreationComponent],
       providers: [
         PostsService,
         MessageService,
@@ -43,7 +45,8 @@ describe('PostsComponent', () => {
         PanelModule,
         AppRoutingModule,
         Ng4LoadingSpinnerModule.forRoot(),
-        AutoCompleteModule
+        AutoCompleteModule,
+        CheckboxModule
       ]
     })
       .compileComponents();

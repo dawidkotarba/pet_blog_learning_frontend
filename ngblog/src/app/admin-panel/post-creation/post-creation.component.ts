@@ -4,7 +4,7 @@ import {PostCreationService} from './post-creation.service';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/components/common/messageservice';
-import {AutocompleteService} from './autocomplete.service';
+import {AutocompleteService} from '../service/autocomplete.service';
 import {Author} from '../../model/author';
 
 @Component({
@@ -25,7 +25,7 @@ export class PostCreationComponent implements OnInit {
               private autocompleteService: AutocompleteService) {
     if (!localStorage.getItem('currentUser')) {
       this.messageService.add({severity: 'warn', summary: 'Please login first...'});
-      this.router.navigate(['/login']);
+      this.router.navigate(['/adminPanel/login']);
     }
   }
 

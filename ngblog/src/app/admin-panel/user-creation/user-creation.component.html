@@ -1,0 +1,75 @@
+<div class="user-creation-container">
+
+  <h2>Add new user:</h2>
+
+
+  <div class="ui-g ui-fluid">
+    <label for="username" class="label-center">Username</label>
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input class="input-field" type="text"
+               id="username"
+               pInputText
+               [(ngModel)]="user.username">
+      </div>
+    </div>
+
+    <label for="firstname" class="label-center">First name</label>
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input class="input-field" type="text"
+               id="firstname"
+               pInputText
+               [(ngModel)]="user.firstname">
+      </div>
+    </div>
+
+    <label for="lastname" class="label-center">Last name</label>
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input class="input-field" type="text"
+               id="lastname"
+               pInputText
+               [(ngModel)]="user.lastname">
+      </div>
+    </div>
+
+    <label for="password" class="label-center">Password</label>
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <input class="input-field" type="password"
+               id="password"
+               pInputText
+               [(ngModel)]="user.password">
+      </div>
+    </div>
+
+    <div class="ui-g-12 ui-md-12">
+      <div class="ui-inputgroup">
+        <p-checkbox class="input-field"
+                    value="val1"
+                    label="Enabled"
+                    binary="true"
+                    [(ngModel)]="user.enabled">
+        </p-checkbox>
+      </div>
+    </div>
+
+
+    <label class="label-center">Authority</label>
+    <p-autoComplete [(ngModel)]="selectedAuthorities"
+                    [suggestions]="authorities"
+                    (completeMethod)="searchAuthorities($event)"
+                    [delay]="500"
+                    [multiple]="true"
+                    [dropdown]="true"
+                    [forceSelection]="true"
+                    field="authority"
+                    [style]="{'width':'98%'}">
+    </p-autoComplete>
+
+  </div>
+
+  <div class="divider"></div>
+  <button type="button" pButton (click)="save()" label="Save user"></button>
+</div>

@@ -3,6 +3,7 @@ package integration.com.dawidkotarba.blog.controller
 import com.dawidkotarba.blog.auth.enums.UserAuthority
 import com.dawidkotarba.blog.enums.CommonExceptionType
 import com.dawidkotarba.blog.repository.CacheableUserRepository
+import groovy.json.JsonBuilder
 import groovy.json.JsonSlurper
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
@@ -70,24 +71,25 @@ class UserControllerSpec extends Specification {
     def 'Should add new user'() {
         given:
         def TEST_VALUE = 'test'
+        def TEST_AUTHORITY_ID = 1
         def TEST_AUTHORITY_VALUE = 'administrate'
-        def requestBody = '{\n' +
-                '  "id": 0,\n' +
-                '  "username": "' + TEST_VALUE + '",\n' +
-                '  "firstname": "' + TEST_VALUE + '",\n' +
-                '  "lastname": "' + TEST_VALUE + '",\n' +
-                '  "password": "' + TEST_VALUE + '",\n' +
-                '  "enabled": true,\n' +
-                '  "authorities": [\n' +
-                '    "' + TEST_AUTHORITY_VALUE + '"\n' +
-                '  ]' + '\n' +
-                '}'
+        def jsonBuilder = new JsonBuilder()
+        jsonBuilder.call(
+                {
+                    username TEST_VALUE
+                    firstname TEST_VALUE
+                    lastname TEST_VALUE
+                    password TEST_VALUE
+                    enabled true
+                    authorities([TEST_AUTHORITY_ID])
+                }
+        )
 
         when: 'rest add user url is hit'
         def response = mockMvc.perform(post('/users')
                 .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(requestBody)).andReturn().response
+                .content(jsonBuilder.toString())).andReturn().response
 
         then: 'response is correct and new user is saved in db'
         response.status == OK.value()

@@ -8,7 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {Router} from '@angular/router';
 import {AutoCompleteModule} from 'primeng/primeng';
-import {AutocompleteService} from './autocomplete.service';
+import {AutocompleteService} from '../service/autocomplete.service';
 
 describe('PostCreationComponent', () => {
   let component: PostCreationComponent;

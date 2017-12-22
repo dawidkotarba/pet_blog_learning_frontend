@@ -1,0 +1,17 @@
+.user-creation-container {
+  width: 800px;
+  margin: auto;
+}
+
+.divider {
+  height: 20px;
+}
+
+.input-field {
+  width: 50%;
+  margin: auto;
+}
+
+.label-center {
+  margin: auto;
+}
