@@ -19,7 +19,7 @@ export class LoginService {
         () => this.messageService.add({severity: 'error', summary: 'Login failure...'}),
         () => {
           this.messageService.add({severity: 'success', summary: 'Login successful.'});
-          this.router.navigate(['/adminPanel']);
+          this.router.navigate(['/adminPanel/posts/add']);
         }
       );
   }
