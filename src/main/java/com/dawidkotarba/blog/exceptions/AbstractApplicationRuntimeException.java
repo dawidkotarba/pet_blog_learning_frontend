@@ -2,15 +2,14 @@ package com.dawidkotarba.blog.exceptions;
 
 import com.dawidkotarba.blog.enums.ExceptionType;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Dawid Kotarba on 13.11.2015.
- */
 public abstract class AbstractApplicationRuntimeException extends RuntimeException {
 
     private UUID uuid;
-    private String[] params;
+    private List<String> params;
     private ExceptionType exceptionType;
 
     public AbstractApplicationRuntimeException(final ExceptionType exceptionType, final String message) {
@@ -28,7 +27,7 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
         init(exceptionType);
     }
 
-    public AbstractApplicationRuntimeException addParams(final String... params) {
+    public AbstractApplicationRuntimeException addParams(final List<String> params) {
         this.params = params;
         return this;
     }
@@ -37,8 +36,8 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
         return uuid;
     }
 
-    public String[] getParams() {
-        return params;
+    public List<String> getParams() {
+        return params != null ? Collections.unmodifiableList(params) : Collections.emptyList();
     }
 
     public ExceptionType getExceptionType() {
