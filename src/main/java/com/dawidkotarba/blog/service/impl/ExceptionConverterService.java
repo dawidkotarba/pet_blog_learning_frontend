@@ -58,8 +58,8 @@ public class ExceptionConverterService {
         return getLocalizedUserMessage(exceptionType, null);
     }
 
-    private String getLocalizedUserMessage(final ExceptionType exceptionType, final String[] params) {
-        return (params != null) ? localizationService.getMessage(exceptionType.name(), params) : localizationService.getMessage(exceptionType.name());
+    private String getLocalizedUserMessage(final ExceptionType exceptionType, final List<String> params) {
+        return (params != null) ? localizationService.getMessage(exceptionType.name(), params.toArray()) : localizationService.getMessage(exceptionType.name());
     }
 
     private List<ValidationError> parseBindingResult(final BindingResult bindingResult) {
