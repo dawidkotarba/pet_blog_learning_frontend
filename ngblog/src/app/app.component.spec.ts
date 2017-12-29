@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule,
-  PanelModule
+  PanelModule, CalendarModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
@@ -49,7 +49,8 @@ describe('AppComponent', () => {
         Ng4LoadingSpinnerModule.forRoot(),
         GrowlModule,
         AutoCompleteModule,
-        CheckboxModule
+        CheckboxModule,
+        CalendarModule
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},

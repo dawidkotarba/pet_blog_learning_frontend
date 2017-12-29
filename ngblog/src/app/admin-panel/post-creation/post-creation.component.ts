@@ -15,8 +15,8 @@ import {Author} from '../../model/author';
 export class PostCreationComponent implements OnInit {
   post: Post = new Post();
   selectedAuthors: Author[];
+  publishedDate: Date;
   authors: Author[];
-
 
   constructor(private postCreationService: PostCreationService,
               private spinnerService: Ng4LoadingSpinnerService,
@@ -32,9 +32,15 @@ export class PostCreationComponent implements OnInit {
   ngOnInit() {
   }
 
+  convertDateToString(date: Date): string {
+    const dateStr = date.toISOString();
+    return dateStr.substring(0, dateStr.length - 5);
+  }
+
   save() {
     this.spinnerService.show();
     this.post.authors = this.selectedAuthors.map(author => author.id);
+    this.post.published = this.convertDateToString(this.publishedDate);
     this.postCreationService.savePost(this.post);
     this.spinnerService.hide();
   }

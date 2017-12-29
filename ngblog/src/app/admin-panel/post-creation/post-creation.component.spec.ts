@@ -7,8 +7,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {Router} from '@angular/router';
-import {AutoCompleteModule} from 'primeng/primeng';
+import {AutoCompleteModule, CalendarModule} from 'primeng/primeng';
 import {AutocompleteService} from '../service/autocomplete.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('PostCreationComponent', () => {
   let component: PostCreationComponent;
@@ -17,8 +18,15 @@ describe('PostCreationComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [PostCreationComponent],
-      imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot(), AutoCompleteModule],
-      providers: [PostCreationService,
+      imports: [
+        FormsModule,
+        HttpClientModule,
+        Ng4LoadingSpinnerModule.forRoot(),
+        AutoCompleteModule,
+        CalendarModule,
+        BrowserAnimationsModule],
+      providers: [
+        PostCreationService,
         MessageService,
         {
           provide: Router, useClass: class {

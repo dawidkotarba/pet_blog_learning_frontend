@@ -28,14 +28,11 @@
 
     <label for="published">Published</label>
     <div class="ui-g-12 ui-md-12">
-      <div class="ui-inputgroup">
-        <input type="text"
-               id="published"
-               class="input-width"
-               pInputText
-               placeholder="2012-12-12T12:12:12"
-               [(ngModel)]="post.published">
-      </div>
+      <p-calendar id="published"
+                  [(ngModel)]="publishedDate"
+                  showTime="true"
+                  hourFormat="24"
+      ></p-calendar>
     </div>
 
 
