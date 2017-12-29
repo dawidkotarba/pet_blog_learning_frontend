@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
-import {AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, PanelModule} from 'primeng/primeng';
+import {AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, PanelModule, CalendarModule} from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
 import {PostsComponent} from '../posts/posts.component';
@@ -46,7 +46,8 @@ describe('PostsComponent', () => {
         AppRoutingModule,
         Ng4LoadingSpinnerModule.forRoot(),
         AutoCompleteModule,
-        CheckboxModule
+        CheckboxModule,
+        CalendarModule
       ]
     })
       .compileComponents();

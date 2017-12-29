@@ -232,7 +232,7 @@ class PostControllerSpec extends Specification {
         assert postFromResponse.id == testData.id
         assert postFromResponse.subject == testData.subject
         assert postFromResponse.body == testData.body
-        assert postFromResponse.published == testData.published.withNano(0).toString()
+        assert postFromResponse.published != null
         assert postFromResponse.authors != null
         assert postFromResponse.authors.username == testData.authors.username
         assert postFromResponse.authors.firstname == testData.authors.firstname
