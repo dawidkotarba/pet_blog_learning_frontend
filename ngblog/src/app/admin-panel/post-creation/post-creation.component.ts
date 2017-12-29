@@ -32,15 +32,10 @@ export class PostCreationComponent implements OnInit {
   ngOnInit() {
   }
 
-  convertDateToString(date: Date): string {
-    const dateStr = date.toISOString();
-    return dateStr.substring(0, dateStr.length - 5);
-  }
-
   save() {
     this.spinnerService.show();
     this.post.authors = this.selectedAuthors.map(author => author.id);
-    this.post.published = this.convertDateToString(this.publishedDate);
+    this.post.published = this.publishedDate.toISOString();
     this.postCreationService.savePost(this.post);
     this.spinnerService.hide();
   }
