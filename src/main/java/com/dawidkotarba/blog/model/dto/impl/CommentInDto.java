@@ -1,7 +1,6 @@
 package com.dawidkotarba.blog.model.dto.impl;
 
 import com.dawidkotarba.blog.model.dto.InDto;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.validator.constraints.NotBlank;
@@ -24,6 +23,5 @@ public class CommentInDto implements InDto {
     @NotNull
     private Long postId;
     @NotNull
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime published;
 }
