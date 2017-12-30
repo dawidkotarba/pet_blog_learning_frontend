@@ -4,6 +4,5 @@ export class Post {
   body: string;
   published: string;
   authors: number[];
-  comments: number[];
   labels: number[];
 }

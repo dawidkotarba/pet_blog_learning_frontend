@@ -30,36 +30,38 @@
     <div class="ui-g-12 ui-md-12">
       <p-calendar id="published"
                   [(ngModel)]="publishedDate"
+                  [showIcon]="false"
                   showTime="true"
-                  hourFormat="24"
-      ></p-calendar>
+                  hourFormat="24"></p-calendar>
     </div>
 
 
     <label>Authors</label>
-    <p-autoComplete [(ngModel)]="selectedAuthors"
-                    [suggestions]="authors"
-                    (completeMethod)="searchAuthors($event)"
-                    [delay]="500"
-                    [multiple]="true"
-                    [dropdown]="true"
-                    [forceSelection]="true"
-                    field="username"
-                    [style]="{'width':'98%'}">
-    </p-autoComplete>
+    <div class="ui-g-12 ui-md-12">
+      <p-autoComplete [(ngModel)]="selectedAuthors"
+                      [suggestions]="authors"
+                      (completeMethod)="searchAuthors($event)"
+                      [delay]="500"
+                      [multiple]="true"
+                      [dropdown]="true"
+                      [forceSelection]="true"
+                      field="username">
+      </p-autoComplete>
+    </div>
 
     <label>Labels</label>
-    <p-autoComplete [(ngModel)]="selectedLabels"
-                    [suggestions]="labels"
-                    (completeMethod)="searchLabels($event)"
-                    [delay]="500"
-                    [multiple]="true"
-                    [dropdown]="true"
-                    [forceSelection]="true"
-                    field="name"
-                    [style]="{'width':'98%'}"
-                    placeholder="not working">
-    </p-autoComplete>
+    <div class="ui-g-12 ui-md-12">
+      <p-autoComplete [(ngModel)]="selectedLabels"
+                      [suggestions]="labels"
+                      (completeMethod)="searchLabels($event)"
+                      [delay]="500"
+                      [multiple]="true"
+                      [dropdown]="true"
+                      [forceSelection]="true"
+                      field="name"
+                      placeholder="not working">
+      </p-autoComplete>
+    </div>
   </div>
 
   <div class="divider"></div>

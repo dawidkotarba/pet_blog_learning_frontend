@@ -32,17 +32,81 @@ export class PostCreationComponent implements OnInit {
   ngOnInit() {
   }
 
-  save() {
-    this.spinnerService.show();
-    this.post.authors = this.selectedAuthors.map(author => author.id);
-    this.post.published = this.publishedDate.toISOString();
-    this.postCreationService.savePost(this.post);
-    this.spinnerService.hide();
-  }
-
   searchAuthors(event): any {
     this.autocompleteService.getAuthors(event.query).subscribe(data => {
       this.authors = data;
     });
+  }
+
+  save() {
+    this.populatePostData();
+    if (!this.validatePostData()) {
+      return;
+    }
+    this.spinnerService.show();
+    this.postCreationService.savePost(this.post).subscribe(
+      undefined,
+      () => {
+        this.showErrorMessage('Error during adding post');
+
+        this.spinnerService.hide();
+      },
+      () => {
+        this.showSuccessMessage('This post have been successfully added');
+        this.clearPostData();
+        this.spinnerService.hide();
+      });
+  }
+
+  populatePostData(): void {
+    if (this.selectedAuthors) {
+      this.post.authors = this.selectedAuthors.map(author => author.id);
+    }
+    if (this.publishedDate) {
+      this.post.published = this.publishedDate.toISOString();
+    }
+  }
+
+  validatePostData(): boolean {
+    if (!this.post.subject) {
+      this.showErrorMessage('Subject cannot be empty');
+      return false;
+    }
+
+    if (!this.post.body) {
+      this.showErrorMessage('Body cannot be empty');
+      return false;
+    }
+
+    if (!this.post.published) {
+      this.showErrorMessage('Published date cannot be empty');
+      return false;
+    }
+
+    if (!this.post.authors) {
+      this.showErrorMessage('Authors cannot be empty');
+      return false;
+    }
+
+    if (!this.post.subject) {
+      this.showErrorMessage('Subject cannot be empty');
+      return false;
+    }
+
+    return true;
+  }
+
+  clearPostData(): void {
+    this.post = new Post();
+    this.selectedAuthors = [];
+    this.publishedDate = null;
+  }
+
+  showErrorMessage(summary: string): void {
+    this.messageService.add({severity: 'error', summary: summary});
+  }
+
+  showSuccessMessage(summary: string): void {
+    this.messageService.add({severity: 'success', summary: summary});
   }
 }

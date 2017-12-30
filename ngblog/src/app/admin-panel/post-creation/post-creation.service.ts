@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Post} from '../model/post';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs/Observable';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class PostCreationService {
               private router: Router) {
   }
 
-  savePost(post: Post) {
+  savePost(post: Post): Observable<any> {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
       this.router.navigate(['/adminPanel/login']);
@@ -24,11 +25,7 @@ export class PostCreationService {
         headers: new HttpHeaders({'Authorization': currentUser})
       };
 
-      this.http.post(this.savePostUrl, post, httpOptions)
-        .subscribe(
-          undefined,
-          () => this.messageService.add({severity: 'error', summary: 'Error during adding post...'}),
-          () => this.messageService.add({severity: 'success', summary: 'Post added.'}));
+      return this.http.post(this.savePostUrl, post, httpOptions);
     }
   }
 }
