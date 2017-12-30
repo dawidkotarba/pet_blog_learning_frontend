@@ -8,7 +8,7 @@ import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule, InputTextareaModule,
-  InputTextModule, PanelModule, CalendarModule
+  InputTextModule, PanelModule, CalendarModule, EditorModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -53,7 +53,8 @@ import {UserCreationService} from './admin-panel/user-creation/user-creation.ser
     InputTextModule,
     AutoCompleteModule,
     CheckboxModule,
-    CalendarModule
+    CalendarModule,
+    EditorModule
   ],
   providers: [
     {provide: APP_BASE_HREF, useValue: '/'},

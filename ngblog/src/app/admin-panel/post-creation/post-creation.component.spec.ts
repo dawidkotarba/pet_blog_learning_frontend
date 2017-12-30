@@ -7,7 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {Router} from '@angular/router';
-import {AutoCompleteModule, CalendarModule} from 'primeng/primeng';
+import {AutoCompleteModule, CalendarModule, EditorModule} from 'primeng/primeng';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -24,7 +24,9 @@ describe('PostCreationComponent', () => {
         Ng4LoadingSpinnerModule.forRoot(),
         AutoCompleteModule,
         CalendarModule,
-        BrowserAnimationsModule],
+        BrowserAnimationsModule,
+        EditorModule
+      ],
       providers: [
         PostCreationService,
         MessageService,

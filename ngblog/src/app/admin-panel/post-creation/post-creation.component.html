@@ -3,8 +3,8 @@
 
   <h2>Add new post:</h2>
 
-
   <div class="ui-g ui-fluid">
+
     <label for="subject">Subject</label>
     <div class="ui-g-12 ui-md-12">
       <div class="ui-inputgroup">
@@ -17,13 +17,7 @@
 
     <label for="body">Body</label>
     <div class="ui-g-12 ui-md-12">
-      <div class="ui-inputgroup">
-      <textarea id="body"
-                class="text-area-size"
-                pInputTextarea
-                [(ngModel)]="post.body">
-      </textarea>
-      </div>
+      <p-editor id="body" [(ngModel)]="post.body"></p-editor>
     </div>
 
     <label for="published">Published</label>
@@ -34,7 +28,6 @@
                   showTime="true"
                   hourFormat="24"></p-calendar>
     </div>
-
 
     <label>Authors</label>
     <div class="ui-g-12 ui-md-12">
