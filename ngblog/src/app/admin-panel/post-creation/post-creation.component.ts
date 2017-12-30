@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {Author} from '../../model/author';
+import {Label} from '../model/label';
 
 @Component({
   selector: 'app-post-creation',
@@ -14,9 +15,11 @@ import {Author} from '../../model/author';
 })
 export class PostCreationComponent implements OnInit {
   post: Post = new Post();
-  selectedAuthors: Author[];
-  publishedDate: Date;
   authors: Author[];
+  selectedAuthors: Author[];
+  labels: Label[];
+  selectedLabels: Label[];
+  publishedDate: Date;
 
   constructor(private postCreationService: PostCreationService,
               private spinnerService: Ng4LoadingSpinnerService,
@@ -30,6 +33,12 @@ export class PostCreationComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  searchLabels(event): any {
+    this.autocompleteService.getLabels(event.query).subscribe(data => {
+      this.labels = data;
+    });
   }
 
   searchAuthors(event): any {
@@ -62,6 +71,11 @@ export class PostCreationComponent implements OnInit {
     if (this.selectedAuthors) {
       this.post.authors = this.selectedAuthors.map(author => author.id);
     }
+
+    if (this.selectedLabels){
+      this.post.labels = this.selectedLabels.map(label => label.id);
+    }
+
     if (this.publishedDate) {
       this.post.published = this.publishedDate.toISOString();
     }
@@ -88,8 +102,8 @@ export class PostCreationComponent implements OnInit {
       return false;
     }
 
-    if (!this.post.subject) {
-      this.showErrorMessage('Subject cannot be empty');
+    if (!this.post.labels) {
+      this.showErrorMessage('Labels cannot be empty');
       return false;
     }
 
@@ -99,6 +113,7 @@ export class PostCreationComponent implements OnInit {
   clearPostData(): void {
     this.post = new Post();
     this.selectedAuthors = [];
+    this.selectedLabels = [];
     this.publishedDate = null;
   }
 

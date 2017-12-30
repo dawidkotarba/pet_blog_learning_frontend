@@ -3,10 +3,7 @@ package com.dawidkotarba.blog.controller;
 import com.dawidkotarba.blog.facade.LabelFacade;
 import com.dawidkotarba.blog.model.dto.impl.LabelDto;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.Set;
@@ -26,5 +23,10 @@ public class LabelController {
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
     public Set<LabelDto> findAll() {
         return labelFacade.findAll();
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public Set<LabelDto> findByName(@RequestParam final String name) {
+        return labelFacade.findByName(name);
     }
 }
