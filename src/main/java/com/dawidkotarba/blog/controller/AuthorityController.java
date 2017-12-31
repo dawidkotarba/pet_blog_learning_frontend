@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/authorities")
@@ -21,7 +21,7 @@ public class AuthorityController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<AuthorityEntity> findAllStartsWith(@RequestParam final String authority) {
+    public Set<AuthorityEntity> findAllStartsWith(@RequestParam final String authority) {
         return authorityFacade.findAllByUsernameStartingWithIgnoreCase(authority);
     }
 }

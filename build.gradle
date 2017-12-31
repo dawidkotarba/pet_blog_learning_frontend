@@ -51,7 +51,7 @@ dependencies {
     compile "javax.inject:javax.inject:1"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.boot:spring-boot-starter-aop:1.5.8.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-aop:1.5.9.RELEASE"
     compile "org.springframework.boot:spring-boot-starter-test"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-mail"
@@ -74,9 +74,9 @@ dependencies {
     // utils
     compile "org.codehaus.jackson:jackson-core-asl:1.9.13"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3"
-    compile "org.apache.commons:commons-lang3:3.6"
+    compile "org.apache.commons:commons-lang3:3.7"
     compile "org.projectlombok:lombok:1.16.18"
-    compile "com.google.guava:guava:23.5-jre"
+    compile "com.google.guava:guava:23.6-jre"
 
     // test
     testCompile "org.springframework.boot:spring-boot-starter-test"

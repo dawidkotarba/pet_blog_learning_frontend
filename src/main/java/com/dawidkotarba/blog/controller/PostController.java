@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -57,17 +56,17 @@ class PostController {
     }
 
     @GetMapping(value = "/search/{dayOfAMonth}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findMontlyByDayOfAMonth(@PathVariable
-                                             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate
-                                                     dayOfAMonth) {
-        return postFacade.findMontlyByDayOfAMonth(dayOfAMonth);
+    Set<PostOutDto> findMontlyByDayOfAMonth(@PathVariable
+                                            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) final LocalDate
+                                                    dayOfAMonth) {
+        return postFacade.findMonthlyByDayOfAMonth(dayOfAMonth);
     }
 
     @GetMapping(value = "/search/{fromDate}/{toDate}", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<PostOutDto> findFromDayToDay(@RequestParam
-                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime fromDate,
-                                      @RequestParam
-                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime toDate) {
+    Set<PostOutDto> findFromDayToDay(@RequestParam
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime fromDate,
+                                     @RequestParam
+                                     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) final LocalDateTime toDate) {
         return postFacade.findFromDateToDate(fromDate, toDate);
     }
 }

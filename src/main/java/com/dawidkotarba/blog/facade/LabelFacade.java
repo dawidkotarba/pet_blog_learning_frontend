@@ -4,6 +4,7 @@ import com.dawidkotarba.blog.converters.impl.LabelConverter;
 import com.dawidkotarba.blog.model.dto.impl.LabelDto;
 import com.dawidkotarba.blog.repository.CacheableLabelRepository;
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.util.Preconditions;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,17 +31,18 @@ public class LabelFacade {
                 .stream()
                 .sorted(Comparator.comparing(l -> l.getLabel().getName()))
                 .map(labelConverter::convert)
-                .collect(Collectors.toSet());
-        return Collections.unmodifiableSet(new LinkedHashSet<>(result));
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
     }
 
     public Set<LabelDto> findByName(final String name) {
+        Preconditions.checkNotNull(name);
         final Set<LabelDto> result = cacheableLabelRepository.findAll()
                 .stream()
                 .filter(labelEntity -> StringUtils.containsIgnoreCase(labelEntity.getLabel().getName(), name))
                 .sorted(Comparator.comparing(l -> l.getLabel().getName()))
                 .map(labelConverter::convert)
-                .collect(Collectors.toSet());
-        return Collections.unmodifiableSet(new LinkedHashSet<>(result));
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
     }
 }
