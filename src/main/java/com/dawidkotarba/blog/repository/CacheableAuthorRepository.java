@@ -5,6 +5,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
+import java.util.Set;
 
 public interface CacheableAuthorRepository extends BaseRepository<AuthorEntity> {
     @Override
@@ -19,9 +20,9 @@ public interface CacheableAuthorRepository extends BaseRepository<AuthorEntity> 
     @Cacheable("authorsCache")
     List<AuthorEntity> findAll();
 
-    List<AuthorEntity> findAllByUsernameIn(Iterable<String> usernames);
+    Set<AuthorEntity> findAllByUsernameIn(Iterable<String> usernames);
 
     AuthorEntity findByUsername(String username);
 
-    List<AuthorEntity> findAllByUsernameStartingWithIgnoreCase(String username);
+    Set<AuthorEntity> findAllByUsernameStartingWithIgnoreCase(String username);
 }

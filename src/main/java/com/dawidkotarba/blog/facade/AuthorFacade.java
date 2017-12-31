@@ -6,6 +6,8 @@ import com.dawidkotarba.blog.repository.CacheableAuthorRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,7 +25,8 @@ public class AuthorFacade {
     }
 
     public Set<AuthorDto> findAllByUsernameStartingWithIgnoreCase(final String username) {
-        return cacheableAuthorRepository.findAllByUsernameStartingWithIgnoreCase(username).stream()
-                .map(authorConverter::convert).collect(Collectors.toSet());
+        final Set<AuthorDto> result = cacheableAuthorRepository.findAllByUsernameStartingWithIgnoreCase(username).stream()
+                .map(authorConverter::convert).collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
     }
 }

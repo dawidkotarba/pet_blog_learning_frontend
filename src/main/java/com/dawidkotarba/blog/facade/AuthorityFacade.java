@@ -5,7 +5,8 @@ import com.dawidkotarba.blog.repository.AuthorityRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
+import java.util.Collections;
+import java.util.Set;
 
 @Named
 public class AuthorityFacade {
@@ -16,7 +17,8 @@ public class AuthorityFacade {
         this.authorityRepository = authorityRepository;
     }
 
-    public List<AuthorityEntity> findAllByUsernameStartingWithIgnoreCase(final String authority) {
-        return authorityRepository.findAllByAuthorityStartingWithIgnoreCase(authority);
+    public Set<AuthorityEntity> findAllByUsernameStartingWithIgnoreCase(final String authority) {
+        final Set<AuthorityEntity> result = authorityRepository.findAllByAuthorityStartingWithIgnoreCase(authority);
+        return Collections.unmodifiableSet(result);
     }
 }

@@ -12,9 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Named
@@ -46,10 +44,14 @@ public class UserFacade {
         return Optional.of(userDto);
     }
 
-    public List<UserOutDto> findAll() {
+    public Set<UserOutDto> findAll() {
         final List<UserEntity> all = cacheableUserRepository.findAll();
 
-        return all.stream().map(userOutConverter::convert).collect(Collectors.toList());
+        final LinkedHashSet<UserOutDto> result = all.stream()
+                .map(userOutConverter::convert)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
+
     }
 
     @PreAuthorize("hasAuthority('administrate')")

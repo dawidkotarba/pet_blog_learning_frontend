@@ -41,10 +41,11 @@ public class PostFacade {
     }
 
     public Set<PostOutDto> findAll() {
-        return cacheablePostRepository.findAll()
+        final LinkedHashSet<PostOutDto> result = cacheablePostRepository.findAll()
                 .stream()
                 .map(postOutConverter::convert)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
     }
 
     public Page<PostOutDto> findAll(final Pageable pageable) {
@@ -66,7 +67,7 @@ public class PostFacade {
         return postOutConverter.convert(post);
     }
 
-    public List<PostOutDto> findMontlyByDayOfAMonth(final LocalDate dayOfAMonth) {
+    public Set<PostOutDto> findMonthlyByDayOfAMonth(final LocalDate dayOfAMonth) {
         Preconditions.checkNotNull(dayOfAMonth);
         final LocalDate startDate = dayOfAMonth.withDayOfMonth(1);
         final LocalDate endDate = dayOfAMonth.withDayOfMonth(dayOfAMonth.lengthOfMonth());
@@ -74,12 +75,14 @@ public class PostFacade {
                 LocalTime.MAX));
     }
 
-    public List<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
+    public Set<PostOutDto> findFromDateToDate(final LocalDateTime fromDate, final LocalDateTime toDate) {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
         final Set<PostEntity> bySubject = cacheablePostRepository.findByPublishedBetween(fromDate, toDate);
-        final List<PostOutDto> result = bySubject.stream().map(postOutConverter::convert).collect(Collectors.toList());
-        return Collections.unmodifiableList(result);
+        final Set<PostOutDto> result = bySubject.stream()
+                .map(postOutConverter::convert)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+        return Collections.unmodifiableSet(result);
     }
 
     @PreAuthorize("hasAuthority('administrate') or hasAuthority('write')")
