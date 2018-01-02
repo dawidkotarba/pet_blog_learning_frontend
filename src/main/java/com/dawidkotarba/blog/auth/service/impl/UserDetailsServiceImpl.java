@@ -1,4 +1,4 @@
-package com.dawidkotarba.blog.auth.config;
+package com.dawidkotarba.blog.auth.service.impl;
 
 import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,12 +9,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 @Named
-class SecurityConfigService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final CacheableUserRepository cacheableUserRepository;
 
     @Inject
-    SecurityConfigService(final CacheableUserRepository cacheableUserRepository) {
+    UserDetailsServiceImpl(final CacheableUserRepository cacheableUserRepository) {
         this.cacheableUserRepository = cacheableUserRepository;
     }
 

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 
 @RestController
-@RequestMapping(value = "/comments")
+@RequestMapping(value = "/api/comments")
 @CrossOrigin(origins = "http://localhost:4200")
 class CommentController {
 

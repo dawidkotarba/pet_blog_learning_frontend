@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "/authors")
+@RequestMapping(value = "/api/authors")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthorController {
 

@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.util.Set;
 
 @RestController
-@RequestMapping(value = "/labels")
+@RequestMapping(value = "/api/labels")
 @CrossOrigin(origins = "http://localhost:4200")
 public class LabelController {
 

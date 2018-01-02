@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(value = "/login")
+@RequestMapping(value = "/api/login")
 @CrossOrigin(origins = "http://localhost:4200")
 public class LoginController {
 

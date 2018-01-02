@@ -67,7 +67,7 @@ class PostControllerSpec extends Specification {
 
     def 'Should return at least one post in pageable format'() {
         when: 'rest posts url is hit'
-        def response = mockMvc.perform(get('/posts')).andReturn().response
+        def response = mockMvc.perform(get('/api/posts')).andReturn().response
         def page = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post returned'
@@ -79,7 +79,7 @@ class PostControllerSpec extends Specification {
 
     def 'Should return at least one post'() {
         when: 'rest posts url is hit'
-        def response = mockMvc.perform(get('/posts/all')).andReturn().response
+        def response = mockMvc.perform(get('/api/posts/all')).andReturn().response
         def page = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post returned'
@@ -91,7 +91,7 @@ class PostControllerSpec extends Specification {
 
     def 'Should return post with proper subject'() {
         when: 'rest posts/subject/{subject} url is hit'
-        def response = mockMvc.perform(get('/posts/subject/' + testPost.subject)).andReturn().response
+        def response = mockMvc.perform(get('/api/posts/subject/' + testPost.subject)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post with proper subject returned'
@@ -102,7 +102,7 @@ class PostControllerSpec extends Specification {
 
     def "Should show exception information when post is not found"() {
         when: 'rest is hit with not existing post'
-        def response = mockMvc.perform(get('/posts/subject/' + NON_EXISTING_VALUE)).andReturn().response
+        def response = mockMvc.perform(get('/api/posts/subject/' + NON_EXISTING_VALUE)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'Exception message is shown'
@@ -126,7 +126,7 @@ class PostControllerSpec extends Specification {
         )
 
         when: 'rest add post url is hit'
-        def response = mockMvc.perform(post('/posts')
+        def response = mockMvc.perform(post('/api/posts')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.WRITE]))))
                 .andReturn().response
@@ -156,7 +156,7 @@ class PostControllerSpec extends Specification {
         )
 
         when: 'rest add post url is hit'
-        def response = mockMvc.perform(post('/posts')
+        def response = mockMvc.perform(post('/api/posts')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString()).with((user("testuser").authorities([UserAuthority.READ]))))
                 .andReturn().response
@@ -202,7 +202,7 @@ class PostControllerSpec extends Specification {
         postRepository.saveAndFlush(postTest3)
 
         when: 'rest posts/search/ url is hit'
-        def response = mockMvc.perform(get('/posts/search/3017-12-15')).andReturn().response
+        def response = mockMvc.perform(get('/api/posts/search/3017-12-15')).andReturn().response
         def page = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and contains two posts'
@@ -219,7 +219,7 @@ class PostControllerSpec extends Specification {
 
     def 'Should return a post by given id'() {
         when: 'rest post url with given id is hit'
-        def response = mockMvc.perform(get('/posts/' + testPost.id)).andReturn().response
+        def response = mockMvc.perform(get('/api/posts/' + testPost.id)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and post returned'
