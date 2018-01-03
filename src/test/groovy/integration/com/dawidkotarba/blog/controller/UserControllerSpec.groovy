@@ -30,7 +30,8 @@ class UserControllerSpec extends Specification {
 
     def 'Should return at least one user'() {
         when: 'rest users url is hit'
-        def response = mockMvc.perform(get('/users')).andReturn().response
+        def response = mockMvc.perform(get('/api/users')
+                .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and user returned'
@@ -43,7 +44,8 @@ class UserControllerSpec extends Specification {
 
     def 'Should return admin user'() {
         when: 'rest single user url is hit'
-        def response = mockMvc.perform(get('/users/admin')).andReturn().response
+        def response = mockMvc.perform(get('/api/users/admin')
+                .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))).andReturn().response
         def user = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and admin user returned'
@@ -57,7 +59,8 @@ class UserControllerSpec extends Specification {
 
     def "Should show exception information when user is not found"() {
         when: 'rest is hit with not existing user'
-        def response = mockMvc.perform(get('/users/nosuchuser')).andReturn().response
+        def response = mockMvc.perform(get('/api/users/nosuchuser')
+                .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'Exception message is shown'
@@ -86,7 +89,7 @@ class UserControllerSpec extends Specification {
         )
 
         when: 'rest add user url is hit'
-        def response = mockMvc.perform(post('/users')
+        def response = mockMvc.perform(post('/api/users')
                 .with((user("testuser").authorities([UserAuthority.ADMINISTRATE])))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString())).andReturn().response

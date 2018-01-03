@@ -31,7 +31,7 @@ class LoginControllerSpec extends Specification {
         )
 
         when: 'rest login url is hit'
-        def response = mockMvc.perform(post('/login')
+        def response = mockMvc.perform(post('/api/login')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString()))
                 .andReturn().response
@@ -51,7 +51,7 @@ class LoginControllerSpec extends Specification {
         )
 
         when: 'rest login url is hit'
-        def response = mockMvc.perform(post('/login')
+        def response = mockMvc.perform(post('/api/login')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString()))
                 .andReturn().response
@@ -71,7 +71,7 @@ class LoginControllerSpec extends Specification {
         )
 
         when: 'rest login url is hit'
-        def response = mockMvc.perform(post('/login')
+        def response = mockMvc.perform(post('/api/login')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString()))
                 .andReturn().response

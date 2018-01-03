@@ -40,7 +40,7 @@ class CommentControllerSpec extends Specification {
         )
 
         when: 'rest add comment url is hit'
-        def response = mockMvc.perform(post('/comments')
+        def response = mockMvc.perform(post('/api/comments')
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(jsonBuilder.toString())).andReturn().response
 

@@ -9,7 +9,7 @@ import {Post} from '../model/post';
 @Injectable()
 export class PostsService {
 
-  allPostsUrl = 'http://localhost:8080/posts/all';
+  allPostsUrl = 'http://localhost:8080/api/posts/all';
 
   constructor(private http: HttpClient) {
   }

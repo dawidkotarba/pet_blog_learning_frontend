@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class PostCreationService {
-  private savePostUrl = 'http://localhost:8080/posts';
+  private savePostUrl = 'http://localhost:8080/api/posts';
 
   constructor(private http: HttpClient) {
   }

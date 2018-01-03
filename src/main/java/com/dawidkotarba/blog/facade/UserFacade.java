@@ -32,6 +32,7 @@ public class UserFacade {
         this.registrationService = registrationService;
     }
 
+    @PreAuthorize("hasAuthority('administrate')")
     public Optional<UserOutDto> findByUsername(final String username) {
         Preconditions.checkNotNull(username);
         final UserEntity byUsername = cacheableUserRepository.findByUsername(username);
@@ -44,6 +45,7 @@ public class UserFacade {
         return Optional.of(userDto);
     }
 
+    @PreAuthorize("hasAuthority('administrate')")
     public Set<UserOutDto> findAll() {
         final List<UserEntity> all = cacheableUserRepository.findAll();
 

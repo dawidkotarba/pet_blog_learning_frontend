@@ -11,8 +11,10 @@ import javax.inject.Inject;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
+
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = API_PREFIX + "users")
 @CrossOrigin(origins = "http://localhost:4200")
 class UserController {
 

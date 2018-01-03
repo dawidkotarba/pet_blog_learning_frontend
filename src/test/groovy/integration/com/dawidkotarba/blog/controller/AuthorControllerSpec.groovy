@@ -50,7 +50,7 @@ class AuthorControllerSpec extends Specification {
 
     def 'Should return minimum 2 authors'() {
         when: 'rest authors?username={query} url is hit'
-        def response = mockMvc.perform(get('/authors?username=' + QUERY_DUMMY)).andReturn().response
+        def response = mockMvc.perform(get('/api/authors?username=' + QUERY_DUMMY)).andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
 
         then: 'response is correct and minimum 2 authors returned'

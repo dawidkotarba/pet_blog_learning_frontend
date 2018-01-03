@@ -26,7 +26,7 @@ class LabelControllerSpec extends Specification {
 
     def "should find all labels"() {
         when:
-        def response = mockMvc.perform(get('/labels/all')
+        def response = mockMvc.perform(get('/api/labels/all')
                 .with((user("testuser").authorities([UserAuthority.WRITE]))))
                 .andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
@@ -42,7 +42,7 @@ class LabelControllerSpec extends Specification {
         def firstLabel = repository.findAll().get(0)
 
         when:
-        def response = mockMvc.perform(get('/labels?name=' + firstLabel.label)
+        def response = mockMvc.perform(get('/api/labels?name=' + firstLabel.label)
                 .with((user("testuser").authorities([UserAuthority.WRITE]))))
                 .andReturn().response
         def content = new JsonSlurper().parseText(response.contentAsString)
