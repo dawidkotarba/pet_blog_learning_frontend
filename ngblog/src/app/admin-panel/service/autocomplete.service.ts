@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Author} from '../../model/author';
 import {Authority} from '../../model/authority';
@@ -15,29 +15,14 @@ export class AutocompleteService {
   }
 
   getAuthors(query: string): Observable<Author[]> {
-    const currentUser = localStorage.getItem('currentUser');
-    const httpOptions = {
-      headers: new HttpHeaders({'Authorization': currentUser})
-    };
-
-    return this.http.get<Author[]>(this.authorsStartWithUrl + query, httpOptions);
+    return this.http.get<Author[]>(this.authorsStartWithUrl + query);
   }
 
   getAuthorities(query: string): Observable<Authority[]> {
-    const currentUser = localStorage.getItem('currentUser');
-    const httpOptions = {
-      headers: new HttpHeaders({'Authorization': currentUser})
-    };
-
-    return this.http.get<Authority[]>(this.authoritiesStartWithUrl + query, httpOptions);
+    return this.http.get<Authority[]>(this.authoritiesStartWithUrl + query);
   }
 
   getLabels(name: string): Observable<Label[]> {
-    const currentUser = localStorage.getItem('currentUser');
-    const httpOptions = {
-      headers: new HttpHeaders({'Authorization': currentUser})
-    };
-    return this.http.get<Label[]>(this.labelsSearchByNameUrl + name, httpOptions);
-
+    return this.http.get<Label[]>(this.labelsSearchByNameUrl + name);
   }
 }
