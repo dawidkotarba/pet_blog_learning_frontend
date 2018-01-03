@@ -17,8 +17,10 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
+import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
+
 @RestController
-@RequestMapping(value = "/posts")
+@RequestMapping(value = API_PREFIX + "posts")
 @CrossOrigin(origins = "http://localhost:4200")
 class PostController {
 

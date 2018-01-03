@@ -7,9 +7,9 @@ import {Label} from '../model/label';
 
 @Injectable()
 export class AutocompleteService {
-  authorsStartWithUrl = 'http://localhost:8080/authors?username=';
-  authoritiesStartWithUrl = 'http://localhost:8080/authorities?authority=';
-  labelsSearchByNameUrl = 'http://localhost:8080/labels?name=';
+  authorsStartWithUrl = 'http://localhost:8080/api/authors?username=';
+  authoritiesStartWithUrl = 'http://localhost:8080/api/authorities?authority=';
+  labelsSearchByNameUrl = 'http://localhost:8080/api/labels?name=';
 
   constructor(private http: HttpClient) {
   }
