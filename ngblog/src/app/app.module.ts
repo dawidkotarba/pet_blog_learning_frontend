@@ -2,13 +2,13 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
-  AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule, InputTextareaModule,
-  InputTextModule, PanelModule, CalendarModule, EditorModule
+  AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
+  InputTextareaModule, InputTextModule, PanelModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -27,6 +27,8 @@ import {LoginService} from './admin-panel/login-page/login.service';
 import {AutocompleteService} from './admin-panel/service/autocomplete.service';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
 import {UserCreationService} from './admin-panel/user-creation/user-creation.service';
+import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
+import {UtilClass} from './admin-panel/util/util-class';
 
 @NgModule({
   declarations: [
@@ -57,14 +59,23 @@ import {UserCreationService} from './admin-panel/user-creation/user-creation.ser
     EditorModule
   ],
   providers: [
-    {provide: APP_BASE_HREF, useValue: '/'},
+    {
+      provide: APP_BASE_HREF,
+      useValue: '/'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true,
+    },
     PostsService,
     PostDetailsService,
     MessageService,
     PostCreationService,
     LoginService,
     AutocompleteService,
-    UserCreationService],
+    UserCreationService,
+    UtilClass],
   bootstrap: [AppComponent]
 })
 export class AppModule {

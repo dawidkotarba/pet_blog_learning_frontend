@@ -24,6 +24,10 @@ export class LoginService {
       );
   }
 
+  getAuthorizationHeader() {
+    return localStorage.getItem('currentUser');
+  }
+
   logout() {
     localStorage.removeItem('currentUser');
   }

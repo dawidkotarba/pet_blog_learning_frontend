@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Post} from '../model/post';
-import {MessageService} from 'primeng/components/common/messageservice';
-import {Router} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
 
@@ -10,22 +8,10 @@ import {Observable} from 'rxjs/Observable';
 export class PostCreationService {
   private savePostUrl = 'http://localhost:8080/api/posts';
 
-  constructor(private http: HttpClient,
-              private messageService: MessageService,
-              private router: Router) {
+  constructor(private http: HttpClient) {
   }
 
   savePost(post: Post): Observable<any> {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-      this.router.navigate(['/adminPanel/login']);
-      this.messageService.add({severity: 'warn', summary: 'Please login first...'});
-    } else {
-      const httpOptions = {
-        headers: new HttpHeaders({'Authorization': currentUser})
-      };
-
-      return this.http.post(this.savePostUrl, post, httpOptions);
-    }
+    return this.http.post(this.savePostUrl, post);
   }
 }
