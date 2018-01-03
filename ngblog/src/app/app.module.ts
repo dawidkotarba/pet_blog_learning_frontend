@@ -29,6 +29,7 @@ import {UserCreationComponent} from './admin-panel/user-creation/user-creation.c
 import {UserCreationService} from './admin-panel/user-creation/user-creation.service';
 import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
 import {UtilClass} from './admin-panel/util/util-class';
+import {ErrorInterceptor} from './app-error-interceptor';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,11 @@ import {UtilClass} from './admin-panel/util/util-class';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthenticationInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
     PostsService,
