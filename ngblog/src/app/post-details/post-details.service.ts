@@ -13,7 +13,7 @@ export class PostDetailsService {
   }
 
   getPost(id: number): Observable<Post> {
-    return this.http.get<Post>('http://localhost:8080/posts/' + id).pipe(
+    return this.http.get<Post>('http://localhost:8080/api/posts/' + id).pipe(
       catchError(this.handleError('getPosts', null))
     );
   }

@@ -2,7 +2,6 @@ package com.dawidkotarba.blog.auth.config;
 
 import com.dawidkotarba.blog.auth.enums.UserAuthority;
 import com.dawidkotarba.blog.auth.service.impl.UserDetailsServiceImpl;
-import com.dawidkotarba.blog.constants.BlogConstants;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -16,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
+
+import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -51,9 +52,9 @@ class SecurityConfigDev {
         @Override
         protected void configure(final HttpSecurity http) throws Exception {
             http.authorizeRequests()
-                    .antMatchers("/api/**").permitAll()
+                    .antMatchers(API_PREFIX + "**").permitAll()
                     .anyRequest().authenticated()
-                    .and().httpBasic().realmName(BlogConstants.BASIC_AUTH_REALM);
+                    .and().httpBasic();
 
             // disable CSRF for mock MVC in tests
             http.csrf().disable();

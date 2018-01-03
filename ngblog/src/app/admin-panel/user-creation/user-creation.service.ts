@@ -6,7 +6,7 @@ import {User} from '../model/user';
 
 @Injectable()
 export class UserCreationService {
-  saveUserUrl = 'http://localhost:8080/users';
+  saveUserUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient,
               private messageService: MessageService,

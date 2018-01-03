@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 
+import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
+
 @RestController
-@RequestMapping(value = "/api/comments")
+@RequestMapping(value = API_PREFIX + "comments")
 @CrossOrigin(origins = "http://localhost:4200")
 class CommentController {
 

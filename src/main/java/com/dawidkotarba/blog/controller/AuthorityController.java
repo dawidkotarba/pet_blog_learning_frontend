@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.util.Set;
 
+import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
+
 @RestController
-@RequestMapping(value = "/api/authorities")
+@RequestMapping(value = API_PREFIX + "authorities")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthorityController {
 
