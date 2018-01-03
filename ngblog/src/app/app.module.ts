@@ -28,6 +28,7 @@ import {AutocompleteService} from './admin-panel/service/autocomplete.service';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
 import {UserCreationService} from './admin-panel/user-creation/user-creation.service';
 import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
+import {UtilClass} from './admin-panel/util/util-class';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import {AuthenticationInterceptor} from './admin-panel/auth/authentication-inter
     PostCreationService,
     LoginService,
     AutocompleteService,
-    UserCreationService],
+    UserCreationService,
+    UtilClass],
   bootstrap: [AppComponent]
 })
 export class AppModule {
