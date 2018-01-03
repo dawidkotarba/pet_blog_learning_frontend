@@ -15,10 +15,10 @@ export class AuthenticationInterceptor implements HttpInterceptor {
               private router: Router,
               private messageService: MessageService,
               private util: UtilClass) {
-    this.urlMethodList.push(['http://localhost:8080/posts', 'POST']);
-    this.urlMethodList.push(['http://localhost:8080/users', 'POST']);
-    this.urlMethodList.push(['http://localhost:8080/labels', 'GET']);
-    this.urlMethodList.push(['http://localhost:8080/authorities', 'GET']);
+    this.urlMethodList.push(['http://localhost:8080/api/posts', 'POST']);
+    this.urlMethodList.push(['http://localhost:8080/api/users', 'POST']);
+    this.urlMethodList.push(['http://localhost:8080/api/labels', 'GET']);
+    this.urlMethodList.push(['http://localhost:8080/api/authorities', 'GET']);
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
