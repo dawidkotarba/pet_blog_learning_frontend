@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {LoginService} from '../login-page/login.service';
 import {Router} from '@angular/router';
 import {MessageService} from 'primeng/components/common/messageservice';
+import {UtilClass} from '../util/util-class';
 
 @Injectable()
 export class AuthenticationInterceptor implements HttpInterceptor {
@@ -12,7 +13,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
 
   constructor(private injector: Injector,
               private router: Router,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private util: UtilClass) {
     this.urlMethodList.push(['http://localhost:8080/posts', 'POST']);
     this.urlMethodList.push(['http://localhost:8080/users', 'POST']);
     this.urlMethodList.push(['http://localhost:8080/labels', 'GET']);
@@ -29,9 +31,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         const authRequest = request.clone({headers: request.headers.set('Authorization', authHeader)});
         return next.handle(authRequest);
       } else {
-        this.router.navigate(['/adminPanel/login']);
-        this.messageService.add({severity: 'warn', summary: 'Please login first...'});
-        this.messageService.add({severity: 'warn', summary: 'Please login first...'});
+        this.util.redirectToLoginPage();
       }
     } else {
       return next.handle(request);

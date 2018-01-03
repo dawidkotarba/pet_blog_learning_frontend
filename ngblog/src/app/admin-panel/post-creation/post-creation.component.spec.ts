@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {AutoCompleteModule, CalendarModule, EditorModule} from 'primeng/primeng';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {UtilClass} from '../util/util-class';
 
 describe('PostCreationComponent', () => {
   let component: PostCreationComponent;
@@ -35,7 +36,8 @@ describe('PostCreationComponent', () => {
             navigate = jasmine.createSpy('navigate');
           }
         },
-        AutocompleteService]
+        AutocompleteService,
+        UtilClass]
     })
       .compileComponents();
   }));

@@ -9,6 +9,7 @@ import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {UserCreationService} from './user-creation.service';
+import {UtilClass} from '../util/util-class';
 
 describe('UserCreationComponent', () => {
   let component: UserCreationComponent;
@@ -29,7 +30,8 @@ describe('UserCreationComponent', () => {
             navigate = jasmine.createSpy('navigate');
           }
         },
-        AutocompleteService]
+        AutocompleteService,
+        UtilClass]
     })
       .compileComponents();
   }));

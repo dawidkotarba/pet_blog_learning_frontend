@@ -2,11 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {Post} from '../model/post';
 import {PostCreationService} from './post-creation.service';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {Router} from '@angular/router';
-import {MessageService} from 'primeng/components/common/messageservice';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {Author} from '../../model/author';
 import {Label} from '../model/label';
+import {UtilClass} from '../util/util-class';
 
 @Component({
   selector: 'app-post-creation',
@@ -23,12 +22,10 @@ export class PostCreationComponent implements OnInit {
 
   constructor(private postCreationService: PostCreationService,
               private spinnerService: Ng4LoadingSpinnerService,
-              private router: Router,
-              private messageService: MessageService,
-              private autocompleteService: AutocompleteService) {
+              private autocompleteService: AutocompleteService,
+              private util: UtilClass) {
     if (!localStorage.getItem('currentUser')) {
-      this.messageService.add({severity: 'warn', summary: 'Please login first...'});
-      this.router.navigate(['/adminPanel/login']);
+      this.util.redirectToLoginPage();
     }
   }
 
@@ -56,12 +53,12 @@ export class PostCreationComponent implements OnInit {
     this.postCreationService.savePost(this.post).subscribe(
       undefined,
       () => {
-        this.showErrorMessage('Error during adding post');
+        this.util.showErrorMessage('Error during adding post');
 
         this.spinnerService.hide();
       },
       () => {
-        this.showSuccessMessage('This post have been successfully added');
+        this.util.showSuccessMessage('This post have been successfully added');
         this.clearPostData();
         this.spinnerService.hide();
       });
@@ -72,7 +69,7 @@ export class PostCreationComponent implements OnInit {
       this.post.authors = this.selectedAuthors.map(author => author.id);
     }
 
-    if (this.selectedLabels){
+    if (this.selectedLabels) {
       this.post.labels = this.selectedLabels.map(label => label.id);
     }
 
@@ -83,27 +80,27 @@ export class PostCreationComponent implements OnInit {
 
   validatePostData(): boolean {
     if (!this.post.subject) {
-      this.showErrorMessage('Subject cannot be empty');
+      this.util.showErrorMessage('Subject cannot be empty');
       return false;
     }
 
     if (!this.post.body) {
-      this.showErrorMessage('Body cannot be empty');
+      this.util.showErrorMessage('Body cannot be empty');
       return false;
     }
 
     if (!this.post.published) {
-      this.showErrorMessage('Published date cannot be empty');
+      this.util.showErrorMessage('Published date cannot be empty');
       return false;
     }
 
     if (!this.post.authors) {
-      this.showErrorMessage('Authors cannot be empty');
+      this.util.showErrorMessage('Authors cannot be empty');
       return false;
     }
 
     if (!this.post.labels) {
-      this.showErrorMessage('Labels cannot be empty');
+      this.util.showErrorMessage('Labels cannot be empty');
       return false;
     }
 
@@ -115,13 +112,5 @@ export class PostCreationComponent implements OnInit {
     this.selectedAuthors = [];
     this.selectedLabels = [];
     this.publishedDate = null;
-  }
-
-  showErrorMessage(summary: string): void {
-    this.messageService.add({severity: 'error', summary: summary});
-  }
-
-  showSuccessMessage(summary: string): void {
-    this.messageService.add({severity: 'success', summary: summary});
   }
 }

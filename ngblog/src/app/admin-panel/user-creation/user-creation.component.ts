@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {MessageService} from 'primeng/components/common/messageservice';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
-import {Router} from '@angular/router';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {Authority} from '../../model/authority';
 import {UserCreationService} from './user-creation.service';
 import {User} from '../model/user';
+import {UtilClass} from '../util/util-class';
 
 @Component({
   selector: 'app-user-creation',
@@ -19,12 +18,10 @@ export class UserCreationComponent implements OnInit {
 
   constructor(private userCreationService: UserCreationService,
               private spinnerService: Ng4LoadingSpinnerService,
-              private router: Router,
-              private messageService: MessageService,
-              private autocompleteService: AutocompleteService) {
+              private autocompleteService: AutocompleteService,
+              private util: UtilClass) {
     if (!localStorage.getItem('currentUser')) {
-      this.messageService.add({severity: 'warn', summary: 'Please login first...'});
-      this.router.navigate(['/adminPanel/login']);
+      this.util.redirectToLoginPage();
     }
   }
 
