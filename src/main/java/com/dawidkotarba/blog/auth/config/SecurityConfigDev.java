@@ -30,16 +30,28 @@ class SecurityConfigDev {
     private UserDetailsServiceImpl userDetailsService;
 
     @Bean
+    BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * Disable CSRF and frame options for H2 console.
+     * CSRF needs to be disabled for Mock MVC as well.
+     *
+     * @param http
+     * @throws Exception
+     */
+    static void disableCsrfAndFrameOptions(final HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+    }
+
+    @Bean
     DaoAuthenticationProvider daoAuthenticationProvider() {
         final DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
-    }
-
-    @Bean
-    BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 
     @Configuration
@@ -56,8 +68,7 @@ class SecurityConfigDev {
                     .anyRequest().authenticated()
                     .and().httpBasic();
 
-            // disable CSRF for mock MVC in tests
-            http.csrf().disable();
+            disableCsrfAndFrameOptions(http);
         }
 
         @Override
@@ -80,9 +91,7 @@ class SecurityConfigDev {
                     .anyRequest().authenticated()
                     .and().formLogin();
 
-            // disable CSRF and frame options for H2
-            http.csrf().disable();
-            http.headers().frameOptions().disable();
+            disableCsrfAndFrameOptions(http);
         }
 
         @Override
