@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface CacheableUserRepository extends BaseRepository<UserEntity> {
     @Override
-    @CacheEvict("usersCache")
+    @CacheEvict(value = "usersCache", allEntries = true)
     <S extends UserEntity> S save(S entity);
 
     @Override
-    @CacheEvict("usersCache")
+    @CacheEvict(value = "usersCache", allEntries = true)
     <S extends UserEntity> S saveAndFlush(S entity);
 
     @Override
@@ -21,5 +21,6 @@ public interface CacheableUserRepository extends BaseRepository<UserEntity> {
     @Query("SELECT DISTINCT u from UserEntity u LEFT JOIN FETCH u.authorities")
     List<UserEntity> findAll();
 
+    @Cacheable(value = "usersCache", key = "#p0")
     UserEntity findByUsername(String name);
 }

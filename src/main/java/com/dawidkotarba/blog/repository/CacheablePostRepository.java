@@ -12,11 +12,11 @@ import java.util.Set;
 public interface CacheablePostRepository extends BaseRepository<PostEntity> {
 
     @Override
-    @CacheEvict("postsCache")
+    @CacheEvict(value = "postsCache", allEntries = true)
     <S extends PostEntity> S save(S entity);
 
     @Override
-    @CacheEvict("postsCache")
+    @CacheEvict(value = "postsCache", allEntries = true)
     <S extends PostEntity> S saveAndFlush(S entity);
 
     @Override
@@ -24,6 +24,7 @@ public interface CacheablePostRepository extends BaseRepository<PostEntity> {
     @Query("SELECT DISTINCT p from PostEntity p LEFT JOIN FETCH p.authors LEFT JOIN FETCH p.comments LEFT JOIN FETCH p.labels")
     List<PostEntity> findAll();
 
+    @Cacheable(value = "postsCache", key = "#p0")
     PostEntity findBySubject(String subject);
 
     Set<PostEntity> findByPublishedBetween(LocalDateTime fromDate, LocalDateTime toDate);

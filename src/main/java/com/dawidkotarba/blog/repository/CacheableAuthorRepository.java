@@ -9,20 +9,17 @@ import java.util.Set;
 
 public interface CacheableAuthorRepository extends BaseRepository<AuthorEntity> {
     @Override
-    @CacheEvict("authorsCache")
+    @CacheEvict(value = "authorsCache", allEntries = true)
     <S extends AuthorEntity> S save(S entity);
 
     @Override
-    @CacheEvict("authorsCache")
+    @CacheEvict(value = "authorsCache", allEntries = true)
     <S extends AuthorEntity> S saveAndFlush(S entity);
 
     @Override
     @Cacheable("authorsCache")
     List<AuthorEntity> findAll();
 
-    Set<AuthorEntity> findAllByUsernameIn(Iterable<String> usernames);
-
-    AuthorEntity findByUsername(String username);
-
+    @Cacheable(value = "authorsCache", key = "#p0")
     Set<AuthorEntity> findAllByUsernameStartingWithIgnoreCase(String username);
 }
