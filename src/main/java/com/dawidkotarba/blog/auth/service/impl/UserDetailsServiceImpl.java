@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.Optional;
 
 @Named
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -20,6 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return cacheableUserRepository.findByUsername(username);
+        return Optional.ofNullable(cacheableUserRepository.findByUsername(username)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }

@@ -6,6 +6,7 @@ import com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.ValidationError;
 import com.dawidkotarba.blog.service.impl.i18n.LocalizationService;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 
 import javax.inject.Inject;
@@ -34,23 +35,29 @@ public class ExceptionConverterService {
         exceptionResponse.setExceptionType(e.getExceptionType());
         exceptionResponse.setUserMessage(getLocalizedUserMessage(e.getExceptionType(), e.getParams()));
         exceptionResponse.setDevMessage(e.getMessage());
-
         return exceptionResponse;
     }
 
     public ExceptionResponse convert(final Exception e) {
-        final ExceptionResponse exceptionResponse = new ExceptionResponse();
-        exceptionResponse.setUuid(UUID.randomUUID());
-        exceptionResponse.setExceptionType(CommonExceptionType.INTERNAL_ERROR);
-        exceptionResponse.setUserMessage(getLocalizedUserMessage(CommonExceptionType.INTERNAL_ERROR));
-        exceptionResponse.setDevMessage(e.getMessage());
+        return convert(e, CommonExceptionType.INTERNAL_ERROR);
+    }
 
-        return exceptionResponse;
+    public ExceptionResponse convert(final AuthenticationException e) {
+        return convert(e, CommonExceptionType.UNAUTHORIZED);
     }
 
     public ExceptionResponse convert(final Exception e, final BindingResult bindingResult) {
-        final ExceptionResponse exceptionResponse = convert(e);
+        final ExceptionResponse exceptionResponse = convert(e, CommonExceptionType.BAD_REQUEST);
         exceptionResponse.getValidationErrors().addAll(parseBindingResult(bindingResult));
+        return exceptionResponse;
+    }
+
+    private ExceptionResponse convert(final Exception e, final CommonExceptionType exceptionType) {
+        final ExceptionResponse exceptionResponse = new ExceptionResponse();
+        exceptionResponse.setUuid(UUID.randomUUID());
+        exceptionResponse.setExceptionType(exceptionType);
+        exceptionResponse.setUserMessage(getLocalizedUserMessage(exceptionType));
+        exceptionResponse.setDevMessage(e.getMessage());
         return exceptionResponse;
     }
 
