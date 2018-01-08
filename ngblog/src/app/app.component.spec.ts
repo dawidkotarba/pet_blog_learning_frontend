@@ -7,8 +7,8 @@ import {APP_BASE_HREF} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 // primeng
 import {
-  AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule, GrowlModule,
-  PanelModule, CalendarModule, EditorModule
+  AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
+  PanelModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
@@ -23,6 +23,7 @@ import {PostCreationComponent} from './admin-panel/post-creation/post-creation.c
 import {LoginService} from './admin-panel/login-page/login.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
+import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
 
 
 describe('AppComponent', () => {
@@ -35,7 +36,8 @@ describe('AppComponent', () => {
         TopbarComponent,
         PostCreationComponent,
         LoginPageComponent,
-        UserCreationComponent
+        UserCreationComponent,
+        SafeHtmlPipe
       ],
       imports: [
         BrowserModule,

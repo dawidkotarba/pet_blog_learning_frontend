@@ -5,8 +5,8 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
 import {
-  AutoCompleteModule, ButtonModule, CheckboxModule, FieldsetModule,
-  PanelModule, CalendarModule, EditorModule
+  AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule,
+  PanelModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
@@ -19,6 +19,7 @@ import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {PostCreationComponent} from '../admin-panel/post-creation/post-creation.component';
 import {LoginPageComponent} from '../admin-panel/login-page/login-page.component';
 import {UserCreationComponent} from '../admin-panel/user-creation/user-creation.component';
+import {SafeHtmlPipe} from '../admin-panel/util/safe-html.pipe';
 
 
 describe('PostsComponent', () => {
@@ -32,7 +33,8 @@ describe('PostsComponent', () => {
         PostDetailsComponent,
         PostCreationComponent,
         LoginPageComponent,
-        UserCreationComponent],
+        UserCreationComponent,
+        SafeHtmlPipe],
       providers: [
         PostsService,
         MessageService,
