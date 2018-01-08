@@ -30,6 +30,7 @@ import {UserCreationService} from './admin-panel/user-creation/user-creation.ser
 import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
 import {UtilClass} from './admin-panel/util/util-class';
 import {ErrorInterceptor} from './app-error-interceptor';
+import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import {ErrorInterceptor} from './app-error-interceptor';
     TopbarComponent,
     PostCreationComponent,
     LoginPageComponent,
-    UserCreationComponent
+    UserCreationComponent,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
