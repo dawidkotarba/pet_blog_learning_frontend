@@ -24,6 +24,7 @@ import {LoginService} from './admin-panel/login-page/login.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
 import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 describe('AppComponent', () => {
@@ -37,7 +38,8 @@ describe('AppComponent', () => {
         PostCreationComponent,
         LoginPageComponent,
         UserCreationComponent,
-        SafeHtmlPipe
+        SafeHtmlPipe,
+        PageNotFoundComponent
       ],
       imports: [
         BrowserModule,
