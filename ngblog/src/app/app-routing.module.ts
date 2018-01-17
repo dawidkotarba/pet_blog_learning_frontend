@@ -5,6 +5,7 @@ import {PostsComponent} from './posts/posts.component';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/posts', pathMatch: 'full'},
@@ -12,7 +13,9 @@ const routes: Routes = [
   {path: 'post/:postId', component: PostDetailsComponent},
   {path: 'adminPanel/posts/add', component: PostCreationComponent},
   {path: 'adminPanel/users/add', component: UserCreationComponent},
-  {path: 'adminPanel/login', component: LoginPageComponent}];
+  {path: 'adminPanel/login', component: LoginPageComponent},
+  {path: '**', component: PageNotFoundComponent}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
