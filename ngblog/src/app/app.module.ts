@@ -31,6 +31,7 @@ import {AuthenticationInterceptor} from './admin-panel/auth/authentication-inter
 import {UtilClass} from './admin-panel/util/util-class';
 import {ErrorInterceptor} from './app-error-interceptor';
 import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
     PostCreationComponent,
     LoginPageComponent,
     UserCreationComponent,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
