@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
-  PanelModule
+  PaginatorModule, PanelModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
@@ -55,7 +55,8 @@ describe('AppComponent', () => {
         AutoCompleteModule,
         CheckboxModule,
         CalendarModule,
-        EditorModule
+        EditorModule,
+        PaginatorModule
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},

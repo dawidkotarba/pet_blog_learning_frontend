@@ -2,22 +2,18 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {of} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators';
-
-import {Post} from '../model/post';
+import {Pagination} from '../model/pagination';
 
 @Injectable()
 export class PostsService {
 
-  allPostsUrl = 'http://localhost:8080/api/posts/all';
+  paginatedPostsUrl = 'http://localhost:8080/api/posts?';
 
   constructor(private http: HttpClient) {
   }
 
-  getPosts(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.allPostsUrl).pipe(
-      catchError(this.handleError('getPosts', []))
-    );
+  getPaginatedPosts(page?: number, pageSize?: number): Observable<Pagination> {
+    return this.http.get<Pagination>(this.paginatedPostsUrl + 'page=' + page + '&size=' + pageSize);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
