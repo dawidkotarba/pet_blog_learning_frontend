@@ -5,7 +5,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
 // primeng
 import {
-  AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule,
+  AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, PaginatorModule,
   PanelModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -56,7 +56,8 @@ describe('PostsComponent', () => {
         AutoCompleteModule,
         CheckboxModule,
         CalendarModule,
-        EditorModule
+        EditorModule,
+        PaginatorModule
       ]
     })
       .compileComponents();
