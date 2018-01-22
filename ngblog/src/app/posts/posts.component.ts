@@ -13,7 +13,7 @@ import {Pagination} from '../model/pagination';
 })
 export class PostsComponent implements OnInit {
   paginatedPosts: Post[] = [];
-  pagination: Pagination;
+  pagination: Pagination = new Pagination();
 
   constructor(private postService: PostsService,
               private spinnerService: Ng4LoadingSpinnerService,
