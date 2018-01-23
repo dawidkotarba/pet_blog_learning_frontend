@@ -18,7 +18,7 @@ export class PostCreationComponent implements OnInit {
   selectedAuthors: Author[];
   labels: Label[];
   selectedLabels: Label[];
-  publishedDate: Date = new Date();
+  publishedDate: Date;
 
   constructor(private postCreationService: PostCreationService,
               private spinnerService: Ng4LoadingSpinnerService,
