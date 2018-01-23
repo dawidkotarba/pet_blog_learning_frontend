@@ -8,7 +8,7 @@ import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
-  InputTextareaModule, InputTextModule, PanelModule
+  InputTextareaModule, InputTextModule, PaginatorModule, PanelModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -61,7 +61,8 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
     AutoCompleteModule,
     CheckboxModule,
     CalendarModule,
-    EditorModule
+    EditorModule,
+    PaginatorModule
   ],
   providers: [
     {
