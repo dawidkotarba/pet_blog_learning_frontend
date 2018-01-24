@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Post} from '../model/post';
-import {PostCreationService} from './post-creation.service';
+import {PostInService} from '../service/post-in.service';
 import {Ng4LoadingSpinnerService} from 'ng4-loading-spinner';
 import {AutocompleteService} from '../service/autocomplete.service';
 import {Author} from '../../model/author';
 import {Label} from '../model/label';
 import {UtilClass} from '../util/util-class';
+import {PostIn} from '../model/postIn';
 
 @Component({
   selector: 'app-post-creation',
@@ -13,20 +13,17 @@ import {UtilClass} from '../util/util-class';
   styleUrls: ['./post-creation.component.css']
 })
 export class PostCreationComponent implements OnInit {
-  post: Post = new Post();
+  post: PostIn = new PostIn();
   authors: Author[];
   selectedAuthors: Author[];
   labels: Label[];
   selectedLabels: Label[];
   publishedDate: Date;
 
-  constructor(private postCreationService: PostCreationService,
+  constructor(private postInService: PostInService,
               private spinnerService: Ng4LoadingSpinnerService,
               private autocompleteService: AutocompleteService,
               private util: UtilClass) {
-    if (!localStorage.getItem('currentUser')) {
-      this.util.redirectToLoginPage();
-    }
   }
 
   ngOnInit() {
@@ -50,7 +47,7 @@ export class PostCreationComponent implements OnInit {
       return;
     }
     this.spinnerService.show();
-    this.postCreationService.savePost(this.post).subscribe(
+    this.postInService.savePost(this.post).subscribe(
       undefined,
       () => {
         this.util.showErrorMessage('Error during adding post');
@@ -108,7 +105,7 @@ export class PostCreationComponent implements OnInit {
   }
 
   clearPostData(): void {
-    this.post = new Post();
+    this.post = new PostIn();
     this.selectedAuthors = [];
     this.selectedLabels = [];
     this.publishedDate = null;

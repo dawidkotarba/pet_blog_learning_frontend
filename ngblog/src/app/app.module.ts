@@ -8,7 +8,7 @@ import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
-  InputTextareaModule, InputTextModule, PanelModule
+  InputTextareaModule, InputTextModule, PanelModule, TieredMenuModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -21,17 +21,25 @@ import {PostDetailsService} from './post-details/post-details.service';
 import {TopbarComponent} from './topbar/topbar.component';
 import {AppRoutingModule} from './app-routing.module';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
-import {PostCreationService} from './admin-panel/post-creation/post-creation.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {LoginService} from './admin-panel/login-page/login.service';
 import {AutocompleteService} from './admin-panel/service/autocomplete.service';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
-import {UserCreationService} from './admin-panel/user-creation/user-creation.service';
+import {UserInService} from './admin-panel/service/user-in.service';
 import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
 import {UtilClass} from './admin-panel/util/util-class';
 import {ErrorInterceptor} from './app-error-interceptor';
 import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {DashboardComponent} from './admin-panel/dashboard/dashboard.component';
+import {LogoutPageComponent} from './admin-panel/logout-page/logout-page.component';
+import {PostsTableComponent} from './admin-panel/posts-table/posts-table.component';
+import {TableModule} from 'primeng/table';
+import {PostInService} from './admin-panel/service/post-in.service';
+import {PostOutService} from './admin-panel/service/post-out.service';
+import {UsersTableComponent} from './admin-panel/users-table/users-table.component';
+import {UserOutService} from './admin-panel/service/user-out.service';
+import {LoginGuard} from './admin-panel/login.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +51,11 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
     LoginPageComponent,
     UserCreationComponent,
     SafeHtmlPipe,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    DashboardComponent,
+    LogoutPageComponent,
+    PostsTableComponent,
+    UsersTableComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +73,9 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
     AutoCompleteModule,
     CheckboxModule,
     CalendarModule,
-    EditorModule
+    EditorModule,
+    TieredMenuModule,
+    TableModule
   ],
   providers: [
     {
@@ -79,13 +93,17 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
       multi: true,
     },
     PostsService,
+    PostInService,
+    PostOutService,
+    UserInService,
+    UserOutService,
     PostDetailsService,
     MessageService,
-    PostCreationService,
     LoginService,
     AutocompleteService,
-    UserCreationService,
-    UtilClass],
+    UtilClass,
+    LoginGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

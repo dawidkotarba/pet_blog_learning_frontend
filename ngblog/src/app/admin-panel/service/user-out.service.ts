@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
 import {Observable} from 'rxjs/Observable';
-
-import {Post} from '../model/post';
+import {catchError} from 'rxjs/operators';
+import {HttpClient} from '@angular/common/http';
+import {UserOut} from '../model/userOut';
 
 @Injectable()
-export class PostDetailsService {
+export class UserOutService {
+
+  allUsersUrl = 'http://localhost:8080/api/users/all';
 
   constructor(private http: HttpClient) {
   }
 
-  getPost(id: number): Observable<Post> {
-    return this.http.get<Post>('http://localhost:8080/api/posts/' + id).pipe(
-      catchError(this.handleError('getUsers', null))
+  getUsers(): Observable<UserOut[]> {
+    return this.http.get<UserOut[]>(this.allUsersUrl).pipe(
+      catchError(this.handleError('getUsers', []))
     );
   }
 

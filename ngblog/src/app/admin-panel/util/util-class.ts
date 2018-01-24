@@ -9,7 +9,7 @@ export class UtilClass {
   }
 
   redirectToLoginPage() {
-    this.router.navigate(['/adminPanel/login']);
+    this.router.navigate(['/login']);
     this.messageService.add({severity: 'warn', summary: 'Please login first...'});
   }
 

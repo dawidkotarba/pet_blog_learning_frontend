@@ -1,14 +1,14 @@
 import {inject, TestBed} from '@angular/core/testing';
 
-import {UserCreationService} from './user-creation.service';
+import {UserInService} from './user-in.service';
 import {MessageService} from 'primeng/components/common/messageservice';
 import {HttpClientModule} from '@angular/common/http';
 import {Router} from '@angular/router';
 
-describe('UserCreationService', () => {
+describe('UserInService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [UserCreationService,
+      providers: [UserInService,
         MessageService,
         {
           provide: Router, useClass: class {
@@ -19,7 +19,7 @@ describe('UserCreationService', () => {
     });
   });
 
-  it('should be created', inject([UserCreationService], (service: UserCreationService) => {
+  it('should be created', inject([UserInService], (service: UserInService) => {
     expect(service).toBeTruthy();
   }));
 });
