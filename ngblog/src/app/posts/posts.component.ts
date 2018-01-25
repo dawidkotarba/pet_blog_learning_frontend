@@ -27,11 +27,13 @@ export class PostsComponent implements OnInit {
   getPaginatedPosts(page: number = 0, pageSize: number = 5): void {
     this.spinnerService.show();
     this.postService.getPaginatedPosts(page, pageSize).subscribe(response => {
-      this.pagination = response;
-      this.paginatedPosts = response.content;
-      this.spinnerService.hide();
-      if (this.paginatedPosts.length === 0) {
-        this.messageService.add({severity: 'error', summary: 'Cannot load any posts...'});
+      if (response && response.content) {
+        this.pagination = response;
+        this.paginatedPosts = response.content;
+        this.spinnerService.hide();
+        if (this.paginatedPosts.length === 0) {
+          this.messageService.add({severity: 'error', summary: 'Cannot load any posts...'});
+        }
       }
     });
   }
