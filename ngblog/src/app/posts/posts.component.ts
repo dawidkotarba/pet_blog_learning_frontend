@@ -4,6 +4,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
 
 import {Post} from '../model/post';
 import {PostsService} from './posts.service';
+import {Pagination} from '../model/pagination';
 
 @Component({
   selector: 'app-posts',
@@ -11,7 +12,8 @@ import {PostsService} from './posts.service';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  posts: Post[] = [];
+  paginatedPosts: Post[] = [];
+  pagination: Pagination = new Pagination();
 
   constructor(private postService: PostsService,
               private spinnerService: Ng4LoadingSpinnerService,
@@ -19,21 +21,28 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getPosts();
+    this.getPaginatedPosts();
   }
 
-  getPosts(): void {
+  getPaginatedPosts(page: number = 0, pageSize: number = 5): void {
     this.spinnerService.show();
-    this.postService.getPosts().subscribe(posts => {
-      this.posts = posts;
-      this.spinnerService.hide();
-      if (posts.length === 0) {
-        this.messageService.add({severity: 'error', summary: 'Cannot load any posts...'});
+    this.postService.getPaginatedPosts(page, pageSize).subscribe(response => {
+      if (response && response.content) {
+        this.pagination = response;
+        this.paginatedPosts = response.content;
+        this.spinnerService.hide();
+        if (this.paginatedPosts.length === 0) {
+          this.messageService.add({severity: 'error', summary: 'Cannot load any posts...'});
+        }
       }
     });
   }
 
-  arePostsAvailable(): boolean {
-    return this.posts && this.posts.length > 0;
+  paginate(event): void {
+    this.getPaginatedPosts(event.page, event.rows);
+  }
+
+  arePaginatedPostsAvailable(): boolean {
+    return this.paginatedPosts && this.paginatedPosts.length > 0;
   }
 }
