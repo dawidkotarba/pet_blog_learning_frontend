@@ -22,12 +22,16 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(req).do(event => {
     }, err => {
       if (err instanceof HttpErrorResponse) {
-        const xmlHttpRequest = event.target as XMLHttpRequest;
-        const response = JSON.parse(xmlHttpRequest.response);
-        const userMessage = response.userMessage;
-        const uuid = response.uuid;
-        if (userMessage) {
-          this.messageService.add({severity: 'error', summary: userMessage, detail: 'Error id: ' + uuid});
+        if (event.target) {
+          const xmlHttpRequest = event.target as XMLHttpRequest;
+          if (xmlHttpRequest.response) {
+            const response = JSON.parse(xmlHttpRequest.response);
+            const userMessage = response.userMessage;
+            const uuid = response.uuid;
+            if (userMessage) {
+              this.messageService.add({severity: 'error', summary: userMessage, detail: 'Error id: ' + uuid});
+            }
+          }
         }
         Observable.throw(err);
       }
