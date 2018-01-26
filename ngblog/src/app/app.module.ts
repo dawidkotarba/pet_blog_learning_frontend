@@ -8,7 +8,7 @@ import {APP_BASE_HREF} from '@angular/common';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
-  InputTextareaModule, InputTextModule, PanelModule, TieredMenuModule
+  InputTextareaModule, InputTextModule, PaginatorModule, PanelModule, TieredMenuModule
 } from 'primeng/primeng';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -23,23 +23,23 @@ import {AppRoutingModule} from './app-routing.module';
 import {PostCreationComponent} from './admin-panel/post-creation/post-creation.component';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {LoginService} from './admin-panel/login-page/login.service';
-import {AutocompleteService} from './admin-panel/service/autocomplete.service';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
-import {UserInService} from './admin-panel/service/user-in.service';
 import {AuthenticationInterceptor} from './admin-panel/auth/authentication-interceptor';
 import {UtilClass} from './admin-panel/util/util-class';
 import {ErrorInterceptor} from './app-error-interceptor';
 import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
+import {TableModule} from 'primeng/table';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {DashboardComponent} from './admin-panel/dashboard/dashboard.component';
-import {LogoutPageComponent} from './admin-panel/logout-page/logout-page.component';
 import {PostsTableComponent} from './admin-panel/posts-table/posts-table.component';
-import {TableModule} from 'primeng/table';
-import {PostInService} from './admin-panel/service/post-in.service';
-import {PostOutService} from './admin-panel/service/post-out.service';
 import {UsersTableComponent} from './admin-panel/users-table/users-table.component';
+import {UserInService} from './admin-panel/service/user-in.service';
 import {UserOutService} from './admin-panel/service/user-out.service';
+import {PostOutService} from './admin-panel/service/post-out.service';
+import {PostInService} from './admin-panel/service/post-in.service';
 import {LoginGuard} from './admin-panel/login.guard';
+import {LogoutPageComponent} from './admin-panel/logout-page/logout-page.component';
+import {AutocompleteService} from './admin-panel/service/autocomplete.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +75,9 @@ import {LoginGuard} from './admin-panel/login.guard';
     CalendarModule,
     EditorModule,
     TieredMenuModule,
-    TableModule
+    TableModule,
+    EditorModule,
+    PaginatorModule
   ],
   providers: [
     {

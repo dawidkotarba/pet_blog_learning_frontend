@@ -12,7 +12,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
   styleUrls: ['./post-details.component.css']
 })
 export class PostDetailsComponent implements OnInit {
-  post: Post = null;
+  post: Post = new Post();
 
   constructor(private  postDetailsService: PostDetailsService,
               private route: ActivatedRoute,

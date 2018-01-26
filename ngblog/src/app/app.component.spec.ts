@@ -8,7 +8,7 @@ import {FormsModule} from '@angular/forms';
 // primeng
 import {
   AutoCompleteModule, ButtonModule, CalendarModule, CheckboxModule, EditorModule, FieldsetModule, GrowlModule,
-  PanelModule
+  PaginatorModule, PanelModule
 } from 'primeng/primeng';
 import {MessageService} from 'primeng/components/common/messageservice';
 // app
@@ -24,9 +24,9 @@ import {LoginService} from './admin-panel/login-page/login.service';
 import {LoginPageComponent} from './admin-panel/login-page/login-page.component';
 import {UserCreationComponent} from './admin-panel/user-creation/user-creation.component';
 import {SafeHtmlPipe} from './admin-panel/util/safe-html.pipe';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {PostInService} from './admin-panel/service/post-in.service';
 import {PostOutService} from './admin-panel/service/post-out.service';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 
 
 describe('AppComponent', () => {
@@ -57,7 +57,8 @@ describe('AppComponent', () => {
         AutoCompleteModule,
         CheckboxModule,
         CalendarModule,
-        EditorModule
+        EditorModule,
+        PaginatorModule
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},

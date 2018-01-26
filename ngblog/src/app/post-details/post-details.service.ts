@@ -14,11 +14,11 @@ export class PostDetailsService {
 
   getPost(id: number): Observable<Post> {
     return this.http.get<Post>('http://localhost:8080/api/posts/' + id).pipe(
-      catchError(this.handleError('getUsers', null))
+      catchError(this.handleError(null))
     );
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
+  private handleError<T>(result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       return of(result as T);
