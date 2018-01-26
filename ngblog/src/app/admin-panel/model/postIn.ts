@@ -1,4 +1,4 @@
-export class Post {
+export class PostIn {
   id: number;
   subject: string;
   body: string;

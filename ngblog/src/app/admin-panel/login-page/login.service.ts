@@ -19,7 +19,7 @@ export class LoginService {
         () => this.messageService.add({severity: 'error', summary: 'Login failure...'}),
         () => {
           this.messageService.add({severity: 'success', summary: 'Login successful.'});
-          this.router.navigate(['/adminPanel/posts/add']);
+          this.router.navigate(['/adminPanel']);
         }
       );
   }
@@ -30,5 +30,9 @@ export class LoginService {
 
   logout() {
     localStorage.removeItem('currentUser');
+  }
+
+  isAuthenticated() {
+    return this.getAuthorizationHeader();
   }
 }

@@ -8,7 +8,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
 import {AutocompleteService} from '../service/autocomplete.service';
-import {UserCreationService} from './user-creation.service';
+import {UserInService} from '../service/user-in.service';
 import {UtilClass} from '../util/util-class';
 
 describe('UserCreationComponent', () => {
@@ -23,7 +23,7 @@ describe('UserCreationComponent', () => {
         Ng4LoadingSpinnerModule.forRoot(),
         AutoCompleteModule,
         CheckboxModule],
-      providers: [UserCreationService,
+      providers: [UserInService,
         MessageService,
         {
           provide: Router, useClass: class {

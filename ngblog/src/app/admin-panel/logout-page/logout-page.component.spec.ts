@@ -1,20 +1,21 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoginPageComponent} from './login-page.component';
-import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
+import {LogoutPageComponent} from './logout-page.component';
+import {LoginPageComponent} from '../login-page/login-page.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import {LoginService} from './login.service';
-import {MessageService} from 'primeng/components/common/messageservice';
+import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
 import {Router} from '@angular/router';
+import {LoginService} from '../login-page/login.service';
+import {MessageService} from 'primeng/components/common/messageservice';
 
-describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+describe('LogoutPageComponent', () => {
+  let component: LogoutPageComponent;
+  let fixture: ComponentFixture<LogoutPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [LoginPageComponent],
+      declarations: [LogoutPageComponent, LoginPageComponent],
       imports: [FormsModule, HttpClientModule, Ng4LoadingSpinnerModule.forRoot()],
       providers: [LoginService,
         MessageService,
@@ -29,7 +30,7 @@ describe('LoginPageComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginPageComponent);
+    fixture = TestBed.createComponent(LogoutPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

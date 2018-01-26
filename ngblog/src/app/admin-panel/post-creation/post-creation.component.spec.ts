@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PostCreationComponent} from './post-creation.component';
 import {Ng4LoadingSpinnerModule} from 'ng4-loading-spinner';
-import {PostCreationService} from './post-creation.service';
+import {PostInService} from '../service/post-in.service';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {MessageService} from 'primeng/components/common/messageservice';
@@ -29,7 +29,7 @@ describe('PostCreationComponent', () => {
         EditorModule
       ],
       providers: [
-        PostCreationService,
+        PostInService,
         MessageService,
         {
           provide: Router, useClass: class {
