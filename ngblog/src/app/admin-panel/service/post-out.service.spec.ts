@@ -1,11 +1,13 @@
 import {inject, TestBed} from '@angular/core/testing';
 
 import {PostOutService} from './post-out.service';
+import {HttpClientModule} from '@angular/common/http';
 
 describe('PostOutService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PostOutService]
+      providers: [PostOutService],
+      imports: [HttpClientModule]
     });
   });
 

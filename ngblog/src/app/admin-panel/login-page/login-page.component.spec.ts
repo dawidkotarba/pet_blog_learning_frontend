@@ -22,7 +22,8 @@ describe('LoginPageComponent', () => {
           provide: Router, useClass: class {
             navigate = jasmine.createSpy('navigate');
           }
-        }]
+        }
+      ]
     })
       .compileComponents();
   }));

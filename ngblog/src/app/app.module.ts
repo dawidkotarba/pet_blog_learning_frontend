@@ -49,11 +49,11 @@ import {AutocompleteService} from './admin-panel/service/autocomplete.service';
     TopbarComponent,
     PostCreationComponent,
     LoginPageComponent,
+    LogoutPageComponent,
     UserCreationComponent,
     SafeHtmlPipe,
     PageNotFoundComponent,
     DashboardComponent,
-    LogoutPageComponent,
     PostsTableComponent,
     UsersTableComponent
   ],
@@ -76,7 +76,6 @@ import {AutocompleteService} from './admin-panel/service/autocomplete.service';
     EditorModule,
     TieredMenuModule,
     TableModule,
-    EditorModule,
     PaginatorModule
   ],
   providers: [
