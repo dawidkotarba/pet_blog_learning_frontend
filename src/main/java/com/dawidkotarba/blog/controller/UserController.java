@@ -4,11 +4,11 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.UserFacade;
 import com.dawidkotarba.blog.model.dto.impl.UserInDto;
 import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
+import io.vavr.control.Option;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
@@ -32,8 +32,8 @@ class UserController {
 
     @GetMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     UserOutDto findByUsername(@PathVariable final String username) {
-        final Optional<UserOutDto> result = userFacade.findByUsername(username);
-        return result.orElseThrow(() -> new NotFoundException("User [" + username + "]" + " not found."));
+        final Option<UserOutDto> result = userFacade.findByUsername(username);
+        return result.getOrElseThrow(() -> new NotFoundException("User [" + username + "]" + " not found."));
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

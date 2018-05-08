@@ -1,13 +1,13 @@
 package com.dawidkotarba.blog.auth.service.impl;
 
 import com.dawidkotarba.blog.repository.CacheableUserRepository;
+import io.vavr.control.Option;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Optional;
 
 @Named
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -21,6 +21,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-        return Optional.ofNullable(cacheableUserRepository.findByUsername(username)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return Option.of(cacheableUserRepository.findByUsername(username)).getOrElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }
