@@ -4,6 +4,7 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.PostFacade;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
+import io.vavr.control.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,7 +15,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.Set;
 
 import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
@@ -43,8 +43,8 @@ class PostController {
 
     @GetMapping(value = "/subject/{subject}", produces = MediaType.APPLICATION_JSON_VALUE)
     PostOutDto findBySubject(@PathVariable final String subject) {
-        final Optional<PostOutDto> result = postFacade.findBySubject(subject);
-        return result.orElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
+        final Option<PostOutDto> result = postFacade.findBySubject(subject);
+        return result.getOrElseThrow(() -> new NotFoundException("Post with subject [" + subject + "]" + " not found."));
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

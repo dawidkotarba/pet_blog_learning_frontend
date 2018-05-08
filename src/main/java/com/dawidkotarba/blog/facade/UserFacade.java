@@ -8,6 +8,7 @@ import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
 import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import com.google.common.base.Preconditions;
+import io.vavr.control.Option;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
@@ -33,16 +34,16 @@ public class UserFacade {
     }
 
     @PreAuthorize("hasAuthority('administrate')")
-    public Optional<UserOutDto> findByUsername(final String username) {
+    public Option<UserOutDto> findByUsername(final String username) {
         Preconditions.checkNotNull(username);
         final UserEntity byUsername = cacheableUserRepository.findByUsername(username);
 
         if (Objects.isNull(byUsername)) {
-            return Optional.empty();
+            return Option.none();
         }
 
         final UserOutDto userDto = userOutConverter.convert(byUsername);
-        return Optional.of(userDto);
+        return Option.some(userDto);
     }
 
     @PreAuthorize("hasAuthority('administrate')")

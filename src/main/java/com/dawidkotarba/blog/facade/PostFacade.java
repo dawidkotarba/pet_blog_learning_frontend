@@ -10,6 +10,7 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.CacheableAuthorRepository;
 import com.dawidkotarba.blog.repository.CacheablePostRepository;
 import com.google.common.base.Preconditions;
+import io.vavr.control.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -52,13 +53,13 @@ public class PostFacade {
         return cacheablePostRepository.findAll(pageable).map(postOutConverter::convert);
     }
 
-    public Optional<PostOutDto> findBySubject(final String subject) {
+    public Option<PostOutDto> findBySubject(final String subject) {
         Preconditions.checkNotNull(subject);
         final PostEntity bySubject = cacheablePostRepository.findBySubject(subject);
         if (Objects.isNull(bySubject)) {
-            return Optional.empty();
+            return Option.none();
         }
-        return Optional.of(postOutConverter.convert(bySubject));
+        return Option.some(postOutConverter.convert(bySubject));
     }
 
     public PostOutDto getOne(final Long id) {
