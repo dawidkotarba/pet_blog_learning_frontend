@@ -48,8 +48,8 @@ class PostController {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    PostOutDto getOne(@PathVariable final Long id) {
-        return postFacade.getOne(id);
+    PostOutDto findById(@PathVariable final Long id) {
+        return postFacade.findById(id);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)

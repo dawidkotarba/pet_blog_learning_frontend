@@ -62,9 +62,9 @@ public class PostFacade {
         return Option.some(postOutConverter.convert(bySubject));
     }
 
-    public PostOutDto getOne(final Long id) {
+    public PostOutDto findById(final Long id) {
         Preconditions.checkNotNull(id);
-        final PostEntity post = cacheablePostRepository.getOne(id);
+        final PostEntity post = cacheablePostRepository.findById(id).get();
         return postOutConverter.convert(post);
     }
 
@@ -96,10 +96,11 @@ public class PostFacade {
     }
 
     private List<AuthorEntity> getAuthors(final PostInDto postInDto) {
-        final List<AuthorEntity> authors = cacheableAuthorRepository.findAll(postInDto.getAuthors());
+        final Set<Long> authorIds = postInDto.getAuthors();
+        final List<AuthorEntity> authors = cacheableAuthorRepository.findAllById(authorIds);
         if (authors.isEmpty()) {
             throw new NotFoundException(
-                    "Author(s) " + postInDto.getAuthors() + " not found. Please add valid author(s).");
+                    "Author(s) " + authorIds + " not found. Please add valid author(s).");
         }
         return authors;
     }

@@ -59,8 +59,8 @@ class AuthorControllerSpec extends Specification {
         content.size >= 2
 
         cleanup:
-        authorRepository.delete(testAuthor.getId())
-        authorRepository.delete(testAuthor2.getId())
+        authorRepository.deleteById(testAuthor.getId())
+        authorRepository.deleteById(testAuthor2.getId())
     }
 }
 

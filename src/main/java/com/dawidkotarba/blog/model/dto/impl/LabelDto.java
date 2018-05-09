@@ -4,8 +4,8 @@ import com.dawidkotarba.blog.model.dto.InDto;
 import com.dawidkotarba.blog.model.dto.OutDto;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 

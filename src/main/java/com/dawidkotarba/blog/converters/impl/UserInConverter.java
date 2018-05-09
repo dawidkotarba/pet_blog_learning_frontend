@@ -30,7 +30,7 @@ public class UserInConverter implements InConverter<UserInDto, UserEntity> {
                 .lastname(userInDto.getLastname())
                 .password(passwordEncoder.encode(userInDto.getPassword()))
                 .enabled(userInDto.isEnabled())
-                .authorities(new HashSet<>(authorityRepository.findAll(userInDto.getAuthorities())))
+                .authorities(new HashSet<>(authorityRepository.findAllById(userInDto.getAuthorities())))
                 .build();
     }
 }

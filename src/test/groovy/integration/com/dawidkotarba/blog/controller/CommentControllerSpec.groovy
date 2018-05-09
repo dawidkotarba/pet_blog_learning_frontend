@@ -46,7 +46,7 @@ class CommentControllerSpec extends Specification {
 
         then: 'response is correct and new comment is saved in db'
         response.status == OK.value()
-        def comment = commentRepository.findOne(new Long(TEST_COMMENT_ID))
+        def comment = commentRepository.findById(TEST_COMMENT_ID as Long).get()
         comment != null
         comment.author == TEST_VALUE
         comment.subject == TEST_VALUE

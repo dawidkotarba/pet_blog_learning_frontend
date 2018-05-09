@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = "1.5.9.RELEASE"
+        springBootVersion = '2.0.2.RELEASE'
     }
     repositories {
         mavenCentral()
@@ -14,12 +14,13 @@ buildscript {
 }
 
 plugins {
-    id "com.github.spotbugs" version "1.6.0"
+    id "com.github.spotbugs" version "1.6.1"
 }
 
 apply plugin: "java"
 apply plugin: "groovy"
 apply plugin: "idea"
+apply plugin: 'io.spring.dependency-management'
 apply plugin: "org.springframework.boot"
 apply plugin: "com.github.kt3k.coveralls"
 apply plugin: "checkstyle"
@@ -33,11 +34,7 @@ jar {
 }
 
 repositories {
-    mavenLocal()
-    jcenter()
     mavenCentral()
-    maven { url "https://repo.spring.io/snapshot" }
-    maven { url "https://repo.spring.io/milestone" }
 }
 
 idea {
@@ -54,18 +51,19 @@ dependencies {
     compile "javax.inject:javax.inject:1"
     compile "org.springframework.boot:spring-boot-starter-web"
     compile "org.springframework.boot:spring-boot-starter-data-jpa"
-    compile "org.springframework.boot:spring-boot-starter-aop:1.5.9.RELEASE"
+    compile "org.springframework.boot:spring-boot-starter-cache"
+    compile "org.springframework.boot:spring-boot-starter-aop"
     compile "org.springframework.boot:spring-boot-starter-test"
     compile "org.springframework.boot:spring-boot-starter-security"
     compile "org.springframework.boot:spring-boot-starter-mail"
     compile "org.springframework.boot:spring-boot-starter-integration"
     compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "org.springframework.boot:spring-boot-starter-remote-shell"
-    compile "org.springframework.boot:spring-boot-devtools"
+    compile "org.springframework.boot:spring-boot-starter-hateoas"
+    runtime "org.springframework.boot:spring-boot-devtools"
 
     // db
-    compile "com.h2database:h2:1.4.196"
-    compile "net.sf.ehcache:ehcache-core:2.6.11"
+    compile "com.h2database:h2"
+    compile "org.ehcache:ehcache"
     compile "com.mysema.querydsl:querydsl-jpa:3.7.4"
     compile "com.mysema.querydsl:querydsl-apt:3.7.4:jpa"
     compile "org.liquibase:liquibase-core"
@@ -78,9 +76,9 @@ dependencies {
     compile "org.codehaus.jackson:jackson-core-asl:1.9.13"
     compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.3"
     compile "org.apache.commons:commons-lang3:3.7"
-    compile "org.projectlombok:lombok:1.16.18"
     compile "com.google.guava:guava:23.6-jre"
     compile "io.vavr:vavr:0.9.2"
+    compile "org.projectlombok:lombok"
 
     // test
     testCompile "org.springframework.boot:spring-boot-starter-test"

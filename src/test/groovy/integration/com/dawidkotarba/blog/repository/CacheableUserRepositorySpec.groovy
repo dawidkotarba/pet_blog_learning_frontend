@@ -9,7 +9,6 @@ import spock.lang.Specification
 import javax.inject.Inject
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
-@DataJpaTest
 class CacheableUserRepositorySpec extends Specification {
 
     def final TEST_VALUE1 = "test1"
@@ -23,6 +22,10 @@ class CacheableUserRepositorySpec extends Specification {
         underTest.save(createTestUser(TEST_VALUE1, true))
         underTest.save(createTestUser(TEST_VALUE2, true))
         underTest.save(createTestUser(TEST_VALUE3, false))
+    }
+
+    def cleanup(){
+        underTest.deleteAll()
     }
 
     def "Should find user by username"() {

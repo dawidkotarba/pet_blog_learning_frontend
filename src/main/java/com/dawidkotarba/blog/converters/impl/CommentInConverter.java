@@ -24,7 +24,7 @@ public class CommentInConverter implements InConverter<CommentInDto, CommentEnti
                 .author(dto.getAuthor())
                 .subject(dto.getSubject())
                 .body(dto.getBody())
-                .post(cacheablePostRepository.findOne(dto.getPostId()))
+                .post(cacheablePostRepository.findById(dto.getPostId()).get())
                 .published(dto.getPublished())
                 .build();
     }

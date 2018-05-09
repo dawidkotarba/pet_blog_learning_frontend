@@ -61,8 +61,8 @@ class PostControllerSpec extends Specification {
     }
 
     def cleanup() {
-        authorRepository.delete(testAuthor.getId())
-        postRepository.delete(testPost.getId())
+        authorRepository.deleteById(testAuthor.getId())
+        postRepository.deleteById(testPost.getId())
     }
 
     def 'Should return at least one post in pageable format'() {
@@ -140,7 +140,7 @@ class PostControllerSpec extends Specification {
         post.published.toString() == TEST_PUBLISHED_VALUE
 
         cleanup:
-        postRepository.delete(post.getId())
+        postRepository.deleteById(post.getId())
     }
 
     def 'Should not add new post for user without sufficient privileges'() {
@@ -212,9 +212,9 @@ class PostControllerSpec extends Specification {
         page.size == 2
 
         cleanup:
-        postRepository.delete(postTest1.getId())
-        postRepository.delete(postTest2.getId())
-        postRepository.delete(postTest3.getId())
+        postRepository.deleteById(postTest1.getId())
+        postRepository.deleteById(postTest2.getId())
+        postRepository.deleteById(postTest3.getId())
     }
 
     def 'Should return a post by given id'() {
