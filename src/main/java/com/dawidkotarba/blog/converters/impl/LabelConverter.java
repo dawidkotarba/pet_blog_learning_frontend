@@ -5,12 +5,15 @@ import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.enums.Label;
 import com.dawidkotarba.blog.model.dto.impl.LabelDto;
 import com.dawidkotarba.blog.model.entities.impl.LabelEntity;
+import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.CacheablePostRepository;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Named
@@ -44,10 +47,12 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
 
     private void findAndPopulatePosts(final LabelDto dto, final LabelEntity entity) {
         if (dto.getPosts() != null) {
-            entity.setPosts(dto.getPosts().stream()
+            Set<PostEntity> posts = dto.getPosts().stream()
                     .filter(Objects::nonNull)
-                    .map(cacheablePostRepository::findOne)
-                    .collect(Collectors.toSet()));
+                    .map(cacheablePostRepository::findById)
+                     .map(Optional::get)
+                    .collect(Collectors.toSet());
+            entity.setPosts(posts);
         }
     }
 }

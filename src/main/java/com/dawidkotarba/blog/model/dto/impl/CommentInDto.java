@@ -1,15 +1,13 @@
 package com.dawidkotarba.blog.model.dto.impl;
 
 import com.dawidkotarba.blog.model.dto.InDto;
-import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
 public class CommentInDto implements InDto {
 
     @NotNull

@@ -3,7 +3,7 @@ package com.dawidkotarba.blog.model.dto.impl;
 import com.dawidkotarba.blog.model.dto.OutDto;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 

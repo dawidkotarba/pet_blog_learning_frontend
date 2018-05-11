@@ -8,6 +8,7 @@ import com.dawidkotarba.blog.repository.CacheableLabelRepository;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Named
@@ -37,7 +38,8 @@ public class PostInConverter implements InConverter<PostInDto, PostEntity> {
         if (dto.getLabels() != null) {
             entity.setLabels(dto.getLabels().stream()
                     .filter(Objects::nonNull)
-                    .map(cacheableLabelRepository::findOne)
+                    .map(cacheableLabelRepository::findById)
+                    .map(Optional::get)
                     .collect(Collectors.toSet()));
         }
     }
