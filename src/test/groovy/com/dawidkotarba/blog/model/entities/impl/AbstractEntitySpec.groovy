@@ -10,14 +10,14 @@ class AbstractEntitySpec extends Specification {
         def collection = [user1, new UserEntity()] as HashSet
 
         when:
-        def isRetrievable = false;
+        def isRetrievable = false
         collection.each {
             if (it == user1) {
-                isRetrievable = true;
+                isRetrievable = true
             }
         }
 
         then:
-        isRetrievable == true;
+        isRetrievable == true
     }
 }

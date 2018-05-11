@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationCredentialsNotF
 import spock.lang.Specification
 
 import javax.inject.Inject
-import java.time.LocalDateTime
 
 @SpringBootTest(classes = com.dawidkotarba.blog.BlogApp.class)
 class PostFacadeSpec extends Specification {
@@ -16,8 +15,16 @@ class PostFacadeSpec extends Specification {
     PostFacade postFacade
 
     def 'Should not adding post without authentication'() {
+        given:
+        def testProperty = 'test'
+        def post = new PostInDto()
+        post.with {
+            subject = testProperty
+            body = testProperty
+        }
+
         when:
-        postFacade.add(PostInDto.builder().subject('test').body('test').published(LocalDateTime.now()).build())
+        postFacade.add(post)
 
         then:
         thrown AuthenticationCredentialsNotFoundException

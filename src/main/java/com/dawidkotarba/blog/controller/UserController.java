@@ -4,12 +4,12 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.UserFacade;
 import com.dawidkotarba.blog.model.dto.impl.UserInDto;
 import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
+import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.Set;
 
 import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
 

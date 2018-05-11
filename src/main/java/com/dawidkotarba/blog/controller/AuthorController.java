@@ -2,11 +2,11 @@ package com.dawidkotarba.blog.controller;
 
 import com.dawidkotarba.blog.facade.AuthorFacade;
 import com.dawidkotarba.blog.model.dto.impl.AuthorDto;
+import io.vavr.collection.Set;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
-import java.util.Set;
 
 import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
 

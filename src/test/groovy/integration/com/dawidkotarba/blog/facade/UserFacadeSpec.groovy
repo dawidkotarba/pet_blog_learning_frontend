@@ -15,12 +15,16 @@ class UserFacadeSpec extends Specification {
     UserFacade userFacade
 
     def 'Should not adding post without authentication'() {
+        given:
+        def user = new UserInDto()
+        def testProperty = 'test'
+        user.with {
+            username = testProperty
+            firstname = testProperty
+            lastname = testProperty
+        }
         when:
-        userFacade.add(UserInDto.builder()
-                .username('test')
-                .firstname('test')
-                .lastname('test')
-                .build())
+        userFacade.add(user)
 
         then:
         thrown AuthenticationCredentialsNotFoundException

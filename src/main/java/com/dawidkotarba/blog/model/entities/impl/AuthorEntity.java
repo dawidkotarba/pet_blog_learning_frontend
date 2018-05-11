@@ -3,7 +3,6 @@ package com.dawidkotarba.blog.model.entities.impl;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "AUTHORS")
@@ -25,5 +24,5 @@ public class AuthorEntity extends AbstractEntity {
     @JoinTable(name = "POSTS_AUTHORS", inverseJoinColumns = @JoinColumn(name = "POST_ID", referencedColumnName = "ID"),
             joinColumns = @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID"))
     @JoinColumn(name = "AUTHOR_ID")
-    private Set<PostEntity> posts;
+    private java.util.Set<PostEntity> posts;
 }

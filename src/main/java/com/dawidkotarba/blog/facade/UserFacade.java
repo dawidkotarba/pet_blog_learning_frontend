@@ -8,13 +8,14 @@ import com.dawidkotarba.blog.model.dto.impl.UserOutDto;
 import com.dawidkotarba.blog.model.entities.impl.UserEntity;
 import com.dawidkotarba.blog.repository.CacheableUserRepository;
 import com.google.common.base.Preconditions;
+import io.vavr.collection.Seq;
+import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Named
 public class UserFacade {
@@ -48,13 +49,8 @@ public class UserFacade {
 
     @PreAuthorize("hasAuthority('administrate')")
     public Set<UserOutDto> findAll() {
-        final List<UserEntity> all = cacheableUserRepository.findAll();
-
-        final LinkedHashSet<UserOutDto> result = all.stream()
-                .map(userOutConverter::convert)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-        return Collections.unmodifiableSet(result);
-
+        final Seq<UserEntity> users = cacheableUserRepository.findAllSeq();
+        return users.map(userOutConverter::convert).toSet();
     }
 
     @PreAuthorize("hasAuthority('administrate')")

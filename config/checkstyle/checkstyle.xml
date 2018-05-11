@@ -45,6 +45,18 @@
         <property name="message" value="Use @Named instead of @Service"/>
     </module>
 
+    <module name="RegexpSingleline">
+        <property name="format" value="import java.util.Set"/>
+        <property name="message"
+                  value="Use collections from vavr. Exceptionally use static import for java collections"/>
+    </module>
+
+    <module name="RegexpSingleline">
+        <property name="format" value="import java.util.List"/>
+        <property name="message"
+                  value="Use collections from vavr. Exceptionally use static import for java collections"/>
+    </module>
+
     <module name="FileLength">
         <property name="max" value="2000"/>
     </module>

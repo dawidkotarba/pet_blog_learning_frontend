@@ -1,15 +1,15 @@
 package com.dawidkotarba.blog.exceptions;
 
 import com.dawidkotarba.blog.enums.ExceptionType;
+import io.vavr.collection.List;
+import io.vavr.collection.Seq;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 public abstract class AbstractApplicationRuntimeException extends RuntimeException {
 
     private UUID uuid;
-    private List<String> params;
+    private Seq<String> params;
     private ExceptionType exceptionType;
 
     public AbstractApplicationRuntimeException(final ExceptionType exceptionType, final String message) {
@@ -36,8 +36,8 @@ public abstract class AbstractApplicationRuntimeException extends RuntimeExcepti
         return uuid;
     }
 
-    public List<String> getParams() {
-        return params != null ? Collections.unmodifiableList(params) : Collections.emptyList();
+    public Seq<String> getParams() {
+        return params != null ? params : List.empty();
     }
 
     public ExceptionType getExceptionType() {

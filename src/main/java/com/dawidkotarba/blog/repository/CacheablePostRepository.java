@@ -1,13 +1,12 @@
 package com.dawidkotarba.blog.repository;
 
 import com.dawidkotarba.blog.model.entities.impl.PostEntity;
+import io.vavr.collection.Set;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Set;
 
 public interface CacheablePostRepository extends BaseRepository<PostEntity> {
 
@@ -22,7 +21,7 @@ public interface CacheablePostRepository extends BaseRepository<PostEntity> {
     @Override
     @Cacheable("postsCache")
     @Query("SELECT DISTINCT p from PostEntity p LEFT JOIN FETCH p.authors LEFT JOIN FETCH p.comments LEFT JOIN FETCH p.labels")
-    List<PostEntity> findAll();
+    java.util.List<PostEntity> findAll();
 
     @Cacheable(value = "postsCache", key = "#p0")
     PostEntity findBySubject(String subject);

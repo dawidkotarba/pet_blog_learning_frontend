@@ -13,8 +13,6 @@ import javax.inject.Named;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Named
 public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutConverter<LabelEntity, LabelDto> {
@@ -47,11 +45,11 @@ public class LabelConverter implements InConverter<LabelDto, LabelEntity>, OutCo
 
     private void findAndPopulatePosts(final LabelDto dto, final LabelEntity entity) {
         if (dto.getPosts() != null) {
-            Set<PostEntity> posts = dto.getPosts().stream()
+            final java.util.Set<PostEntity> posts = dto.getPosts()
                     .filter(Objects::nonNull)
                     .map(cacheablePostRepository::findById)
-                     .map(Optional::get)
-                    .collect(Collectors.toSet());
+                    .map(Optional::get)
+                    .toJavaSet();
             entity.setPosts(posts);
         }
     }
