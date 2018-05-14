@@ -1,14 +1,14 @@
 package com.dawidkotarba.blog.model.dto.impl;
 
 import com.dawidkotarba.blog.model.dto.OutDto;
+import io.vavr.collection.Set;
 import lombok.Builder;
 import lombok.Data;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
 @Builder

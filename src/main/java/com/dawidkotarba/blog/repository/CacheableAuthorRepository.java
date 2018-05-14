@@ -1,11 +1,9 @@
 package com.dawidkotarba.blog.repository;
 
 import com.dawidkotarba.blog.model.entities.impl.AuthorEntity;
+import io.vavr.collection.Set;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-
-import java.util.List;
-import java.util.Set;
 
 public interface CacheableAuthorRepository extends BaseRepository<AuthorEntity> {
     @Override
@@ -18,7 +16,7 @@ public interface CacheableAuthorRepository extends BaseRepository<AuthorEntity> 
 
     @Override
     @Cacheable("authorsCache")
-    List<AuthorEntity> findAll();
+    java.util.List<AuthorEntity> findAll();
 
     @Cacheable(value = "authorsCache", key = "#p0")
     Set<AuthorEntity> findAllByUsernameStartingWithIgnoreCase(String username);

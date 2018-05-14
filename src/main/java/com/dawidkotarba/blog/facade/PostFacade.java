@@ -10,6 +10,8 @@ import com.dawidkotarba.blog.model.entities.impl.PostEntity;
 import com.dawidkotarba.blog.repository.CacheableAuthorRepository;
 import com.dawidkotarba.blog.repository.CacheablePostRepository;
 import com.google.common.base.Preconditions;
+import io.vavr.collection.Seq;
+import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,8 +22,7 @@ import javax.inject.Named;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 @Named
 public class PostFacade {
@@ -42,11 +43,9 @@ public class PostFacade {
     }
 
     public Set<PostOutDto> findAll() {
-        final LinkedHashSet<PostOutDto> result = cacheablePostRepository.findAll()
-                .stream()
+        return cacheablePostRepository.findAllSeq()
                 .map(postOutConverter::convert)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-        return Collections.unmodifiableSet(result);
+                .toSet();
     }
 
     public Page<PostOutDto> findAll(final Pageable pageable) {
@@ -80,24 +79,21 @@ public class PostFacade {
         Preconditions.checkNotNull(fromDate);
         Preconditions.checkNotNull(toDate);
         final Set<PostEntity> bySubject = cacheablePostRepository.findByPublishedBetween(fromDate, toDate);
-        final Set<PostOutDto> result = bySubject.stream()
-                .map(postOutConverter::convert)
-                .collect(Collectors.toCollection(LinkedHashSet::new));
-        return Collections.unmodifiableSet(result);
+        return bySubject.map(postOutConverter::convert).toSet();
     }
 
     @PreAuthorize("hasAuthority('administrate') or hasAuthority('write')")
     public void add(final PostInDto postInDto) {
         Preconditions.checkNotNull(postInDto);
-        final List<AuthorEntity> authors = getAuthors(postInDto);
+        final Seq<AuthorEntity> authors = getAuthors(postInDto);
         final PostEntity entity = postInConverter.convert(postInDto);
-        entity.setAuthors(new HashSet<>(authors));
+        entity.setAuthors(authors.toJavaSet());
         cacheablePostRepository.save(entity);
     }
 
-    private List<AuthorEntity> getAuthors(final PostInDto postInDto) {
+    private Seq<AuthorEntity> getAuthors(final PostInDto postInDto) {
         final Set<Long> authorIds = postInDto.getAuthors();
-        final List<AuthorEntity> authors = cacheableAuthorRepository.findAllById(authorIds);
+        final Seq<AuthorEntity> authors = cacheableAuthorRepository.findAllByIdSeq(authorIds);
         if (authors.isEmpty()) {
             throw new NotFoundException(
                     "Author(s) " + authorIds + " not found. Please add valid author(s).");

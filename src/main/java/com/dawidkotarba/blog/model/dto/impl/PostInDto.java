@@ -1,17 +1,14 @@
 package com.dawidkotarba.blog.model.dto.impl;
 
 import com.dawidkotarba.blog.model.dto.InDto;
-import lombok.Builder;
+import io.vavr.collection.Set;
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Data
-@Builder
 public class PostInDto implements InDto {
 
     @NotBlank
@@ -21,7 +18,7 @@ public class PostInDto implements InDto {
     @NotNull
     private LocalDateTime published;
     @NotNull
-    @NotEmpty
+//    @NotEmpty // TODO: 14.05.18 enable when supported by vavr-jackson
     private Set<Long> authors;
     private Set<Long> labels;
 }

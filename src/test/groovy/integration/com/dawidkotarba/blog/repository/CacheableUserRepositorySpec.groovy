@@ -2,7 +2,6 @@ package integration.com.dawidkotarba.blog.repository
 
 import com.dawidkotarba.blog.model.entities.impl.UserEntity
 import com.dawidkotarba.blog.repository.CacheableUserRepository
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
@@ -24,7 +23,7 @@ class CacheableUserRepositorySpec extends Specification {
         underTest.save(createTestUser(TEST_VALUE3, false))
     }
 
-    def cleanup(){
+    def cleanup() {
         underTest.deleteAll()
     }
 
@@ -39,7 +38,7 @@ class CacheableUserRepositorySpec extends Specification {
     def "Should find a user by example"() {
         when:
         def example = new UserEntity(enabled: false)
-        def result = underTest.findAll(example) as List<UserEntity>
+        def result = underTest.findAllSeq(example) as List<UserEntity>
 
         then:
         result.size() == 1
@@ -49,7 +48,7 @@ class CacheableUserRepositorySpec extends Specification {
     def "Should find list of enabled users"() {
         when:
         def example = new UserEntity(enabled: true)
-        def result = underTest.findAll(example) as List<UserEntity>
+        def result = underTest.findAllSeq(example) as List<UserEntity>
 
         then:
         result.size() == 2
@@ -69,7 +68,7 @@ class CacheableUserRepositorySpec extends Specification {
     def "Should find one matching user"() {
         when:
         def example = new UserEntity(enabled: false)
-        def result = underTest.findAll(example) as List<UserEntity>
+        def result = underTest.findAllSeq(example) as List<UserEntity>
 
         then:
         result.size() == 1

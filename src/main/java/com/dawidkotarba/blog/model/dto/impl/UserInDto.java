@@ -1,16 +1,13 @@
 package com.dawidkotarba.blog.model.dto.impl;
 
 import com.dawidkotarba.blog.model.dto.InDto;
-import lombok.Builder;
+import io.vavr.collection.Set;
 import lombok.Data;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 @Data
-@Builder
 public class UserInDto implements InDto {
 
     @NotNull
@@ -25,6 +22,6 @@ public class UserInDto implements InDto {
     private String password;
     private boolean enabled;
     @NotNull
-    @NotEmpty
+    //    @NotEmpty // TODO: 14.05.18 enable when supported by vavr-jackson
     private Set<Long> authorities;
 }

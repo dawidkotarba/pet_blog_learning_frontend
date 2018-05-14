@@ -6,14 +6,16 @@ import com.dawidkotarba.blog.exceptions.AbstractApplicationRuntimeException;
 import com.dawidkotarba.blog.exceptions.ExceptionResponse;
 import com.dawidkotarba.blog.exceptions.ValidationError;
 import com.dawidkotarba.blog.service.impl.i18n.LocalizationService;
+import io.vavr.collection.List;
+import io.vavr.collection.Seq;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Created by Dawid Kotarba on 14.11.2015.
@@ -48,7 +50,7 @@ public class ExceptionConverterService {
 
     public ExceptionResponse convert(final Exception e, final BindingResult bindingResult) {
         final ExceptionResponse exceptionResponse = convert(e, CommonExceptionType.BAD_REQUEST);
-        exceptionResponse.getValidationErrors().addAll(parseBindingResult(bindingResult));
+        exceptionResponse.setValidationErrors(parseBindingResult(bindingResult));
         return exceptionResponse;
     }
 
@@ -65,17 +67,16 @@ public class ExceptionConverterService {
         return getLocalizedUserMessage(exceptionType, null);
     }
 
-    private String getLocalizedUserMessage(final ExceptionType exceptionType, final List<String> params) {
-        return (params != null) ? localizationService.getMessage(exceptionType.name(), params.toArray()) : localizationService.getMessage(exceptionType.name());
+    private String getLocalizedUserMessage(final ExceptionType exceptionType, final Seq<String> params) {
+        return (params != null) ? localizationService.getMessage(exceptionType.name(), params.toJavaArray())
+                : localizationService.getMessage(exceptionType.name());
     }
 
-    private List<ValidationError> parseBindingResult(final BindingResult bindingResult) {
-        final List<ValidationError> validationErrors = new ArrayList<>();
-
-        bindingResult.getFieldErrors().forEach(fieldError ->
-                validationErrors.add(new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))
-        );
-
-        return validationErrors;
+    private Seq<ValidationError> parseBindingResult(final BindingResult bindingResult) {
+        final Collection<ValidationError> validationErrors = bindingResult.getFieldErrors()
+                .stream()
+                .map(fieldError -> new ValidationError(fieldError.getField(), fieldError.getDefaultMessage()))
+                .collect(Collectors.toList());
+        return List.ofAll(validationErrors);
     }
 }

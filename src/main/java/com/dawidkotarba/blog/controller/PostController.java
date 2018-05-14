@@ -4,6 +4,7 @@ import com.dawidkotarba.blog.exceptions.NotFoundException;
 import com.dawidkotarba.blog.facade.PostFacade;
 import com.dawidkotarba.blog.model.dto.impl.PostInDto;
 import com.dawidkotarba.blog.model.dto.impl.PostOutDto;
+import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,6 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 import static com.dawidkotarba.blog.constants.BlogConstants.API_PREFIX;
 

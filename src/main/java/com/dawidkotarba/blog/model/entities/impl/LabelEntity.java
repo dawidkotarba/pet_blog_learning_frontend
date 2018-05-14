@@ -4,7 +4,6 @@ import com.dawidkotarba.blog.enums.Label;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "LABELS")
@@ -24,5 +23,5 @@ public class LabelEntity extends AbstractEntity {
     @JoinTable(name = "POSTS_LABELS", inverseJoinColumns = @JoinColumn(name = "POST_ID", referencedColumnName = "ID"),
             joinColumns = @JoinColumn(name = "LABEL_ID", referencedColumnName = "ID"))
     @JoinColumn(name = "LABEL_ID")
-    private Set<PostEntity> posts;
+    private java.util.Set<PostEntity> posts;
 }

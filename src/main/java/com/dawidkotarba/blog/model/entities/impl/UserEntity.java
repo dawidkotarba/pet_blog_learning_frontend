@@ -5,7 +5,6 @@ import lombok.*;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -42,5 +41,5 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USERS_AUTHORITIES", joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "AUTHORITY_ID", referencedColumnName = "ID"))
-    private Set<AuthorityEntity> authorities;
+    private java.util.Set<AuthorityEntity> authorities;
 }

@@ -1,8 +1,7 @@
 package com.dawidkotarba.blog.repository;
 
 import com.dawidkotarba.blog.auth.model.entities.AuthorityEntity;
-
-import java.util.Set;
+import io.vavr.collection.Set;
 
 public interface AuthorityRepository extends BaseRepository<AuthorityEntity> {
 

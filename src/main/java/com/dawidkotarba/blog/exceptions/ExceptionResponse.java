@@ -1,15 +1,11 @@
 package com.dawidkotarba.blog.exceptions;
 
 import com.dawidkotarba.blog.enums.ExceptionType;
+import io.vavr.collection.Seq;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by Dawid Kotarba on 14.11.2015.
- */
 @Data
 public class ExceptionResponse {
 
@@ -17,5 +13,5 @@ public class ExceptionResponse {
     private ExceptionType exceptionType;
     private String userMessage;
     private String devMessage;
-    private List<ValidationError> validationErrors = new ArrayList<>();
+    private Seq<ValidationError> validationErrors;
 }

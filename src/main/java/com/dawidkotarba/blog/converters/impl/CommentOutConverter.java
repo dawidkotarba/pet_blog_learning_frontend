@@ -3,11 +3,10 @@ package com.dawidkotarba.blog.converters.impl;
 import com.dawidkotarba.blog.converters.OutConverter;
 import com.dawidkotarba.blog.model.dto.impl.CommentOutDto;
 import com.dawidkotarba.blog.model.entities.impl.CommentEntity;
+import io.vavr.collection.Set;
 
 import javax.inject.Named;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Named
 public class CommentOutConverter implements OutConverter<CommentEntity, CommentOutDto> {
@@ -24,9 +23,6 @@ public class CommentOutConverter implements OutConverter<CommentEntity, CommentO
     }
 
     Set<CommentOutDto> convertToDtos(final Set<CommentEntity> entities) {
-        return entities.stream()
-                .filter(Objects::nonNull)
-                .map(this::convert)
-                .collect(Collectors.toSet());
+        return entities.filter(Objects::nonNull).map(this::convert);
     }
 }
