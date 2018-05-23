@@ -17,10 +17,6 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Created by Dawid Kotarba on 14.11.2015.
- */
-
 @Named
 public class ExceptionConverterService {
 

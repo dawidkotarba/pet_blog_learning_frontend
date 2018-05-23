@@ -9,9 +9,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Created by Dawid Kotarba on 08.02.2016.
- */
 @Named
 @Transactional(propagation = Propagation.REQUIRED)
 @Target(ElementType.TYPE)

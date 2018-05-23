@@ -8,10 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- * Created by Dawid Kotarba on 16.01.2016.
- */
-
 @Named
 @Slf4j
 class HeartBeatService {
