@@ -2,9 +2,6 @@ package com.dawidkotarba.blog.exceptions;
 
 import com.dawidkotarba.blog.enums.CommonExceptionType;
 
-/**
- * Created by Dawid Kotarba on 13.11.2015.
- */
 public class InternalErrorException extends AbstractApplicationRuntimeException {
 
     public InternalErrorException(final String devMessage) {

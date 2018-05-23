@@ -6,10 +6,6 @@ import org.springframework.context.MessageSource;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-/**
- * Created by Dawid Kotarba on 14.11.2015.
- */
-
 @Named
 public class LocalizationService {
 
